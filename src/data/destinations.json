@@ -79,9 +79,10 @@
     "days": 2,
     "cost": 35,
     "effort": "Medium",
-    "image": "https://images.unsplash.com/photo-1772533254933-ee692487aba2?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hawa_Mahal_in_Jaipur%2C_Rajasthan.jpg",
     "why": "A colourful heritage city with forts, courtyards, craft markets and Rajasthani food.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Hawa_Mahal_in_Jaipur,_Rajasthan.jpg"
   },
   {
     "id": "goa",
@@ -93,9 +94,10 @@
     "days": 3,
     "cost": 40,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Palolem_beach%2C_Goa_-_panoramio.jpg",
     "why": "A relaxed mix of beaches, old neighbourhoods, seafood and sunset cafés.",
-    "travel": "Local transfers vary"
+    "travel": "Local transfers vary",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Palolem_beach,_Goa_-_panoramio.jpg"
   },
   {
     "id": "kochi",
@@ -107,9 +109,10 @@
     "days": 2,
     "cost": 30,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_Fishing_Net_in_Cochin.jpg",
     "why": "Explore Fort Kochi lanes, waterfront views, local art and Kerala flavours.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "imageSource": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_Fishing_Net_in_Cochin.jpg"
   },
   {
     "id": "udaipur",
@@ -121,9 +124,10 @@
     "days": 2,
     "cost": 40,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Pichola_Udaipur_India.jpg",
     "why": "A scenic lake city for palace visits, rooftop dinners and unhurried evenings.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Lake_Pichola_Udaipur_India.jpg"
   },
   {
     "id": "varanasi",
@@ -135,9 +139,10 @@
     "days": 2,
     "cost": 25,
     "effort": "Medium",
-    "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/DASHASHWAMEDH_GHAT%2C_VARANASI.jpg",
     "why": "A deeply atmospheric city best explored respectfully with time to absorb its rituals.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:DASHASHWAMEDH_GHAT,_VARANASI.jpg"
   },
   {
     "id": "bangkok",
@@ -373,9 +378,10 @@
     "days": 3,
     "cost": 90,
     "effort": "Medium",
-    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A_view_of_Tokyo_city_from_Shibuya_Sky,_Tokyo,_Japan.jpg",
     "why": "A big-city mix of neighbourhoods, gardens, design, food and late-night energy.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:A_view_of_Tokyo_city_from_Shibuya_Sky,_Tokyo,_Japan.jpg"
   },
   {
     "id": "kyoto",
@@ -401,9 +407,10 @@
     "days": 2,
     "cost": 65,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://images.squarespace-cdn.com/content/v1/6354f31408faa42115499bca/ef9cdc84-b708-48a9-9b65-1e66bee942d5/Osaka-Dotonbori-Canal-by-Day.jpg?format=2500w",
     "why": "A friendly food city with lively districts, markets and easy day-trip options.",
-    "travel": "About 30–45 min from Kyoto by JR rapid train; route and service vary"
+    "travel": "About 30–45 min from Kyoto by JR rapid train; route and service vary",
+    "imageSource": "https://www.travelynotes.com/blog-japan/my-osaka-bucket-list-best-things-to-do-hidden-gems-and-travel-tips"
   },
   {
     "id": "hanoi",
@@ -541,9 +548,10 @@
     "days": 1,
     "cost": 45,
     "effort": "Low",
-    "image": "https://www.reisroutes.be/userfiles/fotos/nara-tempel_11385_xl.jpg",
+    "image": "https://cdn.kimkim.com/files/a/images/e3eb7d1bb01f01244e95b0225f0289ca845d5512/big-bab7e7b10bc93866f10d48a3ff653018.jpg",
     "why": "A gentle day trip for temple gardens, historic streets and Nara Park.",
-    "travel": "About 45–60 min from Kyoto or Osaka"
+    "travel": "About 45–60 min from Kyoto or Osaka",
+    "imageSource": "https://www.kimkim.com/c/highlights-of-japan-15-days"
   },
   {
     "id": "hakone",
@@ -555,9 +563,10 @@
     "days": 2,
     "cost": 100,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1677318059807-58cb4878df0f?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://www.pref.kanagawa.jp/images/16596/lakeashi-fuji.jpg",
     "why": "A scenic mountain escape with onsen stays, lake views and art museums.",
-    "travel": "About 1.5 hr from Tokyo"
+    "travel": "About 1.5 hr from Tokyo",
+    "imageSource": "https://www.pref.kanagawa.jp/docs/b6m/index.html"
   },
   {
     "id": "hiroshima",
@@ -569,9 +578,10 @@
     "days": 2,
     "cost": 70,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://www.celebritycruises.com/blog/content/uploads/2025/06/historical-places-in-japan-hiroshima-peace-memorial-park-museum-hiroshima-1536x1024.jpg",
     "why": "A thoughtful history visit paired with a memorable nearby island excursion.",
-    "travel": "About 1.5–2 hr from Osaka by shinkansen"
+    "travel": "About 1.5–2 hr from Osaka by shinkansen",
+    "imageSource": "https://www.celebritycruises.com/blog/historical-places-in-japan"
   },
   {
     "id": "kanazawa",
@@ -583,9 +593,10 @@
     "days": 2,
     "cost": 65,
     "effort": "Low",
-    "image": "https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/2050/2050_1_xl.jpg",
+    "image": "https://ipdi.w3.kanazawa-u.ac.jp/common/img/ijyu-kanko3.jpg",
     "why": "Traditional districts, crafts, seafood and one of Japan's celebrated gardens.",
-    "travel": "About 2.5 hr from Tokyo by train"
+    "travel": "About 2.5 hr from Tokyo by train",
+    "imageSource": "https://ipdi.w3.kanazawa-u.ac.jp/en/ijyu"
   },
   {
     "id": "sapporo",
@@ -597,8 +608,99 @@
     "days": 2,
     "cost": 75,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1707745798783-056675fcee15?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://img.city-cost.com/fit-in/800x800/53ea112bf4475757de510bcb2bd55ee8.jpg",
     "why": "A northern city base for food, parks and seasonal snow or flower scenery.",
-    "travel": "About 1.5 hr flight from Tokyo"
+    "travel": "About 1.5 hr flight from Tokyo",
+    "imageSource": "https://www.city-cost.com/blogs/City-Cost/GO0OW-living_money_sapporo_shi_hokkaido"
+  },
+  {
+    "id": "agra",
+    "name": "Agra",
+    "region": "Uttar Pradesh",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Marble masterpiece & Mughal history",
+    "days": 2,
+    "cost": 35,
+    "effort": "Low",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Taj_Mahal_islamic_architecture.JPG/1280px-Taj_Mahal_islamic_architecture.JPG",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_islamic_architecture.JPG",
+    "why": "See the Taj Mahal alongside Agra Fort and the city's Mughal-era heritage.",
+    "travel": "About 2–3 hr from Delhi by fast train"
+  },
+  {
+    "id": "delhi",
+    "name": "Delhi",
+    "region": "National Capital Territory",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Monuments, markets & layered history",
+    "days": 2,
+    "cost": 40,
+    "effort": "Medium",
+    "image": "https://smarthistory.org/wp-content/uploads/2024/09/1_Humayuns_Tomb_9710410947-870x566.jpg",
+    "imageSource": "https://smarthistory.org/period-culture-style/timurid/",
+    "why": "A capital-city mix of Mughal landmarks, leafy gardens, museums and food streets.",
+    "travel": "City transfers vary; allow extra time for traffic"
+  },
+  {
+    "id": "hampi",
+    "name": "Hampi",
+    "region": "Karnataka",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Temple ruins & boulder-strewn landscapes",
+    "days": 2,
+    "cost": 30,
+    "effort": "Medium",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hampi_chariot.jpg",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Hampi_chariot.jpg",
+    "why": "Explore the Vijayanagara-era temple complexes and striking granite landscapes.",
+    "travel": "Usually reached via Hospet; last-mile transfers vary"
+  },
+  {
+    "id": "mysuru",
+    "name": "Mysuru",
+    "region": "Karnataka",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Royal architecture & market mornings",
+    "days": 2,
+    "cost": 30,
+    "effort": "Low",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mysore_Palace_Morning.jpg",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Mysore_Palace_Morning.jpg",
+    "why": "A relaxed heritage city known for its palace, markets and nearby Chamundi Hill.",
+    "travel": "About 3 hr from Bengaluru by road or train"
+  },
+  {
+    "id": "rishikesh",
+    "name": "Rishikesh",
+    "region": "Uttarakhand",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Ganga river walks & Himalayan foothills",
+    "days": 2,
+    "cost": 30,
+    "effort": "Medium",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Rishikesh%2C_Lakshman_Jhula.jpg",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Rishikesh,_Lakshman_Jhula.jpg",
+    "why": "Combine riverside walks, ashrams and optional yoga or outdoor activities.",
+    "travel": "About 45–60 min from Dehradun airport by road"
+  },
+  {
+    "id": "amritsar",
+    "name": "Amritsar",
+    "region": "Punjab",
+    "country": "India",
+    "scope": "India",
+    "tagline": "Golden Temple & Punjabi food",
+    "days": 2,
+    "cost": 30,
+    "effort": "Low",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Temple_-_Amritsar_India.jpg",
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Golden_Temple_-_Amritsar_India.jpg",
+    "why": "A rewarding cultural stop for the Golden Temple, museums and Punjabi cuisine.",
+    "travel": "City transfers vary"
   }
 ]
