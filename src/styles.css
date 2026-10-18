@@ -422,3 +422,47 @@ footer{background:#f3f2eb}
 .journey-stop-bottom .journey-stop-copy{margin-bottom:0}
 .journey-stop:hover .journey-photo{box-shadow:0 0 0 2px #9eaf96,0 3px 12px #34422b18}
 @media(max-width:720px){.journey-strip{margin:16px 0;padding:14px 12px}.journey-path{min-height:225px}.journey-stop{flex-basis:150px;width:150px}.journey-road{top:22px;height:166px}.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin{top:65px}.journey-photo{width:82px;height:60px;flex-basis:60px}.journey-stop-copy b{font-size:11px}}
+
+
+/* PR #6: date range, climate guidance and activity replacement choices */
+.date-field{display:grid;gap:8px;min-width:0}
+.date-field>span{font-size:12px;font-weight:700;color:#3f493d}
+.date-range-control{position:relative;display:grid;gap:10px}
+.date-range-trigger{width:100%;display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid #d8ddd2;border-radius:12px;background:#fffdf8;color:#283229;text-align:left;cursor:pointer}
+.date-range-trigger span{flex:1;font-size:13px}
+.date-range-trigger:hover,.date-range-trigger:focus-visible{border-color:#71876b;outline:none}
+.date-calendar{position:absolute;z-index:20;top:48px;left:0;width:min(320px,calc(100vw - 48px));padding:14px;background:#fffdf8;border:1px solid #e0e4db;border-radius:16px;box-shadow:0 14px 40px #26352220}
+.calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.calendar-head b{font-size:14px}
+.calendar-head button{display:grid;place-items:center;width:30px;height:30px;border:0;border-radius:8px;background:#f1f3ed;color:#344733;cursor:pointer}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.calendar-weekday{padding:5px 0;color:#7b8277;font-size:10px;font-weight:700}
+.calendar-day{min-width:0;aspect-ratio:1;border:0;border-radius:50%;background:transparent;color:#283229;font-size:12px;cursor:pointer}
+.calendar-day:hover{background:#e9eee4}
+.calendar-day.range-start,.calendar-day.range-end{background:#36543a;color:white;font-weight:750}
+.calendar-day.range-middle{background:#e3eadc;border-radius:0}
+.calendar-hint{margin:10px 0 8px;color:#737b70;font-size:11px}
+.calendar-clear{width:100%;padding:9px;border:1px solid #dfe4da;border-radius:9px;background:#f7f8f3;color:#36543a;font-size:12px;cursor:pointer}
+.flexible-date-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:#616c5e;cursor:pointer}
+.flexible-date-toggle input{accent-color:#36543a}
+.climate-card{display:flex;align-items:flex-start;gap:15px;margin:18px 0;padding:20px;border:1px solid #e1e6db;border-radius:18px;background:#f7f8f2}
+.climate-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#e6ecdf;color:#36543a}
+.climate-card .eyebrow{font-size:10px}
+.climate-card h2{margin:4px 0 8px;font-size:20px;font-weight:650}
+.climate-card p{margin:6px 0;color:#687163;font-size:12px;line-height:1.6}
+.climate-card p b{color:#344733;font-size:13px}
+.climate-card .climate-temperature{color:#36543a;font-weight:700}
+.personal-note{margin-top:7px!important;color:#607354!important;font-size:13px!important}
+.swap-options{grid-column:1/-1;display:grid;gap:8px;margin:4px 0 8px;padding:14px;border:1px solid #e2e7dc;border-radius:13px;background:#f8f9f5}
+.swap-options> b{font-size:12px;color:#475541}
+.swap-option{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #e2e6dc;border-radius:10px;background:#fffdf8;color:#29352a;text-align:left;cursor:pointer}
+.swap-option:hover,.swap-option:focus-visible{border-color:#82977a;background:#f0f4eb;outline:none}
+.swap-option span{display:grid;gap:4px}
+.swap-option strong{font-size:12px}
+.swap-option small{font-size:10px;color:#788072}
+@media(max-width:640px){.date-calendar{left:0}.climate-card{padding:15px;gap:10px}.climate-card h2{font-size:17px}}
+
+
+/* Keep the flexible-date checkbox compact and inline within the trip form. */
+.fields .flexible-date-toggle{display:flex;grid-column:1/-1;align-items:center;justify-content:flex-start;gap:8px;width:max-content;max-width:100%;font-size:12px;line-height:1.4;cursor:pointer}
+.fields .flexible-date-toggle input{width:14px;height:14px;min-height:14px;flex:0 0 14px;margin:0;padding:0;accent-color:#36543a}

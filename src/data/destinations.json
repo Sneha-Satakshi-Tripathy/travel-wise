@@ -79,7 +79,7 @@
     "days": 2,
     "cost": 35,
     "effort": "Medium",
-    "image": "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://images.unsplash.com/photo-1772533254933-ee692487aba2?auto=format&fit=crop&w=1100&q=85",
     "why": "A colourful heritage city with forts, courtyards, craft markets and Rajasthani food.",
     "travel": "City transfers vary"
   },
@@ -149,7 +149,7 @@
     "days": 2,
     "cost": 45,
     "effort": "Medium",
-    "image": "https://images.unsplash.com/photo-1598970605070-a38a6ccd3a2d?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://images.unsplash.com/photo-1613672803979-a6edfc5a179b?auto=format&fit=crop&w=1100&q=85",
     "why": "A lively city combining ornate temples, river rides, markets and memorable street food.",
     "travel": "City transfers vary"
   },
@@ -177,7 +177,7 @@
     "days": 3,
     "cost": 45,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://images.unsplash.com/photo-1580981072760-b72ef15a545e?auto=format&fit=crop&w=1100&q=85",
     "why": "A coastal base for beaches, viewpoints and relaxed evenings; check seasonal sea conditions.",
     "travel": "Local transfers vary"
   },
@@ -471,7 +471,7 @@
     "days": 1,
     "cost": 35,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://images.unsplash.com/photo-1748102289607-4e1270e4da65?auto=format&fit=crop&w=1100&q=85",
     "why": "A classic bay cruise among dramatic karst islands, with options from day trips to overnight boats.",
     "travel": "About 2.5–3 hr from Hanoi"
   },
@@ -530,5 +530,75 @@
     "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1100&q=85",
     "why": "A nature-focused stop known for spectacular caves, river scenery and outdoor adventures.",
     "travel": "Overnight train or flight plus road transfer"
+  },
+  {
+    "id": "nara",
+    "name": "Nara",
+    "region": "Kansai",
+    "country": "Japan",
+    "scope": "Japan",
+    "tagline": "Deer park & ancient temples",
+    "days": 1,
+    "cost": 45,
+    "effort": "Low",
+    "image": "https://www.reisroutes.be/userfiles/fotos/nara-tempel_11385_xl.jpg",
+    "why": "A gentle day trip for temple gardens, historic streets and Nara Park.",
+    "travel": "About 45–60 min from Kyoto or Osaka"
+  },
+  {
+    "id": "hakone",
+    "name": "Hakone",
+    "region": "Kanagawa",
+    "country": "Japan",
+    "scope": "Japan",
+    "tagline": "Hot springs & Mount Fuji views",
+    "days": 2,
+    "cost": 100,
+    "effort": "Low",
+    "image": "https://images.unsplash.com/photo-1677318059807-58cb4878df0f?auto=format&fit=crop&w=1100&q=85",
+    "why": "A scenic mountain escape with onsen stays, lake views and art museums.",
+    "travel": "About 1.5 hr from Tokyo"
+  },
+  {
+    "id": "hiroshima",
+    "name": "Hiroshima",
+    "region": "Chugoku",
+    "country": "Japan",
+    "scope": "Japan",
+    "tagline": "History, resilience & island views",
+    "days": 2,
+    "cost": 70,
+    "effort": "Low",
+    "image": "https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?auto=format&fit=crop&w=1100&q=85",
+    "why": "A thoughtful history visit paired with a memorable nearby island excursion.",
+    "travel": "About 1.5–2 hr from Osaka by shinkansen"
+  },
+  {
+    "id": "kanazawa",
+    "name": "Kanazawa",
+    "region": "Hokuriku",
+    "country": "Japan",
+    "scope": "Japan",
+    "tagline": "Garden beauty & artisan culture",
+    "days": 2,
+    "cost": 65,
+    "effort": "Low",
+    "image": "https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/2050/2050_1_xl.jpg",
+    "why": "Traditional districts, crafts, seafood and one of Japan's celebrated gardens.",
+    "travel": "About 2.5 hr from Tokyo by train"
+  },
+  {
+    "id": "sapporo",
+    "name": "Sapporo",
+    "region": "Hokkaido",
+    "country": "Japan",
+    "scope": "Japan",
+    "tagline": "Northern flavours & wide-open nature",
+    "days": 2,
+    "cost": 75,
+    "effort": "Low",
+    "image": "https://images.unsplash.com/photo-1707745798783-056675fcee15?auto=format&fit=crop&w=1100&q=85",
+    "why": "A northern city base for food, parks and seasonal snow or flower scenery.",
+    "travel": "About 1.5 hr flight from Tokyo"
   }
 ]

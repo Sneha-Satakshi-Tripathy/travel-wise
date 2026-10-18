@@ -758,5 +758,975 @@
     "cost": 8,
     "effort": "Low",
     "note": "Plan transfers in advance; rural transport options can be limited."
+  },
+  {
+    "id": "kandy-botanical",
+    "place": "kandy",
+    "name": "Royal Botanical Gardens stroll",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Shady garden paths and a relaxed break among tropical plants."
+  },
+  {
+    "id": "kandy-cultural",
+    "place": "kandy",
+    "name": "Traditional Kandyan dance performance",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Check the day's performance schedule and arrive a little early."
+  },
+  {
+    "id": "sigiriya-museum",
+    "place": "sigiriya",
+    "name": "Sigiriya museum and water gardens",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "A gentler way to understand the site's history and landscape."
+  },
+  {
+    "id": "sigiriya-village",
+    "place": "sigiriya",
+    "name": "Village cooking and local lunch",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Choose a responsible local host and confirm transport."
+  },
+  {
+    "id": "nuwara-gregory",
+    "place": "nuwara-eliya",
+    "name": "Gregory Lake promenade",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "A relaxed lakeside option when the hill-country weather is clear."
+  },
+  {
+    "id": "nuwara-town",
+    "place": "nuwara-eliya",
+    "name": "Colonial town and market stroll",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 4,
+    "effort": "Low",
+    "note": "Bring a light layer; highland weather can change quickly."
+  },
+  {
+    "id": "galle-museum",
+    "place": "galle",
+    "name": "Maritime archaeology museum",
+    "slot": "Afternoon",
+    "duration": "1 hr",
+    "cost": 6,
+    "effort": "Low",
+    "note": "Check opening hours before visiting."
+  },
+  {
+    "id": "galle-cafes",
+    "place": "galle",
+    "name": "Fort cafés and artisan shops",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "A flexible stop for local crafts and a slow coffee."
+  },
+  {
+    "id": "mirissa-whale",
+    "place": "mirissa",
+    "name": "Responsible whale-watching trip",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 45,
+    "effort": "Medium",
+    "note": "Only go with a responsible operator; seasonal sightings are never guaranteed."
+  },
+  {
+    "id": "mirissa-coconut",
+    "place": "mirissa",
+    "name": "Coconut Tree Hill coastal viewpoint",
+    "slot": "Sunset",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Stay on marked paths and avoid cliff edges."
+  },
+  {
+    "id": "jaipur-hawa",
+    "place": "jaipur",
+    "name": "Hawa Mahal and old-city lanes",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Visit early for softer light and lighter crowds."
+  },
+  {
+    "id": "jaipur-crafts",
+    "place": "jaipur",
+    "name": "Block-printing or blue-pottery workshop",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 25,
+    "effort": "Low",
+    "note": "Ask about workshop duration and what is included."
+  },
+  {
+    "id": "goa-spice",
+    "place": "goa",
+    "name": "Spice plantation visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Confirm transport and tour inclusions ahead of time."
+  },
+  {
+    "id": "goa-sunset",
+    "place": "goa",
+    "name": "Sunset along the Mandovi waterfront",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Choose a public, well-lit stretch and check local conditions."
+  },
+  {
+    "id": "kochi-net",
+    "place": "kochi",
+    "name": "Chinese fishing nets waterfront",
+    "slot": "Sunset",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Visit in daylight or early evening and keep clear of working equipment."
+  },
+  {
+    "id": "kochi-palace",
+    "place": "kochi",
+    "name": "Mattancherry Palace and Jew Town",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check weekly closing days before you go."
+  },
+  {
+    "id": "udaipur-bagore",
+    "place": "udaipur",
+    "name": "Bagore Ki Haveli cultural evening",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Verify the performance schedule on the day."
+  },
+  {
+    "id": "udaipur-cafe",
+    "place": "udaipur",
+    "name": "Old-city rooftop café break",
+    "slot": "Afternoon",
+    "duration": "1 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Choose a venue with a safe, convenient route back."
+  },
+  {
+    "id": "varanasi-aarti",
+    "place": "varanasi",
+    "name": "Ganga Aarti viewing",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Arrive early, follow local guidance and respect ceremony space."
+  },
+  {
+    "id": "varanasi-sarnath",
+    "place": "varanasi",
+    "name": "Sarnath heritage visit",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Allow time for the journey outside the city centre."
+  },
+  {
+    "id": "bangkok-river",
+    "place": "bangkok",
+    "name": "Chao Phraya river ferry and riverside walk",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check ferry routes and last departures."
+  },
+  {
+    "id": "bangkok-house",
+    "place": "bangkok",
+    "name": "Jim Thompson House museum",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Confirm current entry times and guided-tour availability."
+  },
+  {
+    "id": "chiang-cooking",
+    "place": "chiang-mai",
+    "name": "Northern Thai cooking class",
+    "slot": "Afternoon",
+    "duration": "3 hr",
+    "cost": 30,
+    "effort": "Low",
+    "note": "Book ahead and share dietary needs."
+  },
+  {
+    "id": "chiang-dpoi",
+    "place": "chiang-mai",
+    "name": "Doi Suthep temple viewpoint",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 10,
+    "effort": "Medium",
+    "note": "Use a reputable transfer and dress respectfully at the temple."
+  },
+  {
+    "id": "krabi-town",
+    "place": "krabi",
+    "name": "Krabi Town riverside and night market",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Market days vary; check weather and return transport."
+  },
+  {
+    "id": "krabi-mangrove",
+    "place": "krabi",
+    "name": "Guided mangrove boardwalk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Choose a marked route and follow local weather advice."
+  },
+  {
+    "id": "phuket-view",
+    "place": "phuket",
+    "name": "Karon Viewpoint coastal panorama",
+    "slot": "Morning",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Use marked viewing areas and watch roadside traffic."
+  },
+  {
+    "id": "phuket-museum",
+    "place": "phuket",
+    "name": "Thai Hua local history museum",
+    "slot": "Afternoon",
+    "duration": "1 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check opening times before travelling."
+  },
+  {
+    "id": "ayutthaya-bicycle",
+    "place": "ayutthaya",
+    "name": "Historic park bicycle loop",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Medium",
+    "note": "Rent from a reputable shop and use care around traffic."
+  },
+  {
+    "id": "ayutthaya-museum",
+    "place": "ayutthaya",
+    "name": "Chao Sam Phraya National Museum",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Confirm current opening hours."
+  },
+  {
+    "id": "ayutthaya-river",
+    "place": "ayutthaya",
+    "name": "Riverside local-food stop",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Check transport back before settling in for dinner."
+  },
+  {
+    "id": "paris-montmartre",
+    "place": "paris",
+    "name": "Montmartre lanes and Sacré-Cœur views",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 0,
+    "effort": "Medium",
+    "note": "Expect hills and steps; take breaks as needed."
+  },
+  {
+    "id": "paris-museum",
+    "place": "paris",
+    "name": "Small museum or garden afternoon",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Check opening days and reserve popular exhibitions."
+  },
+  {
+    "id": "nice-coast",
+    "place": "nice",
+    "name": "Coastal path and sea-view pause",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Check sea conditions and stay on the marked path."
+  },
+  {
+    "id": "nice-art",
+    "place": "nice",
+    "name": "Matisse Museum and Cimiez gardens",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check the museum's current opening schedule."
+  },
+  {
+    "id": "lyon-halles",
+    "place": "lyon",
+    "name": "Les Halles food hall tasting",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 22,
+    "effort": "Low",
+    "note": "Check opening hours and choose portions to share."
+  },
+  {
+    "id": "lyon-funicular",
+    "place": "lyon",
+    "name": "Fourvière viewpoint and old town",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Medium",
+    "note": "The old town has slopes and cobbles; the funicular can help."
+  },
+  {
+    "id": "rome-trastevere",
+    "place": "rome",
+    "name": "Trastevere lanes and piazza pause",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Visit respectfully around residential streets."
+  },
+  {
+    "id": "rome-villa",
+    "place": "rome",
+    "name": "Villa Borghese gardens",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Museum entry needs separate advance booking."
+  },
+  {
+    "id": "florence-oltrarno",
+    "place": "florence",
+    "name": "Oltrarno artisan workshops",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check workshop opening times; some close between lunch and evening."
+  },
+  {
+    "id": "florence-gardens",
+    "place": "florence",
+    "name": "Boboli or Bardini garden visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Check tickets and seasonal hours."
+  },
+  {
+    "id": "venice-islands",
+    "place": "venice",
+    "name": "Murano or Burano vaporetto outing",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Check vaporetto schedules and island return times."
+  },
+  {
+    "id": "venice-art",
+    "place": "venice",
+    "name": "Dorsoduro galleries and quiet canals",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Confirm gallery opening hours."
+  },
+  {
+    "id": "zurich-lindenhof",
+    "place": "zurich",
+    "name": "Lindenhof and old-town lanes",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "An easy walk with viewpoints and historic streets."
+  },
+  {
+    "id": "zurich-art",
+    "place": "zurich",
+    "name": "Kunsthaus art museum visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 25,
+    "effort": "Low",
+    "note": "Check current exhibitions and ticket options."
+  },
+  {
+    "id": "lucerne-wall",
+    "place": "lucerne",
+    "name": "Musegg Wall and old-town lanes",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Medium",
+    "note": "Some sections include stairs; check seasonal access."
+  },
+  {
+    "id": "lucerne-lion",
+    "place": "lucerne",
+    "name": "Lion Monument and Glacier Garden",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Check opening times for the museum section."
+  },
+  {
+    "id": "barcelona-gothic",
+    "place": "barcelona",
+    "name": "Gothic Quarter and cathedral lanes",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Watch for pickpockets in crowded streets."
+  },
+  {
+    "id": "barcelona-park",
+    "place": "barcelona",
+    "name": "Park Güell viewpoints",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 15,
+    "effort": "Medium",
+    "note": "Reserve timed entry if visiting ticketed areas."
+  },
+  {
+    "id": "madrid-palace",
+    "place": "madrid",
+    "name": "Royal Palace exterior and Plaza de Oriente",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Check palace access and any event closures."
+  },
+  {
+    "id": "madrid-market",
+    "place": "madrid",
+    "name": "Mercado de San Miguel food stop",
+    "slot": "Afternoon",
+    "duration": "1 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Busy periods are crowded; check prices before ordering."
+  },
+  {
+    "id": "amsterdam-ferry",
+    "place": "amsterdam",
+    "name": "Free IJ ferry and waterfront walk",
+    "slot": "Afternoon",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Check ferry routes and be aware of cycle traffic."
+  },
+  {
+    "id": "amsterdam-park",
+    "place": "amsterdam",
+    "name": "Vondelpark and neighbourhood café",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "A relaxed option for a quieter day."
+  },
+  {
+    "id": "tokyo-meiji",
+    "place": "tokyo",
+    "name": "Meiji Shrine and Yoyogi Park",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Keep to public paths and respect shrine customs."
+  },
+  {
+    "id": "tokyo-teamlab",
+    "place": "tokyo",
+    "name": "Digital art or contemporary museum visit",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 30,
+    "effort": "Low",
+    "note": "Book timed entry ahead where required."
+  },
+  {
+    "id": "kyoto-arashiyama",
+    "place": "kyoto",
+    "name": "Arashiyama bamboo grove and riverside",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Arrive early to avoid peak crowds."
+  },
+  {
+    "id": "kyoto-nishiki",
+    "place": "kyoto",
+    "name": "Nishiki Market tasting stroll",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Be mindful of market rules about eating while walking."
+  },
+  {
+    "id": "osaka-castle",
+    "place": "osaka",
+    "name": "Osaka Castle park and grounds",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Allow time for the park; museum entry is separate."
+  },
+  {
+    "id": "osaka-shinsekai",
+    "place": "osaka",
+    "name": "Shinsekai neighbourhood food walk",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Check restaurant hours and ingredients."
+  },
+  {
+    "id": "nara-park",
+    "place": "nara",
+    "name": "Nara Park and Todai-ji temple area",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Do not feed or tease deer; follow posted guidance."
+  },
+  {
+    "id": "nara-machiya",
+    "place": "nara",
+    "name": "Naramachi historic lanes and cafés",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "A gentle option for traditional houses and small shops."
+  },
+  {
+    "id": "hakone-lake",
+    "place": "hakone",
+    "name": "Lake Ashi lakeside and sightseeing boat",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Boat schedules and Fuji visibility depend on weather."
+  },
+  {
+    "id": "hakone-onsen",
+    "place": "hakone",
+    "name": "Traditional onsen relaxation",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 35,
+    "effort": "Low",
+    "note": "Check bathing etiquette and any tattoo policies."
+  },
+  {
+    "id": "hiroshima-peace",
+    "place": "hiroshima",
+    "name": "Peace Memorial Park and museum",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Allow time for a thoughtful visit and museum exhibits."
+  },
+  {
+    "id": "hiroshima-miyajima",
+    "place": "hiroshima",
+    "name": "Miyajima shrine and waterfront",
+    "slot": "Daytime",
+    "duration": "4 hr",
+    "cost": 25,
+    "effort": "Low",
+    "note": "Check ferry times and tide conditions."
+  },
+  {
+    "id": "kanazawa-garden",
+    "place": "kanazawa",
+    "name": "Kenrokuen Garden stroll",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Garden scenery changes by season; check opening hours."
+  },
+  {
+    "id": "kanazawa-market",
+    "place": "kanazawa",
+    "name": "Omicho Market seafood and local produce",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 20,
+    "effort": "Low",
+    "note": "Confirm stall hours and dietary needs."
+  },
+  {
+    "id": "sapporo-park",
+    "place": "sapporo",
+    "name": "Odori Park and central city walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Seasonal events can affect access and crowd levels."
+  },
+  {
+    "id": "sapporo-food",
+    "place": "sapporo",
+    "name": "Nijo Market and Hokkaido food tasting",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 22,
+    "effort": "Low",
+    "note": "Check stall opening hours and ingredient details."
+  },
+  {
+    "id": "hanoi-local-walk",
+    "place": "hanoi",
+    "name": "Hanoi local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hanoi-food-stop",
+    "place": "hanoi",
+    "name": "Hanoi local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hoi-an-local-walk",
+    "place": "hoi-an",
+    "name": "Hoi An local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hoi-an-food-stop",
+    "place": "hoi-an",
+    "name": "Hoi An local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ho-chi-minh-city-local-walk",
+    "place": "ho-chi-minh-city",
+    "name": "Ho Chi Minh City local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ho-chi-minh-city-food-stop",
+    "place": "ho-chi-minh-city",
+    "name": "Ho Chi Minh City local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ninh-binh-local-walk",
+    "place": "ninh-binh",
+    "name": "Ninh Binh local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ninh-binh-food-stop",
+    "place": "ninh-binh",
+    "name": "Ninh Binh local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ha-long-bay-local-walk",
+    "place": "ha-long-bay",
+    "name": "Ha Long Bay local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ha-long-bay-food-stop",
+    "place": "ha-long-bay",
+    "name": "Ha Long Bay local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "da-nang-local-walk",
+    "place": "da-nang",
+    "name": "Da Nang local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "da-nang-food-stop",
+    "place": "da-nang",
+    "name": "Da Nang local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hue-river",
+    "place": "hue",
+    "name": "Perfume River promenade",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hue-tomb",
+    "place": "hue",
+    "name": "Garden tomb heritage visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "dalat-waterfall",
+    "place": "da-lat",
+    "name": "Waterfall and pine-forest viewpoint",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "dalat-market",
+    "place": "da-lat",
+    "name": "Da Lat night market stroll",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "phong-nha-cycling",
+    "place": "phong-nha",
+    "name": "Village lanes and rice-field cycle",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "phong-nha-garden",
+    "place": "phong-nha",
+    "name": "Countryside garden and local lunch",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "nara-local-walk",
+    "place": "nara",
+    "name": "Nara local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "nara-food-stop",
+    "place": "nara",
+    "name": "Nara local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hakone-local-walk",
+    "place": "hakone",
+    "name": "Hakone local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hakone-food-stop",
+    "place": "hakone",
+    "name": "Hakone local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hiroshima-local-walk",
+    "place": "hiroshima",
+    "name": "Hiroshima local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hiroshima-food-stop",
+    "place": "hiroshima",
+    "name": "Hiroshima local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "kanazawa-local-walk",
+    "place": "kanazawa",
+    "name": "Kanazawa local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "kanazawa-food-stop",
+    "place": "kanazawa",
+    "name": "Kanazawa local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "sapporo-local-walk",
+    "place": "sapporo",
+    "name": "Sapporo local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "sapporo-food-stop",
+    "place": "sapporo",
+    "name": "Sapporo local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
   }
 ]
