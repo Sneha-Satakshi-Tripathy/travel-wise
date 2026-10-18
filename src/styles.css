@@ -466,3 +466,16 @@ footer{background:#f3f2eb}
 /* Keep the flexible-date checkbox compact and inline within the trip form. */
 .fields .flexible-date-toggle{display:flex;grid-column:1/-1;align-items:center;justify-content:flex-start;gap:8px;width:max-content;max-width:100%;font-size:12px;line-height:1.4;cursor:pointer}
 .fields .flexible-date-toggle input{width:14px;height:14px;min-height:14px;flex:0 0 14px;margin:0;padding:0;accent-color:#36543a}
+
+
+/* PR #7: keep the journey and trip overview in the first viewport. */
+.journey-strip{background:#f4f3eb}
+.journey-road{top:35px}
+.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin{top:110px}
+.journey-stop-copy{position:relative;z-index:2;overflow-wrap:anywhere}
+.journey-stop-copy b{display:block;max-width:100%;overflow-wrap:anywhere;line-height:1.35}
+.journey-photo-fallback{position:relative;background:linear-gradient(145deg,#dfe8d9,#f0e9dc)!important}
+.journey-photo-fallback::after{content:"⌖ Photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:5px;color:#53674e;font-size:9px;font-weight:600;text-align:center}
+/* Keep the timeline marker on its own visual row, away from long destination names. */
+.journey-stop{overflow:visible}
+@media(max-width:720px){.journey-road{top:25px}.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin{top:100px}.journey-stop-copy b{font-size:11px;line-height:1.35}}
