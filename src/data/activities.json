@@ -1728,5 +1728,245 @@
     "cost": 12,
     "effort": "Low",
     "note": "Broths may contain pork, fish or other allergens; confirm ingredients before ordering."
+  },
+  {
+    "id": "agra-taj",
+    "place": "agra",
+    "name": "Taj Mahal visit",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Check the current opening day and ticket rules; the Taj Mahal is closed on Fridays."
+  },
+  {
+    "id": "agra-fort",
+    "place": "agra",
+    "name": "Agra Fort and Mughal courtyards",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Allow time for security and walking through the large fort complex."
+  },
+  {
+    "id": "agra-mehtab",
+    "place": "agra",
+    "name": "Mehtab Bagh riverfront view",
+    "slot": "Sunset",
+    "duration": "1 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "The view depends on weather and visibility; verify garden hours before visiting."
+  },
+  {
+    "id": "agra-marble",
+    "place": "agra",
+    "name": "Marble inlay craft workshop",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Ask about the workshop price and whether a purchase is expected."
+  },
+  {
+    "id": "delhi-humayun",
+    "place": "delhi",
+    "name": "Humayun’s Tomb and garden complex",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check current ticket prices and opening hours before setting out."
+  },
+  {
+    "id": "delhi-qutub",
+    "place": "delhi",
+    "name": "Qutub Minar complex",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Wear comfortable shoes and check current monument access rules."
+  },
+  {
+    "id": "delhi-oldcity",
+    "place": "delhi",
+    "name": "Old Delhi food and bazaar walk",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 20,
+    "effort": "Medium",
+    "note": "Choose a guided route if unfamiliar with the lanes; check ingredients and allergens."
+  },
+  {
+    "id": "delhi-lodhi",
+    "place": "delhi",
+    "name": "Lodhi Garden and nearby architecture",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "A relaxed outdoor stop; avoid the hottest part of the day in summer."
+  },
+  {
+    "id": "hampi-vittala",
+    "place": "hampi",
+    "name": "Vittala Temple and Stone Chariot",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 8,
+    "effort": "Medium",
+    "note": "Use local transport between monument clusters and check protected-site rules."
+  },
+  {
+    "id": "hampi-virupaksha",
+    "place": "hampi",
+    "name": "Virupaksha Temple and Hampi Bazaar",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 3,
+    "effort": "Low",
+    "note": "Dress respectfully at the temple and check entry rules for worship areas."
+  },
+  {
+    "id": "hampi-hemakuta",
+    "place": "hampi",
+    "name": "Hemakuta Hill sunset viewpoints",
+    "slot": "Sunset",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Medium",
+    "note": "Uneven rock surfaces can be slippery; avoid climbing in rain or darkness."
+  },
+  {
+    "id": "hampi-royal",
+    "place": "hampi",
+    "name": "Royal Enclosure and stepwell ruins",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Medium",
+    "note": "Carry water and sun protection; shade is limited across the ruins."
+  },
+  {
+    "id": "mysuru-palace",
+    "place": "mysuru",
+    "name": "Mysore Palace visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check palace hours and photography rules; evening illumination is schedule-dependent."
+  },
+  {
+    "id": "mysuru-market",
+    "place": "mysuru",
+    "name": "Devaraja Market flower and spice lanes",
+    "slot": "Morning",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Go earlier for market activity and ask before photographing vendors."
+  },
+  {
+    "id": "mysuru-chamundi",
+    "place": "mysuru",
+    "name": "Chamundi Hill and temple precinct",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 3,
+    "effort": "Medium",
+    "note": "Road and temple queues vary; use authorised transport and check access rules."
+  },
+  {
+    "id": "mysuru-cathedral",
+    "place": "mysuru",
+    "name": "St Philomena’s Cathedral",
+    "slot": "Afternoon",
+    "duration": "45 min",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Respect services and any visitor restrictions."
+  },
+  {
+    "id": "rishikesh-ram",
+    "place": "rishikesh",
+    "name": "Ram Jhula and riverside walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Follow local bridge and river safety notices; currents can be strong."
+  },
+  {
+    "id": "rishikesh-triveni",
+    "place": "rishikesh",
+    "name": "Triveni Ghat evening aarti",
+    "slot": "Evening",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Arrive early, keep access clear and follow ceremony guidance."
+  },
+  {
+    "id": "rishikesh-ashram",
+    "place": "rishikesh",
+    "name": "Beatles Ashram art and forest paths",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Medium",
+    "note": "Check current entry status and wear shoes suitable for uneven paths."
+  },
+  {
+    "id": "rishikesh-yoga",
+    "place": "rishikesh",
+    "name": "Introductory yoga or meditation session",
+    "slot": "Morning",
+    "duration": "1 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Choose a reputable centre and confirm class schedule and inclusions."
+  },
+  {
+    "id": "amritsar-golden",
+    "place": "amritsar",
+    "name": "Golden Temple and Sarovar walk",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Cover your head, remove footwear and follow the site's visitor etiquette."
+  },
+  {
+    "id": "amritsar-bagh",
+    "place": "amritsar",
+    "name": "Jallianwala Bagh memorial",
+    "slot": "Morning",
+    "duration": "1 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Allow quiet time for the memorial and check current access hours."
+  },
+  {
+    "id": "amritsar-museum",
+    "place": "amritsar",
+    "name": "Partition Museum",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check opening days and ticket requirements before visiting."
+  },
+  {
+    "id": "amritsar-food",
+    "place": "amritsar",
+    "name": "Punjabi food trail around the old city",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Ask about dairy, ghee, nuts and other allergens before ordering."
   }
 ]

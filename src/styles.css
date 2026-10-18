@@ -466,3 +466,24 @@ footer{background:#f3f2eb}
 /* Keep the flexible-date checkbox compact and inline within the trip form. */
 .fields .flexible-date-toggle{display:flex;grid-column:1/-1;align-items:center;justify-content:flex-start;gap:8px;width:max-content;max-width:100%;font-size:12px;line-height:1.4;cursor:pointer}
 .fields .flexible-date-toggle input{width:14px;height:14px;min-height:14px;flex:0 0 14px;margin:0;padding:0;accent-color:#36543a}
+
+/* PR #9: journey stops use independent photo, number and text rows; no absolute marker collisions. */
+.journey-strip{overflow:hidden}
+.journey-scroll{overflow-x:auto;overflow-y:hidden;padding:4px 2px 12px}
+.journey-path{align-items:stretch;min-height:0;padding:4px 8px 8px;gap:8px}
+.journey-road{display:none}
+.journey-stop,.journey-stop-top,.journey-stop-bottom{position:relative;display:flex;flex:0 0 154px;width:154px;min-height:0;height:auto;align-items:stretch;justify-content:flex-start;flex-direction:column;gap:8px;padding:0 4px 8px;overflow:visible}
+.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin,.journey-pin{position:absolute;z-index:3;top:8px;left:12px;right:auto;transform:none;width:29px;height:29px;border:2px solid #fffdf8;background:#36543a;color:#fff;box-shadow:0 2px 8px #1e2c1b45;font-size:10px}
+.journey-stop-active .journey-pin{transform:scale(1.08);background:#243f29;color:#fff}
+.journey-photo,.journey-stop-top .journey-photo,.journey-stop-bottom .journey-photo{position:relative;display:block;order:1;flex:0 0 100px;width:100%;height:100px;margin:0;border:1px solid #e2e7dc;border-radius:12px;background:#e8ece3;overflow:hidden;box-shadow:0 2px 8px #34422b12}
+.journey-photo>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.journey-stop-copy,.journey-stop-top .journey-stop-copy,.journey-stop-bottom .journey-stop-copy{order:2;display:grid;align-content:start;gap:5px;width:100%;max-width:none;min-height:45px;margin:0;padding:0 3px;overflow:visible;text-align:left;overflow-wrap:anywhere}
+.journey-stop-copy b{display:block;width:100%;font-size:12px;line-height:1.35;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;color:#283229}
+.journey-stop-copy small{font-size:10px;line-height:1.4;white-space:normal}
+.journey-stop-bottom{flex-direction:column}
+.journey-photo-fallback{background:linear-gradient(135deg,#e5ebdf,#f5f0e6)!important}
+.journey-photo-fallback::after{content:"Photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:8px;text-align:center;font-size:10px;color:#5b6a55;font-weight:700}
+.place-img.image-fallback{background:linear-gradient(135deg,#e5ebdf,#f5f0e6)}
+.place-img.image-fallback::after{content:"Destination photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:12px;text-align:center;color:#5b6a55;font-size:12px;font-weight:700}
+.place-img.image-fallback>img{display:none}
+@media(max-width:720px){.journey-path{min-height:0;gap:6px;padding:4px 2px 8px}.journey-stop,.journey-stop-top,.journey-stop-bottom{flex-basis:138px;width:138px;padding:0 3px 8px}.journey-photo,.journey-stop-top .journey-photo,.journey-stop-bottom .journey-photo{height:88px;flex-basis:88px}.journey-stop-copy b{font-size:11px}.journey-stop-copy small{font-size:9px}}
