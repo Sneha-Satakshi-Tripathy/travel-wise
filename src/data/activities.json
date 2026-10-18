@@ -1448,5 +1448,285 @@
     "cost": 22,
     "effort": "Low",
     "note": "Check stall opening hours and ingredient details."
+  },
+  {
+    "id": "hanoi-local-walk",
+    "place": "hanoi",
+    "name": "Hanoi local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hanoi-food-stop",
+    "place": "hanoi",
+    "name": "Hanoi local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hoi-an-local-walk",
+    "place": "hoi-an",
+    "name": "Hoi An local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hoi-an-food-stop",
+    "place": "hoi-an",
+    "name": "Hoi An local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ho-chi-minh-city-local-walk",
+    "place": "ho-chi-minh-city",
+    "name": "Ho Chi Minh City local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ho-chi-minh-city-food-stop",
+    "place": "ho-chi-minh-city",
+    "name": "Ho Chi Minh City local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ninh-binh-local-walk",
+    "place": "ninh-binh",
+    "name": "Ninh Binh local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ninh-binh-food-stop",
+    "place": "ninh-binh",
+    "name": "Ninh Binh local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ha-long-bay-local-walk",
+    "place": "ha-long-bay",
+    "name": "Ha Long Bay local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "ha-long-bay-food-stop",
+    "place": "ha-long-bay",
+    "name": "Ha Long Bay local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "da-nang-local-walk",
+    "place": "da-nang",
+    "name": "Da Nang local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "da-nang-food-stop",
+    "place": "da-nang",
+    "name": "Da Nang local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hue-river",
+    "place": "hue",
+    "name": "Perfume River promenade",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hue-tomb",
+    "place": "hue",
+    "name": "Garden tomb heritage visit",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "dalat-waterfall",
+    "place": "da-lat",
+    "name": "Waterfall and pine-forest viewpoint",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "dalat-market",
+    "place": "da-lat",
+    "name": "Da Lat night market stroll",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "phong-nha-cycling",
+    "place": "phong-nha",
+    "name": "Village lanes and rice-field cycle",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "phong-nha-garden",
+    "place": "phong-nha",
+    "name": "Countryside garden and local lunch",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "nara-local-walk",
+    "place": "nara",
+    "name": "Nara local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "nara-food-stop",
+    "place": "nara",
+    "name": "Nara local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hakone-local-walk",
+    "place": "hakone",
+    "name": "Hakone local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hakone-food-stop",
+    "place": "hakone",
+    "name": "Hakone local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hiroshima-local-walk",
+    "place": "hiroshima",
+    "name": "Hiroshima local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "hiroshima-food-stop",
+    "place": "hiroshima",
+    "name": "Hiroshima local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "kanazawa-local-walk",
+    "place": "kanazawa",
+    "name": "Kanazawa local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "kanazawa-food-stop",
+    "place": "kanazawa",
+    "name": "Kanazawa local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "sapporo-local-walk",
+    "place": "sapporo",
+    "name": "Sapporo local neighbourhood walk",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
+  },
+  {
+    "id": "sapporo-food-stop",
+    "place": "sapporo",
+    "name": "Sapporo local food and market stop",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Check local opening times and seasonal conditions before setting out."
   }
 ]
