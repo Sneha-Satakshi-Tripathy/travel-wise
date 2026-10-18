@@ -1,0 +1,13 @@
+[
+{"id":"temple","place":"kandy","name":"Temple of the Sacred Tooth Relic","slot":"Morning","duration":"1.5 hr","cost":12,"effort":"Low","note":"Visit respectfully; shoulders and knees should be covered."},
+{"id":"lake","place":"kandy","name":"Kandy Lake loop & coffee","slot":"Afternoon","duration":"1.5 hr","cost":10,"effort":"Low","note":"An easy wander with a café break built in."},
+{"id":"market","place":"kandy","name":"Local market food walk","slot":"Evening","duration":"1.5 hr","cost":18,"effort":"Low","note":"Try local snacks with a guide or go at your own pace."},
+{"id":"rock","place":"sigiriya","name":"Sigiriya Rock Fortress","slot":"Morning","duration":"3 hr","cost":35,"effort":"High","note":"Many stairs and exposed sections; start early and carry water."},
+{"id":"village","place":"sigiriya","name":"Village lunch & countryside ride","slot":"Afternoon","duration":"2 hr","cost":22,"effort":"Low","note":"A slower way to experience rural life after the climb."},
+{"id":"tea","place":"nuwara-eliya","name":"Tea estate visit & tasting","slot":"Morning","duration":"2 hr","cost":20,"effort":"Low","note":"Ask about factory tour times before travelling."},
+{"id":"train","place":"nuwara-eliya","name":"Scenic train window time","slot":"Afternoon","duration":"2 hr","cost":15,"effort":"Low","note":"Train schedules and seat availability need confirmation."},
+{"id":"fort","place":"galle","name":"Galle Fort heritage walk","slot":"Morning","duration":"2 hr","cost":0,"effort":"Low","note":"Explore lanes, lighthouse and ramparts in the cooler hours."},
+{"id":"sunset","place":"galle","name":"Rampart sunset & dinner","slot":"Evening","duration":"2 hr","cost":25,"effort":"Low","note":"Keep the evening flexible for golden-hour views."},
+{"id":"beach","place":"mirissa","name":"Beach morning & swim","slot":"Morning","duration":"2 hr","cost":0,"effort":"Low","note":"Check sea conditions and local safety advice before swimming."},
+{"id":"cafe","place":"mirissa","name":"Sea-view lunch & slow afternoon","slot":"Afternoon","duration":"2 hr","cost":24,"effort":"Low","note":"A deliberately unhurried block with room to explore."}
+]
