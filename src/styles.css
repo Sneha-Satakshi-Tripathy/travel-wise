@@ -371,3 +371,24 @@ footer{background:#f3f2eb}
 }
 
 :root{--line:#e5e2d9;--card:#fffdf8;--ink:#283229;--muted:#777f74}
+
+/* Visual day-by-day route strip */
+.journey-strip{margin:20px 0 24px;padding:18px 18px 16px;background:#f0f0e8;border:1px solid #e5e2d9;border-radius:18px;overflow:hidden}
+.journey-strip-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.journey-strip-head>span:last-child{font-size:10px;color:#7a8277}
+.journey-track{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity}
+.journey-stop{flex:0 0 158px;min-width:0;padding:0;border:1px solid #e5e2d9;border-radius:13px;background:#fffdf8;text-align:left;overflow:hidden;scroll-snap-align:start;transition:transform .18s,border-color .18s,box-shadow .18s;cursor:pointer}
+.journey-stop:hover{transform:translateY(-2px)}
+.journey-stop-active{border-color:#537457;box-shadow:0 0 0 2px #dbe6d7}
+.journey-photo{height:88px;display:block;position:relative;background:#e2e7dc;overflow:hidden}
+.journey-photo>img{width:100%;height:100%;object-fit:cover;display:block}
+.journey-day-badge{position:absolute;left:8px;top:8px;padding:5px 7px;border-radius:6px;background:#fffdf0;color:#294b37;font-size:9px;font-weight:700;letter-spacing:.04em}
+.journey-stop-copy{display:grid;gap:5px;padding:10px}
+.journey-stop-copy b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#283229}
+.journey-stop-copy small{font-size:10px;color:#7a8277}
+.journey-stop-copy>span{display:flex;align-items:center;gap:4px;font-size:9px;color:#537457;margin-top:2px}
+.journey-connector{display:flex;align-items:center;gap:0;flex:0 0 28px;justify-content:center;color:#9aa493}
+.journey-connector>span{height:1px;background:#c8d0c2;flex:1}
+.journey-connector>svg{flex-shrink:0}
+.journey-photo-placeholder{height:100%;display:grid;place-items:center;color:#71846d}
+@media(max-width:720px){.journey-strip{margin:16px 0;padding:14px 12px}.journey-stop{flex-basis:145px}.journey-photo{height:78px}.journey-connector{flex-basis:20px}}

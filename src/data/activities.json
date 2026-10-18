@@ -638,5 +638,125 @@
     "cost": 18,
     "effort": "Low",
     "note": "Confirm ingredients and use reputable transport after dinner."
+  },
+  {
+    "id": "ninh-binh-boat",
+    "place": "ninh-binh",
+    "name": "Trang An scenic boat ride",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Choose an official boat route and bring sun protection."
+  },
+  {
+    "id": "ninh-binh-cycling",
+    "place": "ninh-binh",
+    "name": "Countryside cycle and rice-field lanes",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Rent a bicycle locally and check the weather before setting out."
+  },
+  {
+    "id": "halong-cruise",
+    "place": "ha-long-bay",
+    "name": "Limestone-island bay cruise",
+    "slot": "Morning",
+    "duration": "4–6 hr",
+    "cost": 55,
+    "effort": "Low",
+    "note": "Compare licensed operators and confirm the route and weather cancellation policy."
+  },
+  {
+    "id": "halong-kayak",
+    "place": "ha-long-bay",
+    "name": "Kayak or floating-village visit",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 18,
+    "effort": "Medium",
+    "note": "Optional activity; follow the operator's safety guidance and life-jacket rules."
+  },
+  {
+    "id": "danang-beach",
+    "place": "da-nang",
+    "name": "My Khe Beach and seaside promenade",
+    "slot": "Morning",
+    "duration": "1.5 hr",
+    "cost": 0,
+    "effort": "Low",
+    "note": "Go earlier for a quieter walk and check sea conditions before swimming."
+  },
+  {
+    "id": "danang-marble",
+    "place": "da-nang",
+    "name": "Marble Mountains viewpoints",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Medium",
+    "note": "There are stairs; check elevator access and choose a comfortable route."
+  },
+  {
+    "id": "hue-citadel",
+    "place": "hue",
+    "name": "Imperial City citadel visit",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Wear sun protection and allow time for the large historic complex."
+  },
+  {
+    "id": "hue-food",
+    "place": "hue",
+    "name": "Hue-style noodle and local food stops",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 12,
+    "effort": "Low",
+    "note": "Ask about spice levels and ingredients when ordering."
+  },
+  {
+    "id": "dalat-gardens",
+    "place": "da-lat",
+    "name": "Flower gardens and central lake walk",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Bring a light layer; the highland weather can be cool."
+  },
+  {
+    "id": "dalat-coffee",
+    "place": "da-lat",
+    "name": "Highland coffee and market stroll",
+    "slot": "Evening",
+    "duration": "1.5 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Try a local café and leave room for the night market."
+  },
+  {
+    "id": "phong-nha-cave",
+    "place": "phong-nha",
+    "name": "Phong Nha cave boat journey",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Book with a licensed operator and check seasonal river conditions."
+  },
+  {
+    "id": "phong-nha-river",
+    "place": "phong-nha",
+    "name": "Riverside village and countryside stop",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Plan transfers in advance; rural transport options can be limited."
   }
 ]
