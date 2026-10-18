@@ -1,6 +1,6 @@
-# Roamwise
+# Travel wise
 
-A responsive, frontend-only travel-planning prototype built with React and Vite. Roamwise helps you choose a trip scope, shortlist cities, assemble a flexible day-by-day itinerary, and see illustrative budget estimates.
+A responsive, frontend-only travel-planning prototype built with React and Vite. Travel wise helps you choose a trip scope, shortlist cities, assemble a flexible day-by-day itinerary, and see illustrative budget estimates.
 
 ## Current prototype
 
