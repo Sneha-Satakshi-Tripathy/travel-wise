@@ -182,13 +182,20 @@ export default function App() {
         <section className="itinerary-main">
           <div className="section-head itinerary-title"><div><h2>The days, your way</h2><p>Swap, add or skip anything. This is a flexible starting point.</p></div><button className="link" onClick={() => setPage("discover")}>Change cities ↗</button></div>
           <div className="journey-strip" aria-label="Visual day-by-day route">
-            <div className="journey-strip-head"><span className="eyebrow">YOUR ROUTE AT A GLANCE</span><span>{days.length} days · {chosen.length} {chosen.length === 1 ? "stop" : "stops"}</span></div>
-            <div className="journey-track">{days.map((d,i)=><React.Fragment key={d.n}>
-              <button className={activeDay===i?"journey-stop journey-stop-active":"journey-stop"} aria-pressed={activeDay===i} onClick={()=>{setActiveDay(i);setAddingForDay(-1);}}>
-                <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display="none";}}/>:<span className="journey-photo-placeholder"><MapPin size={20}/></span>}<span className="journey-day-badge">DAY {String(d.n).padStart(2,"0")}</span></span>
-                <span className="journey-stop-copy"><b>{d.place?.name||"Open day"}</b><small>{d.activities.length} {d.activities.length===1?"activity":"activities"}</small><span>{i===0?"Start here":i===days.length-1?"Final stop":"Next stop"} <ArrowRight size={11}/></span></span>
-              </button>{i<days.length-1&&<span className="journey-connector" aria-hidden="true"><span></span><ArrowRight size={14}/></span>}
-            </React.Fragment>)}</div></div><div className="day-tabs" role="tablist" aria-label="Itinerary days">
+            <div className="journey-strip-head"><span className="eyebrow">YOUR JOURNEY</span><span>{days.length} days · {chosen.length} {chosen.length === 1 ? "stop" : "stops"}</span></div>
+            <div className="journey-scroll">
+              <div className="journey-path" style={{"--journey-count": days.length}}>
+                <svg className="journey-road" viewBox={`0 0 ${Math.max(1,days.length-1)*180+100} 180`} preserveAspectRatio="none" aria-hidden="true">
+                  <path d={`M 48 90 ${days.map((d,i)=>{const x=48+i*180;return i===0?"":`Q ${x-45} ${i%2===0?28:152} ${x} 90`;}).join(" ")}`} />
+                </svg>
+                {days.map((d,i)=><button key={d.n} className={`journey-stop journey-stop-${i%2===0?"top":"bottom"} ${activeDay===i?"journey-stop-active":""}`} aria-pressed={activeDay===i} onClick={()=>{setActiveDay(i);setAddingForDay(-1);}}>
+                  <span className="journey-pin"><span>{String(d.n).padStart(2,"0")}</span></span>
+                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display="none";}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
+                  <span className="journey-stop-copy"><b>{d.place?.name||"Open day"}</b><small>{d.activities.length} {d.activities.length===1?"activity":"activities"}</small></span>
+                </button>)}
+              </div>
+            </div>
+          </div><div className="day-tabs" role="tablist" aria-label="Itinerary days">
             {days.map((d, i) => <button key={d.n} role="tab" aria-selected={activeDay === i} className={activeDay === i ? "day-tab active" : "day-tab"} onClick={() => { setActiveDay(i); setAddingForDay(-1); }}><small>DAY</small><b>{String(d.n).padStart(2, "0")}</b><span>{d.place?.name || "Open day"}</span></button>)}
           </div>
           {days[activeDay] && (() => { const d = days[activeDay]; const candidates = d.place ? activities.filter(a => a.place === d.place.id && !trip.activities.includes(a.id)) : activities.filter(a => trip.places.includes(a.place) && !trip.activities.includes(a.id)); return <article className="active-day-panel" key={d.n}>
