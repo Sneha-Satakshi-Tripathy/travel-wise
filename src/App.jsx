@@ -83,6 +83,8 @@ export default function App() {
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
   useEffect(() => { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); }, [savedTrips]);
+  // Every page transition starts at the top; don’t preserve a previous page’s scroll offset.
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); }, [page]);
 
   const chosen = destinations.filter(d => trip.places.includes(d.id));
   const selected = activities.filter(a => trip.activities.includes(a.id) && trip.places.includes(a.place));
@@ -178,10 +180,18 @@ export default function App() {
     extras.sort((a, b) => b.remainder - a.remainder).slice(0, trip.days - allocated).forEach(item => { counts[item.index] += 1; });
     const plan = [];
     assigned.forEach((place, index) => {
-      const placeActivities = selected.filter(activity => activity.place === place.id);
-      const chunkSize = Math.max(1, Math.ceil(placeActivities.length / counts[index]));
+      // Start with the user’s chosen activities, then use the destination catalogue to fill
+      // longer stays. This prevents selected starter activities from leaving later days empty.
+      const selectedIds = new Set(trip.activities);
+      const placeActivities = activities
+        .filter(activity => activity.place === place.id)
+        .sort((a, b) => Number(selectedIds.has(b.id)) - Number(selectedIds.has(a.id)));
       for (let day = 0; day < counts[index]; day += 1) {
-        plan.push({ n: plan.length + 1, place, activities: placeActivities.slice(day * chunkSize, (day + 1) * chunkSize) });
+        // Proportional boundaries distribute remainder activities across days instead of
+        // creating a blank final day due to ceil-based chunk sizes.
+        const start = Math.floor(day * placeActivities.length / counts[index]);
+        const end = Math.floor((day + 1) * placeActivities.length / counts[index]);
+        plan.push({ n: plan.length + 1, place, activities: placeActivities.slice(start, end) });
       }
     });
     return plan;
