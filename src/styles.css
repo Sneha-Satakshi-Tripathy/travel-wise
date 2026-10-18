@@ -461,3 +461,8 @@ footer{background:#f3f2eb}
 .swap-option strong{font-size:12px}
 .swap-option small{font-size:10px;color:#788072}
 @media(max-width:640px){.date-calendar{left:0}.climate-card{padding:15px;gap:10px}.climate-card h2{font-size:17px}}
+
+
+/* Keep the flexible-date checkbox compact and inline within the trip form. */
+.fields .flexible-date-toggle{display:flex;grid-column:1/-1;align-items:center;justify-content:flex-start;gap:8px;width:max-content;max-width:100%;font-size:12px;line-height:1.4;cursor:pointer}
+.fields .flexible-date-toggle input{width:14px;height:14px;min-height:14px;flex:0 0 14px;margin:0;padding:0;accent-color:#36543a}
