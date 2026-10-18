@@ -55,7 +55,7 @@ img{background:#ece9df}
 }
 
 
-/* Roamwise visual refresh: editorial, calm, and mobile-first */
+/* Travel wise visual refresh: editorial, calm, and mobile-first */
 :root{--paper:#f8f7f2;--card:#fffefa;--ink:#25382c;--muted:#747d72;--forest:#294b37;--sage:#dfe8d9;--line:#e6e5dc;--clay:#c77d5d}
 body{background:var(--paper);color:var(--ink)}
 ::selection{background:#dce8d5;color:#203b2a}
