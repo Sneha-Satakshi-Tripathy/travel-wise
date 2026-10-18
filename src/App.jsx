@@ -14,7 +14,7 @@ const starterPlaces = {
   Vietnam: { countries: [], places: ["hanoi", "ninh-binh", "ha-long-bay", "da-nang", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "ninh-binh-boat", "ninh-binh-cycling", "halong-cruise", "halong-kayak", "danang-beach", "danang-marble", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
-const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 1800, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
+const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
 // Broad historical seasonal guidance only; never a live forecast or guarantee.
 const climateTips = {
   "Sri Lanka": { season: "December–April for the west and south coasts; January–April for the central highlands", temperature: "24–32°C on the coasts; around 12–22°C in the highlands", note: "Monsoons vary by coast and elevation, so choose the season for your selected region." },
@@ -83,6 +83,8 @@ export default function App() {
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
   useEffect(() => { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); }, [savedTrips]);
+  // Every page transition starts at the top; don’t preserve a previous page’s scroll offset.
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); }, [page]);
 
   const chosen = destinations.filter(d => trip.places.includes(d.id));
   const selected = activities.filter(a => trip.activities.includes(a.id) && trip.places.includes(a.place));
@@ -178,10 +180,24 @@ export default function App() {
     extras.sort((a, b) => b.remainder - a.remainder).slice(0, trip.days - allocated).forEach(item => { counts[item.index] += 1; });
     const plan = [];
     assigned.forEach((place, index) => {
-      const placeActivities = selected.filter(activity => activity.place === place.id);
-      const chunkSize = Math.max(1, Math.ceil(placeActivities.length / counts[index]));
+      // Start with the user’s chosen activities, then use the destination catalogue to fill
+      // longer stays. This prevents selected starter activities from leaving later days empty.
+      const selectedIds = new Set(trip.activities);
+      const placeActivities = activities
+        .filter(activity => activity.place === place.id)
+        .sort((a, b) => Number(selectedIds.has(b.id)) - Number(selectedIds.has(a.id)));
       for (let day = 0; day < counts[index]; day += 1) {
-        plan.push({ n: plan.length + 1, place, activities: placeActivities.slice(day * chunkSize, (day + 1) * chunkSize) });
+        // Proportional boundaries distribute remainder activities across days instead of
+        // creating a blank final day due to ceil-based chunk sizes.
+        const start = Math.floor(day * placeActivities.length / counts[index]);
+        const end = Math.floor((day + 1) * placeActivities.length / counts[index]);
+        let dayActivities = placeActivities.slice(start, end);
+        // If the stay is longer than the catalogue, reuse one relevant option on a different
+        // day rather than silently presenting a zero-activity day. Never duplicate within a day.
+        if (!dayActivities.length && placeActivities.length) {
+          dayActivities = [placeActivities[day % placeActivities.length]];
+        }
+        plan.push({ n: plan.length + 1, place, activities: dayActivities });
       }
     });
     return plan;
