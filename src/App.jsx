@@ -15,7 +15,8 @@ const starterPlaces = {
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
 const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 1800, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
-// Broad historical seasonal guidance only; never a live forecast or guarantee.\nconst climateTips = {
+// Broad historical seasonal guidance only; never a live forecast or guarantee.
+const climateTips = {
   "Sri Lanka": { season: "December–April for the west and south coasts; January–April for the central highlands", temperature: "24–32°C on the coasts; around 12–22°C in the highlands", note: "Monsoons vary by coast and elevation, so choose the season for your selected region." },
   India: { season: "October–March for many popular north and west India routes", temperature: "18–30°C in many popular city routes; cooler nights are possible", note: "India varies widely by region; mountain, desert and southern-coastal trips need different timing." },
   Thailand: { season: "November–February for generally drier, more comfortable conditions", temperature: "24–32°C", note: "Rain patterns differ between the Andaman coast and the Gulf islands." },
