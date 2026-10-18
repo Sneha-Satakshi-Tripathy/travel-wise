@@ -74,3 +74,24 @@ To add a city, add its destination fixture and at least one activity using the s
 - `npm run dev` — start the Vite development server
 - `npm run build` — build the production bundle
 - `npm run preview` — preview a production build
+
+## Data quality and estimate limits
+
+Roamwise currently ships with static JSON fixtures in `src/data/`; it does not fetch live travel data.
+
+- Destination and activity costs are rough **USD-based planning estimates**, not quotations, official entrance fees, or guaranteed daily budgets. Currency display uses approximate reference conversion factors in `src/App.jsx`; it is not live foreign-exchange data.
+- Seasonal guidance is broad climate context, not a forecast. Check official meteorological services, local authorities, attraction operators, and travel advisories near departure.
+- Entry and visa requirements depend on passport nationality, trip purpose, duration, and current rules. Do not infer visa eligibility from a destination card; verify with the destination government's official immigration source.
+- Travel times are indicative and vary by route, transport mode, traffic, timetable, and service disruptions. The UI should not present them as live ETAs.
+- Attraction access, opening hours, tickets, and image URLs have not been independently verified in real time. Verify before booking or departure.
+
+### Validate the fixture data
+
+Run:
+
+```bash
+npm run validate:data
+npm run build
+```
+
+The validator checks unique IDs, required fields, destination/activity references, non-negative numeric costs, HTTPS image URL format, at least four activities per destination, and common generic placeholder text. It does not verify live image availability, attraction opening hours, prices, transit timetables, visa rules, or factual claims against official sources.
