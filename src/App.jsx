@@ -142,7 +142,7 @@ export default function App() {
   const visibleDestinations = destinations.filter(d => trip.destination === "Europe"
     ? d.scope === "Europe" && (!trip.countries.length || trip.countries.includes(d.country))
     : d.scope === trip.destination);
-  const placeCoordinates = {\n    nara: [34.6851, 135.8048], hakone: [35.2324, 139.1069], hiroshima: [34.3853, 132.4553], kanazawa: [36.5613, 136.6562], sapporo: [43.0618, 141.3545],
+  const placeCoordinates = {
     kandy: [7.2906, 80.6337], "nuwara-eliya": [6.9497, 80.7891], galle: [6.0535, 80.221], sigiriya: [7.957, 80.7603], mirissa: [5.9483, 80.4716],
     jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739],
     bangkok: [13.7563, 100.5018], "chiang-mai": [18.7883, 98.9853], krabi: [8.0863, 98.9063], phuket: [7.8804, 98.3923], ayutthaya: [14.3532, 100.5689],
