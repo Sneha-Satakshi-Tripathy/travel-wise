@@ -4,9 +4,9 @@ A responsive, frontend-only travel-planning prototype built with React and Vite.
 
 ## Current prototype
 
-- **Trip scopes:** Sri Lanka, India, Thailand, and Europe.
-- **Hierarchical planning:** choose India or Thailand as a country-level trip; choose Europe as a multi-country region, select one or more countries, then shortlist cities within those countries.
-- **Seeded city catalog:** Sri Lanka (Sigiriya, Kandy, Nuwara Eliya, Galle Fort, Mirissa); India (Jaipur, Goa, Kochi, Udaipur, Varanasi); Thailand (Bangkok, Chiang Mai, Krabi, Phuket, Ayutthaya); Europe (France, Italy, Switzerland, Spain, Netherlands).
+- **Trip scopes:** Sri Lanka, India, Thailand, Japan, Vietnam, and Europe.
+- **Hierarchical planning:** choose India, Thailand, Japan or Vietnam as a country-level trip; choose Europe as a multi-country region, select one or more countries, then shortlist cities within those countries.
+- **Seeded city catalog:** Sri Lanka (Sigiriya, Kandy, Nuwara Eliya, Galle Fort, Mirissa); India (Jaipur, Goa, Kochi, Udaipur, Varanasi); Thailand (Bangkok, Chiang Mai, Krabi, Phuket, Ayutthaya); Japan (Tokyo, Kyoto, Osaka); Vietnam (Hanoi, Hoi An, Ho Chi Minh City); Europe (France, Italy, Switzerland, Spain, Netherlands).
 - **Itinerary editing:** starter activities are added when a city is selected; activities can be toggled in the itinerary.
 - **Trip preferences:** travel style, trip length, travellers, date window, budget, and display currency.
 - **Local persistence:** trip and profile state are saved in the browser's `localStorage`; use **Reset demo** to clear the saved demo.
