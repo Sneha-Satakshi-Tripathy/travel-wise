@@ -11,7 +11,7 @@ const starterPlaces = {
   India: { countries: [], places: ["jaipur", "goa", "kochi"], activities: ["jaipur-fort", "jaipur-food", "goa-beach", "goa-old-town", "kochi-fort", "kochi-food"] },
   Thailand: { countries: [], places: ["bangkok", "chiang-mai", "krabi"], activities: ["bangkok-temples", "bangkok-food", "chiang-temples", "chiang-market", "krabi-beach", "krabi-food"] },
   Japan: { countries: [], places: ["tokyo", "kyoto", "osaka"], activities: ["tokyo-neighbourhood", "tokyo-food", "kyoto-temples", "kyoto-tea", "osaka-market", "osaka-food"] },
-  Vietnam: { countries: [], places: ["hanoi", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
+  Vietnam: { countries: [], places: ["hanoi", "ninh-binh", "ha-long-bay", "da-nang", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "ninh-binh-boat", "ninh-binh-cycling", "halong-cruise", "halong-kayak", "danang-beach", "danang-marble", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
 const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", budget: 1800, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
@@ -117,7 +117,7 @@ export default function App() {
     jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739],
     bangkok: [13.7563, 100.5018], "chiang-mai": [18.7883, 98.9853], krabi: [8.0863, 98.9063], phuket: [7.8804, 98.3923], ayutthaya: [14.3532, 100.5689],
     tokyo: [35.6762, 139.6503], kyoto: [35.0116, 135.7681], osaka: [34.6937, 135.5023],
-    hanoi: [21.0278, 105.8342], "hoi-an": [15.8801, 108.338], "ho-chi-minh-city": [10.8231, 106.6297],
+    hanoi: [21.0278, 105.8342], "ninh-binh": [20.2506, 105.9745], "ha-long-bay": [20.9101, 107.1839], "da-nang": [16.0544, 108.2022], "hoi-an": [15.8801, 108.338], hue: [16.4637, 107.5909], "da-lat": [11.9404, 108.4583], "phong-nha": [17.5916, 106.283], "ho-chi-minh-city": [10.8231, 106.6297],
     paris: [48.8566, 2.3522], nice: [43.7102, 7.262], lyon: [45.764, 4.8357], rome: [41.9028, 12.4964], florence: [43.7696, 11.2558], venice: [45.4408, 12.3155],
     zurich: [47.3769, 8.5417], lucerne: [47.0502, 8.3093], barcelona: [41.3874, 2.1686], madrid: [40.4168, -3.7038], amsterdam: [52.3676, 4.9041]
   };
@@ -181,7 +181,21 @@ export default function App() {
       <div className="itinerary-layout">
         <section className="itinerary-main">
           <div className="section-head itinerary-title"><div><h2>The days, your way</h2><p>Swap, add or skip anything. This is a flexible starting point.</p></div><button className="link" onClick={() => setPage("discover")}>Change cities ↗</button></div>
-          <div className="day-tabs" role="tablist" aria-label="Itinerary days">
+          <div className="journey-strip" aria-label="Visual day-by-day route">
+            <div className="journey-strip-head"><span className="eyebrow">YOUR JOURNEY</span><span>{days.length} days · {chosen.length} {chosen.length === 1 ? "stop" : "stops"}</span></div>
+            <div className="journey-scroll">
+              <div className="journey-path" style={{"--journey-count": days.length}}>
+                <svg className="journey-road" viewBox={`0 0 ${Math.max(1,days.length-1)*180+100} 180`} preserveAspectRatio="none" aria-hidden="true">
+                  <path d={`M 48 90 ${days.map((d,i)=>{const x=48+i*180;return i===0?"":`Q ${x-45} ${i%2===0?28:152} ${x} 90`;}).join(" ")}`} />
+                </svg>
+                {days.map((d,i)=><button key={d.n} className={`journey-stop journey-stop-${i%2===0?"top":"bottom"} ${activeDay===i?"journey-stop-active":""}`} aria-pressed={activeDay===i} onClick={()=>{setActiveDay(i);setAddingForDay(-1);}}>
+                  <span className="journey-pin"><span>{String(d.n).padStart(2,"0")}</span></span>
+                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display="none";}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
+                  <span className="journey-stop-copy"><b>{d.place?.name||"Open day"}</b><small>{d.activities.length} {d.activities.length===1?"activity":"activities"}</small></span>
+                </button>)}
+              </div>
+            </div>
+          </div><div className="day-tabs" role="tablist" aria-label="Itinerary days">
             {days.map((d, i) => <button key={d.n} role="tab" aria-selected={activeDay === i} className={activeDay === i ? "day-tab active" : "day-tab"} onClick={() => { setActiveDay(i); setAddingForDay(-1); }}><small>DAY</small><b>{String(d.n).padStart(2, "0")}</b><span>{d.place?.name || "Open day"}</span></button>)}
           </div>
           {days[activeDay] && (() => { const d = days[activeDay]; const candidates = d.place ? activities.filter(a => a.place === d.place.id && !trip.activities.includes(a.id)) : activities.filter(a => trip.places.includes(a.place) && !trip.activities.includes(a.id)); return <article className="active-day-panel" key={d.n}>
