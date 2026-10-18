@@ -78,6 +78,7 @@ export default function App() {
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
   useEffect(() => { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); }, [savedTrips]);
+  useEffect(() => { window.scrollTo(0, 0); }, [page]);
 
   const chosen = destinations.filter(d => trip.places.includes(d.id));
   const selected = activities.filter(a => trip.activities.includes(a.id) && trip.places.includes(a.place));
@@ -197,18 +198,6 @@ export default function App() {
         <div className="trip-top-actions"><button className="secondary" onClick={() => { setPage("profile"); setStep(1); }}>Edit trip</button><button className="primary" onClick={saveCurrentTrip}><Check size={15} /> {currentTripId ? "Update saved trip" : "Save trip"}</button></div>
       </div>
       {trip.flexibleDates && <section className="climate-card"><div className="climate-icon"><Sparkles size={18} /></div><div><small className="eyebrow">A GOOD TIME TO GO</small><h2>Best time to visit {trip.destination}</h2><p><b>{climateTips[trip.destination]?.season}</b></p><p className="climate-temperature">Typical temperatures: {climateTips[trip.destination]?.temperature}</p><p>{climateTips[trip.destination]?.note} These are broad climate averages, not a live forecast.</p></div></section>}
-      <section className="map-disclosure">
-        <button className="map-disclosure-toggle" aria-expanded={showMap} onClick={() => setShowMap(v => !v)}>
-          <span className="map-toggle-icon"><MapPin size={17} /></span><span><b>Map & locations</b><small>{chosen.length ? chosen.map(p => p.name).join(" · ") : "Choose places to see them here"}</small></span><span className="map-toggle-action">{showMap ? "Hide map" : "Explore map"} <ChevronDown size={15} /></span>
-        </button>
-        {showMap && <div className="map-disclosure-content">
-          <div className="map-frame-wrap">
-            {(() => { const first = chosen[0]; const coords = placeCoordinates[first?.id] || (trip.destination === "Sri Lanka" ? [7.8,80.7] : trip.destination === "India" ? [20.6,78.9] : trip.destination === "Thailand" ? [15.8,101] : trip.destination === "Japan" ? [36.2,138.2] : trip.destination === "Vietnam" ? [16.0,107.5] : [46.0,10.0]); return <iframe title={"Map of " + trip.destination + " trip locations"} loading="lazy" src={"https://www.openstreetmap.org/export/embed.html?bbox=" + (mapBounds[trip.destination] || mapBounds["Sri Lanka"]) + "&layer=mapnik&marker=" + coords[0] + "," + coords[1]} />; })()}
-            <a className="map-open-link" href={"https://www.google.com/maps/dir/" + chosen.map(p => encodeURIComponent(p.name + ", " + p.country)).join("/")} target="_blank" rel="noreferrer">Open route in Google Maps ↗</a>
-          </div>
-          <div className="map-location-list"><small className="eyebrow">YOUR PLACES</small>{chosen.length ? chosen.map((place, index) => { const planned = selected.filter(activity => activity.place === place.id); const nearby = activities.filter(activity => activity.place === place.id); return <div className="map-location" key={place.id}><span className="map-location-number">{String(index+1).padStart(2,"0")}</span><div><b>{place.name}</b><small>{place.country} · {planned.length} planned · {nearby.length} ideas</small><span>{nearby.slice(0,2).map(activity => activity.name).join(" · ") || place.tagline}</span></div></div>; }) : <p className="empty">Add places to your trip to see their locations and activity ideas.</p>}</div>
-        </div>}
-      </section>
       <div className="itinerary-layout">
         <section className="itinerary-main">
           <div className="section-head itinerary-title"><div><h2>The days, your way</h2><p>Swap, add or skip anything. This is a flexible starting point.</p></div><button className="link" onClick={() => setPage("discover")}>Change cities ↗</button></div>
@@ -221,7 +210,7 @@ export default function App() {
                 </svg>
                 {days.map((d,i)=><button key={d.n} className={`journey-stop journey-stop-${i%2===0?"top":"bottom"} ${activeDay===i?"journey-stop-active":""}`} aria-pressed={activeDay===i} onClick={()=>{setActiveDay(i);setAddingForDay(-1);}}>
                   <span className="journey-pin"><span>{String(d.n).padStart(2,"0")}</span></span>
-                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display="none";}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
+                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt={d.place?.name || "Destination photo"} loading="lazy" onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback="true";img.src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=500&q=80";}else{img.style.display="none";img.parentElement.classList.add("journey-photo-fallback");}}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
                   <span className="journey-stop-copy"><b>{d.place?.name||"Open day"}</b><small>{d.activities.length} {d.activities.length===1?"activity":"activities"}</small></span>
                 </button>)}
               </div>
@@ -241,6 +230,18 @@ export default function App() {
           <div className="itinerary-summary-card"><small className="eyebrow">TRIP SNAPSHOT</small><h3>Looking good.</h3><div className="sidebar-stats"><div><span>Cities</span><b>{trip.places.length}</b></div><div><span>Days</span><b>{trip.days}</b></div><div><span>Travellers</span><b>{trip.travelers}</b></div></div><div className="sidebar-budget"><div><span>Estimated total</span><b>{money(total, trip.currency)}</b></div><div className="budget-meter"><i style={{ width: `${Math.min(100, total / Math.max(trip.budget * trip.travelers, 1) * 100)}%` }} /></div><small>{Math.min(100, Math.round(total / Math.max(trip.budget * trip.travelers, 1) * 100))}% of your {money(trip.budget * trip.travelers, trip.currency)} total budget</small></div><div className="sidebar-note"><Check size={15} /><span>Your itinerary stays editable. Save when you're ready to keep it in Your trips.</span></div><button className="secondary sidebar-save" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button></div>
         </aside>
       </div>
+      <section className="map-disclosure">
+        <button className="map-disclosure-toggle" aria-expanded={showMap} onClick={() => setShowMap(v => !v)}>
+          <span className="map-toggle-icon"><MapPin size={17} /></span><span><b>Map & locations</b><small>{chosen.length ? chosen.map(p => p.name).join(" · ") : "Choose places to see them here"}</small></span><span className="map-toggle-action">{showMap ? "Hide map" : "Explore map"} <ChevronDown size={15} /></span>
+        </button>
+        {showMap && <div className="map-disclosure-content">
+          <div className="map-frame-wrap">
+            {(() => { const first = chosen[0]; const coords = placeCoordinates[first?.id] || (trip.destination === "Sri Lanka" ? [7.8,80.7] : trip.destination === "India" ? [20.6,78.9] : trip.destination === "Thailand" ? [15.8,101] : trip.destination === "Japan" ? [36.2,138.2] : trip.destination === "Vietnam" ? [16.0,107.5] : [46.0,10.0]); return <iframe title={"Map of " + trip.destination + " trip locations"} loading="lazy" src={"https://www.openstreetmap.org/export/embed.html?bbox=" + (mapBounds[trip.destination] || mapBounds["Sri Lanka"]) + "&layer=mapnik&marker=" + coords[0] + "," + coords[1]} />; })()}
+            <a className="map-open-link" href={"https://www.google.com/maps/dir/" + chosen.map(p => encodeURIComponent(p.name + ", " + p.country)).join("/")} target="_blank" rel="noreferrer">Open route in Google Maps ↗</a>
+          </div>
+          <div className="map-location-list"><small className="eyebrow">YOUR PLACES</small>{chosen.length ? chosen.map((place, index) => { const planned = selected.filter(activity => activity.place === place.id); const nearby = activities.filter(activity => activity.place === place.id); return <div className="map-location" key={place.id}><span className="map-location-number">{String(index+1).padStart(2,"0")}</span><div><b>{place.name}</b><small>{place.country} · {planned.length} planned · {nearby.length} ideas</small><span>{nearby.slice(0,2).map(activity => activity.name).join(" · ") || place.tagline}</span></div></div>; }) : <p className="empty">Add places to your trip to see their locations and activity ideas.</p>}</div>
+        </div>}
+      </section>
       <div className="save-banner"><div><small className="eyebrow">YOUR TRIP, READY WHEN YOU ARE</small><h2>Keep the plan. Keep the <em>possibility.</em></h2><p>{currentTripId ? "This trip is saved in Your trips. Update it whenever plans change." : "This is a draft until you choose to save it."}</p></div><div className="save-actions"><button className="secondary" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button><button className="primary" onClick={saveCurrentTrip}>{currentTripId ? "Update saved trip" : "Save this trip"} <Check size={15} /></button></div></div>
     </main>}
     <footer><span><Compass size={15} /> Travel wise<span className="dot">.</span></span><small>Made for the way you wander.</small></footer>{toast && <div className="toast">{toast}</div>}
