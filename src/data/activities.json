@@ -1452,281 +1452,281 @@
   {
     "id": "hanoi-local-walk",
     "place": "hanoi",
-    "name": "Hanoi local neighbourhood walk",
+    "name": "Temple of Literature and leafy boulevards",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "The temple has an admission fee and set opening hours; verify both before visiting."
   },
   {
     "id": "hanoi-food-stop",
     "place": "hanoi",
-    "name": "Hanoi local food and market stop",
+    "name": "Bún chả and egg-coffee tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "These are Hanoi favourites; prices vary by venue and ask about ingredients or allergens."
   },
   {
     "id": "hoi-an-local-walk",
     "place": "hoi-an",
-    "name": "Hoi An local neighbourhood walk",
+    "name": "Japanese Covered Bridge and heritage lanes",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Some heritage buildings use a ticket bundle; check the current Hoi An Old Town ticket rules."
   },
   {
     "id": "hoi-an-food-stop",
     "place": "hoi-an",
-    "name": "Hoi An local food and market stop",
+    "name": "Cao lầu and white-rose dumpling tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "These are local specialties; choose a well-reviewed venue and confirm ingredients."
   },
   {
     "id": "ho-chi-minh-city-local-walk",
     "place": "ho-chi-minh-city",
-    "name": "Ho Chi Minh City local neighbourhood walk",
+    "name": "Nguyễn Huệ walking street and colonial-era landmarks",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Best explored on foot; check access restrictions during public events."
   },
   {
     "id": "ho-chi-minh-city-food-stop",
     "place": "ho-chi-minh-city",
-    "name": "Ho Chi Minh City local food and market stop",
+    "name": "Bánh mì and southern street-food tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Try freshly prepared food and check ingredients, spice levels and allergens."
   },
   {
     "id": "ninh-binh-local-walk",
     "place": "ninh-binh",
-    "name": "Ninh Binh local neighbourhood walk",
+    "name": "Tam Cốc village lanes and rice-field paths",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Rural roads may have little shade or traffic separation; check weather and local conditions."
   },
   {
     "id": "ninh-binh-food-stop",
     "place": "ninh-binh",
-    "name": "Ninh Binh local food and market stop",
+    "name": "Ninh Bình crispy rice and local goat dishes",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "A regional specialty tasting; confirm ingredients and dietary requirements before ordering."
   },
   {
     "id": "ha-long-bay-local-walk",
     "place": "ha-long-bay",
-    "name": "Ha Long Bay local neighbourhood walk",
+    "name": "Bãi Cháy waterfront promenade",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "A low-key land-based alternative to boat trips; check weather and waterfront conditions."
   },
   {
     "id": "ha-long-bay-food-stop",
     "place": "ha-long-bay",
-    "name": "Ha Long Bay local food and market stop",
+    "name": "Quảng Ninh seafood dinner in Bãi Cháy",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Seafood prices vary by species and weight; confirm the price before ordering."
   },
   {
     "id": "da-nang-local-walk",
     "place": "da-nang",
-    "name": "Da Nang local neighbourhood walk",
+    "name": "Han River promenade and Dragon Bridge",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Bridge light and fire shows run on selected schedules; verify the current schedule if timing your visit."
   },
   {
     "id": "da-nang-food-stop",
     "place": "da-nang",
-    "name": "Da Nang local food and market stop",
+    "name": "Mì Quảng and bánh xèo tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Regional dishes vary by restaurant; ask about peanuts, seafood and other allergens."
   },
   {
     "id": "hue-river",
     "place": "hue",
-    "name": "Perfume River promenade",
+    "name": "Perfume River and Trang Tien Bridge riverside walk",
     "slot": "Afternoon",
     "duration": "1.5 hr",
     "cost": 0,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "A free, flexible stroll; boat rides are separate and depend on operator and river conditions."
   },
   {
     "id": "hue-tomb",
     "place": "hue",
-    "name": "Garden tomb heritage visit",
+    "name": "Khai Dinh or Tu Duc Imperial Tomb visit",
     "slot": "Morning",
     "duration": "2 hr",
     "cost": 8,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "The tombs are separate sites with separate access; check ticket options and opening hours."
   },
   {
     "id": "dalat-waterfall",
     "place": "da-lat",
-    "name": "Waterfall and pine-forest viewpoint",
+    "name": "Datanla Waterfall and forest trail",
     "slot": "Morning",
     "duration": "2 hr",
     "cost": 10,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Terrain and optional rides vary by route; check current access and safety notices."
   },
   {
     "id": "dalat-market",
     "place": "da-lat",
-    "name": "Da Lat night market stroll",
+    "name": "Da Lat night market and local snacks",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 8,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "The market is busiest in the evening; confirm prices and ingredient details before buying food."
   },
   {
     "id": "phong-nha-cycling",
     "place": "phong-nha",
-    "name": "Village lanes and rice-field cycle",
+    "name": "Phong Nha village and rice-field cycling route",
     "slot": "Afternoon",
     "duration": "2 hr",
     "cost": 8,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Use a helmet, check road conditions and avoid cycling after dark on unlit rural roads."
   },
   {
     "id": "phong-nha-garden",
     "place": "phong-nha",
-    "name": "Countryside garden and local lunch",
+    "name": "Phong Nha farm-to-table lunch and village stop",
     "slot": "Morning",
     "duration": "2 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Rural venues may need advance notice; arrange return transport before heading out."
   },
   {
     "id": "nara-local-walk",
     "place": "nara",
-    "name": "Nara local neighbourhood walk",
+    "name": "Kasuga Taisha forest approach and lantern-lined paths",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Some paths are uneven and shaded; allow extra time and check shrine access details."
   },
   {
     "id": "nara-food-stop",
     "place": "nara",
-    "name": "Nara local food and market stop",
+    "name": "Kakinoha-zushi and Nara sweets tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Kakinoha-zushi commonly contains fish; check ingredients and storage information."
   },
   {
     "id": "hakone-local-walk",
     "place": "hakone",
-    "name": "Hakone local neighbourhood walk",
+    "name": "Gora Park and Hakone Open-Air Museum area",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "The area has slopes; check museum admission, opening hours and step-free routes."
   },
   {
     "id": "hakone-food-stop",
     "place": "hakone",
-    "name": "Hakone local food and market stop",
+    "name": "Hakone-Yumoto shops and local soba lunch",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Restaurant hours can vary by day; check opening times and ingredients."
   },
   {
     "id": "hiroshima-local-walk",
     "place": "hiroshima",
-    "name": "Hiroshima local neighbourhood walk",
+    "name": "Hondori arcade and central Hiroshima walk",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "A mostly urban walk; allow extra time between the Peace Park and shopping streets."
   },
   {
     "id": "hiroshima-food-stop",
     "place": "hiroshima",
-    "name": "Hiroshima local food and market stop",
+    "name": "Hiroshima-style okonomiyaki tasting",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Many versions contain egg, wheat and seafood; ask about ingredients and allergens."
   },
   {
     "id": "kanazawa-local-walk",
     "place": "kanazawa",
-    "name": "Kanazawa local neighbourhood walk",
+    "name": "Higashi Chaya historic teahouse district",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Some historic buildings are private or ticketed; respect signs and check opening hours."
   },
   {
     "id": "kanazawa-food-stop",
     "place": "kanazawa",
-    "name": "Kanazawa local food and market stop",
+    "name": "Kanazawa gold-leaf sweets and local wagashi",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "A light alternative to a seafood meal; check ingredients and shop hours."
   },
   {
     "id": "sapporo-local-walk",
     "place": "sapporo",
-    "name": "Sapporo local neighbourhood walk",
+    "name": "Maruyama Park and Hokkaido Shrine",
     "slot": "Morning",
     "duration": "1.5 hr",
     "cost": 5,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Paths can be snowy or icy in winter; check weather and seasonal access."
   },
   {
     "id": "sapporo-food-stop",
     "place": "sapporo",
-    "name": "Sapporo local food and market stop",
+    "name": "Sapporo miso ramen tasting in Susukino",
     "slot": "Evening",
     "duration": "1.5 hr",
     "cost": 12,
     "effort": "Low",
-    "note": "Check local opening times and seasonal conditions before setting out."
+    "note": "Broths may contain pork, fish or other allergens; confirm ingredients before ordering."
   }
 ]
