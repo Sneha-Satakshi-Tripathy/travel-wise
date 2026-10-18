@@ -47,7 +47,7 @@ function DateRangePicker({ startDate, endDate, onChange, flexible, onFlexibleCha
       <div className="calendar-grid">{["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => <span className="calendar-weekday" key={day}>{day}</span>)}
         {cells.map((day, i) => day < 1 || day > daysInMonth ? <span key={"blank-" + i} /> : <button type="button" key={day} className={"calendar-day " + (iso(day) === startDate ? "range-start " : "") + (iso(day) === endDate ? "range-end " : "") + (startDate && endDate && iso(day) > startDate && iso(day) < endDate ? "range-middle" : "")} onClick={() => pick(iso(day))}>{day}</button>)}</div>
       <p className="calendar-hint">{!startDate || endDate ? "Select your departure date" : "Now select your return date"}</p><button type="button" className="calendar-clear" onClick={() => { onChange("", ""); onFlexibleChange(true); setOpen(false); }}>Keep dates flexible instead</button></div>}
-    <label className="flexible-date-toggle"><input type="checkbox" checked={flexible} onChange={e => { onFlexibleChange(e.target.checked); if (e.target.checked) onChange("", ""); }} /><span>I’m flexible on dates</span></label>
+    <label className="flexible-date-toggle"><input type="checkbox" checked={flexible} onChange={e => { if (e.target.checked) onChange("", ""); onFlexibleChange(e.target.checked); }} /><span>I’m flexible on dates</span></label>
   </div>;
 }
 export default function App() {
