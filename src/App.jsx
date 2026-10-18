@@ -8,9 +8,9 @@ const SAVED_TRIPS_KEY = "roamwise-saved-trips-v1";
 const scopeOptions = ["India", "Thailand", "Japan", "Vietnam", "Europe", "Sri Lanka"];
 const starterPlaces = {
   "Sri Lanka": { countries: [], places: ["kandy", "nuwara-eliya", "galle"], activities: ["temple", "lake", "market", "tea", "train", "fort", "sunset"] },
-  India: { countries: [], places: ["jaipur", "goa", "kochi"], activities: ["jaipur-fort", "jaipur-food", "goa-beach", "goa-old-town", "kochi-fort", "kochi-food"] },
+  India: { countries: [], places: ["jaipur", "agra", "delhi"], activities: ["jaipur-fort", "jaipur-food", "agra-taj", "agra-fort", "delhi-humayun", "delhi-qutub"] },
   Thailand: { countries: [], places: ["bangkok", "chiang-mai", "krabi"], activities: ["bangkok-temples", "bangkok-food", "chiang-temples", "chiang-market", "krabi-beach", "krabi-food"] },
-  Japan: { countries: [], places: ["tokyo", "kyoto", "osaka"], activities: ["tokyo-neighbourhood", "tokyo-food", "kyoto-temples", "kyoto-tea", "osaka-market", "osaka-food"] },
+  Japan: { countries: [], places: ["tokyo","kyoto","osaka","nara","hakone","hiroshima","kanazawa","sapporo"], activities: ["tokyo-neighbourhood","tokyo-food","kyoto-temples","kyoto-tea","osaka-market","osaka-food","nara-park","nara-machiya","hakone-lake","hakone-onsen","hiroshima-peace","hiroshima-miyajima","kanazawa-garden","kanazawa-market","sapporo-park","sapporo-food"] },
   Vietnam: { countries: [], places: ["hanoi", "ninh-binh", "ha-long-bay", "da-nang", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "ninh-binh-boat", "ninh-binh-cycling", "halong-cruise", "halong-kayak", "danang-beach", "danang-marble", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
@@ -149,7 +149,7 @@ export default function App() {
     : d.scope === trip.destination);
   const placeCoordinates = {
     kandy: [7.2906, 80.6337], "nuwara-eliya": [6.9497, 80.7891], galle: [6.0535, 80.221], sigiriya: [7.957, 80.7603], mirissa: [5.9483, 80.4716],
-    jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739],
+    jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739], agra: [27.1767, 78.0081], delhi: [28.6139, 77.2090], hampi: [15.3350, 76.4600], mysuru: [12.2958, 76.6394], rishikesh: [30.0869, 78.2676], amritsar: [31.6340, 74.8723],
     bangkok: [13.7563, 100.5018], "chiang-mai": [18.7883, 98.9853], krabi: [8.0863, 98.9063], phuket: [7.8804, 98.3923], ayutthaya: [14.3532, 100.5689],
     tokyo: [35.6762, 139.6503], kyoto: [35.0116, 135.7681], osaka: [34.6937, 135.5023], nara: [34.6851, 135.8048], hakone: [35.2324, 139.1069], hiroshima: [34.3853, 132.4553], kanazawa: [36.5613, 136.6562], sapporo: [43.0618, 141.3545],
     hanoi: [21.0278, 105.8342], "ninh-binh": [20.2506, 105.9745], "ha-long-bay": [20.9101, 107.1839], "da-nang": [16.0544, 108.2022], "hoi-an": [15.8801, 108.338], hue: [16.4637, 107.5909], "da-lat": [11.9404, 108.4583], "phong-nha": [17.5916, 106.283], "ho-chi-minh-city": [10.8231, 106.6297],
@@ -160,10 +160,32 @@ export default function App() {
     "Sri Lanka": "79.65,5.75,81.95,9.95", India: "68.0,6.0,97.5,35.5", Thailand: "97.0,5.0,106.0,21.0",
     Japan: "129.0,30.0,146.0,46.0", Vietnam: "102.0,8.0,110.0,24.0", Europe: "-1.0,35.0,19.0,56.0"
   };
-  const days = useMemo(() => Array.from({ length: trip.days }, (_, i) => {
-    const place = trip.places.length ? destinations.find(d => d.id === trip.places[i % trip.places.length]) : null;
-    return { n: i + 1, place, activities: place ? selected.filter(a => a.place === place.id) : [] };
-  }), [trip.days, trip.places, selected]);
+  const days = useMemo(() => {
+    const route = trip.places.map(id => destinations.find(d => d.id === id)).filter(Boolean);
+    if (!route.length) return Array.from({ length: trip.days }, (_, i) => ({ n: i + 1, place: null, activities: [] }));
+    // Keep each selected city contiguous. Allocate days across the route, weighted by suggested stay length.
+    const assigned = route.slice(0, Math.min(route.length, trip.days));
+    const counts = assigned.map(() => 1);
+    const remaining = trip.days - counts.length;
+    const totalWeight = assigned.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0);
+    const extras = assigned.map((place, index) => {
+      const exact = remaining * Math.max(1, place.days || 1) / totalWeight;
+      const whole = Math.floor(exact);
+      counts[index] += whole;
+      return { index, remainder: exact - whole };
+    });
+    const allocated = counts.reduce((sum, count) => sum + count, 0);
+    extras.sort((a, b) => b.remainder - a.remainder).slice(0, trip.days - allocated).forEach(item => { counts[item.index] += 1; });
+    const plan = [];
+    assigned.forEach((place, index) => {
+      const placeActivities = selected.filter(activity => activity.place === place.id);
+      const chunkSize = Math.max(1, Math.ceil(placeActivities.length / counts[index]));
+      for (let day = 0; day < counts[index]; day += 1) {
+        plan.push({ n: plan.length + 1, place, activities: placeActivities.slice(day * chunkSize, (day + 1) * chunkSize) });
+      }
+    });
+    return plan;
+  }, [trip.days, trip.places, selected]);
 
   return <div className="app">
     <header>
@@ -184,7 +206,7 @@ export default function App() {
     {page === "discover" && <main className="discover"><div className="section-head"><div><small className="eyebrow">A SHORTLIST WITH SOUL</small><h1>Places that fit <em>your kind of trip.</em></h1><p>Pick a trip destination first, then add the cities you want to explore. Prices are rough USD-based planning estimates, not live quotes. Currency conversion uses approximate reference rates, not live FX. Attraction fees, meals, transport and season can change the actual total.</p></div><b className="count">{trip.places.length} cities picked</b></div>
       <div className="scope-switch" aria-label="Trip destination">{scopeOptions.map(scope => <button key={scope} className={trip.destination === scope ? "scope-chip active" : "scope-chip"} onClick={() => changeScope(scope)}>{scope}</button>)}</div>
       {trip.destination === "Europe" && <section className="country-picker"><div><b>Choose countries</b><small>Pick one country or combine several for a multi-country Europe trip.</small></div><div className="country-chips">{countries.map(country => <button key={country} className={trip.countries.includes(country) ? "country-chip active" : "country-chip"} onClick={() => toggleCountry(country)}>{trip.countries.includes(country) && <Check size={13} />}{country}</button>)}</div><small>{trip.countries.length ? `Showing cities in ${trip.countries.join(", ")}` : "No countries selected — showing cities across Europe."}</small></section>}
-      <div className="cards">{visibleDestinations.map(d => <article className={trip.places.includes(d.id) ? "place-card selected-place" : "place-card"} key={d.id}><div className="place-img"><img src={d.image} alt={d.name} onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=85"; }} /><span>{d.country} · {d.region}</span><button className={trip.places.includes(d.id) ? "place-select selected" : "place-select"} onClick={() => togglePlace(d.id)} aria-label={trip.places.includes(d.id) ? "Remove city" : "Add city"} aria-pressed={trip.places.includes(d.id)}>{trip.places.includes(d.id) ? <><Check size={15} /> Selected</> : <><Plus size={16} /> Add</>}</button></div><div className="place-content"><h3>{d.name}</h3><b>{d.tagline}</b><p>{d.why}</p><small><MapPin size={13} />{d.travel} · {d.effort} effort</small><div className="place-footer"><strong>~{displayMoney(d.cost, trip.currency)} <small>/ person</small></strong><button className="link" onClick={() => togglePlace(d.id)}>{trip.places.includes(d.id) ? "✓ Selected · Remove" : "＋ Add to trip"}</button></div></div></article>)}</div>
+      <div className="cards">{visibleDestinations.map(d => <article className={trip.places.includes(d.id) ? "place-card selected-place" : "place-card"} key={d.id}><div className="place-img"><img src={d.image} alt={`${d.name} destination`} loading="lazy" onError={e => { const img = e.currentTarget; img.onerror = null; img.style.display = "none"; img.parentElement.classList.add("image-fallback"); }} /><span>{d.country} · {d.region}</span><button className={trip.places.includes(d.id) ? "place-select selected" : "place-select"} onClick={() => togglePlace(d.id)} aria-label={trip.places.includes(d.id) ? "Remove city" : "Add city"} aria-pressed={trip.places.includes(d.id)}>{trip.places.includes(d.id) ? <><Check size={15} /> Selected</> : <><Plus size={16} /> Add</>}</button></div><div className="place-content"><h3>{d.name}</h3><b>{d.tagline}</b><p>{d.why}</p><small><MapPin size={13} />{d.travel} · {d.effort} effort</small><div className="place-footer"><strong>~{displayMoney(d.cost, trip.currency)} <small>/ person</small></strong><button className="link" onClick={() => togglePlace(d.id)}>{trip.places.includes(d.id) ? "✓ Selected · Remove" : "＋ Add to trip"}</button></div></div></article>)}</div>
       <div className="sticky"><span><b>{trip.places.length} cities selected</b><small>Mix cities at your own pace. Add a city to include its starter activities.</small></span><button className="primary" disabled={!trip.places.length} onClick={() => { setPage("trip"); setExpanded(0); }}>Build my itinerary <ArrowRight size={16} /></button></div>
     </main>}
 
@@ -226,7 +248,7 @@ export default function App() {
                 </svg>
                 {days.map((d,i)=><button key={d.n} className={`journey-stop journey-stop-${i%2===0?"top":"bottom"} ${activeDay===i?"journey-stop-active":""}`} aria-pressed={activeDay===i} onClick={()=>{setActiveDay(i);setAddingForDay(-1);}}>
                   <span className="journey-pin"><span>{String(d.n).padStart(2,"0")}</span></span>
-                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display="none";}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
+                  <span className="journey-photo">{d.place?.image?<img src={d.place.image} alt={`${d.place.name} destination`} loading="lazy" onError={e=>{const img=e.currentTarget;img.onerror=null;img.style.display="none";img.parentElement.classList.add("journey-photo-fallback");}}/>:<span className="journey-photo-placeholder"><MapPin size={18}/></span>}</span>
                   <span className="journey-stop-copy"><b>{d.place?.name||"Open day"}</b><small>{d.activities.length} {d.activities.length===1?"activity":"activities"}</small></span>
                 </button>)}
               </div>
