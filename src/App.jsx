@@ -191,7 +191,13 @@ export default function App() {
         // creating a blank final day due to ceil-based chunk sizes.
         const start = Math.floor(day * placeActivities.length / counts[index]);
         const end = Math.floor((day + 1) * placeActivities.length / counts[index]);
-        plan.push({ n: plan.length + 1, place, activities: placeActivities.slice(start, end) });
+        let dayActivities = placeActivities.slice(start, end);
+        // If the stay is longer than the catalogue, reuse one relevant option on a different
+        // day rather than silently presenting a zero-activity day. Never duplicate within a day.
+        if (!dayActivities.length && placeActivities.length) {
+          dayActivities = [placeActivities[day % placeActivities.length]];
+        }
+        plan.push({ n: plan.length + 1, place, activities: dayActivities });
       }
     });
     return plan;
