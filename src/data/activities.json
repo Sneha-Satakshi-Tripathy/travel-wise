@@ -518,5 +518,125 @@
     "cost": 25,
     "effort": "Low",
     "note": "Book major museums ahead in peak season."
+  },
+  {
+    "id": "tokyo-neighbourhood",
+    "place": "tokyo",
+    "name": "Asakusa and riverside wander",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "A flexible walk through traditional streets and nearby river views."
+  },
+  {
+    "id": "tokyo-food",
+    "place": "tokyo",
+    "name": "Ramen and neighbourhood food crawl",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 22,
+    "effort": "Low",
+    "note": "Check queues and dietary details; prices vary by neighbourhood."
+  },
+  {
+    "id": "kyoto-temples",
+    "place": "kyoto",
+    "name": "Shrine paths and historic lanes",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 10,
+    "effort": "Low",
+    "note": "Start early and be respectful in active places of worship."
+  },
+  {
+    "id": "kyoto-tea",
+    "place": "kyoto",
+    "name": "Tea-house pause and old-town stroll",
+    "slot": "Afternoon",
+    "duration": "1.5 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Reserve a tea experience in advance if you want a formal session."
+  },
+  {
+    "id": "osaka-market",
+    "place": "osaka",
+    "name": "Market streets and canal walk",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Busy areas are best explored with awareness of bikes and traffic."
+  },
+  {
+    "id": "osaka-food",
+    "place": "osaka",
+    "name": "Osaka street-food evening",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 22,
+    "effort": "Low",
+    "note": "Choose busy stalls and check ingredients and allergens."
+  },
+  {
+    "id": "hanoi-old-quarter",
+    "place": "hanoi",
+    "name": "Old Quarter and Hoan Kiem Lake",
+    "slot": "Morning",
+    "duration": "2 hr",
+    "cost": 5,
+    "effort": "Low",
+    "note": "Take care crossing busy roads and allow time to find safe crossings."
+  },
+  {
+    "id": "hanoi-food",
+    "place": "hanoi",
+    "name": "Northern Vietnamese food walk",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 15,
+    "effort": "Low",
+    "note": "Choose busy, freshly prepared stalls and ask about allergens."
+  },
+  {
+    "id": "hoi-an-old-town",
+    "place": "hoi-an",
+    "name": "Old Town and lantern-lit riverfront",
+    "slot": "Afternoon",
+    "duration": "2 hr",
+    "cost": 8,
+    "effort": "Low",
+    "note": "Check current ticketing rules for heritage sites."
+  },
+  {
+    "id": "hoi-an-cooking",
+    "place": "hoi-an",
+    "name": "Local market and cooking experience",
+    "slot": "Morning",
+    "duration": "3 hr",
+    "cost": 28,
+    "effort": "Low",
+    "note": "Book a reputable class and share dietary requirements ahead of time."
+  },
+  {
+    "id": "hcmc-history",
+    "place": "ho-chi-minh-city",
+    "name": "History museum and central landmarks",
+    "slot": "Morning",
+    "duration": "2.5 hr",
+    "cost": 8,
+    "effort": "Medium",
+    "note": "Check opening hours and allow breaks from the heat."
+  },
+  {
+    "id": "hcmc-food",
+    "place": "ho-chi-minh-city",
+    "name": "Southern Vietnamese food stops",
+    "slot": "Evening",
+    "duration": "2 hr",
+    "cost": 18,
+    "effort": "Low",
+    "note": "Confirm ingredients and use reputable transport after dinner."
   }
 ]
