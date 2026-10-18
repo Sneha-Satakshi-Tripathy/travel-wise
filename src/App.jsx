@@ -33,7 +33,7 @@ const money = (n, c = "USD") => {
 // Fixture prices are illustrative USD estimates; convert only for display, not live quotes.
 const USD_PER_UNIT = { USD: 1, INR: 1 / 83, EUR: 1.08, GBP: 1.27, LKR: 1 / 300, THB: 1 / 35, JPY: 1 / 150, VND: 1 / 24500 };
 const displayMoney = (usd, currency = "USD") => money(usd / (USD_PER_UNIT[currency] || 1), currency);
-const convertBudget = (amount, from, to) => amount * (USD_PER_UNIT[to] || 1) / (USD_PER_UNIT[from] || 1);
+const convertBudget = (amount, from, to) => amount * (USD_PER_UNIT[from] || 1) / (USD_PER_UNIT[to] || 1);
 
 function DateRangePicker({ startDate, endDate, onChange, flexible, onFlexibleChange, legacyLabel }) {
   const [open, setOpen] = useState(false);
@@ -242,7 +242,7 @@ export default function App() {
           </article>; })()}
         </section>
         <aside className="itinerary-sidebar">
-          <div className="itinerary-summary-card"><small className="eyebrow">TRIP SNAPSHOT</small><h3>Looking good.</h3><div className="sidebar-stats"><div><span>Cities</span><b>{trip.places.length}</b></div><div><span>Days</span><b>{trip.days}</b></div><div><span>Travellers</span><b>{trip.travelers}</b></div></div><div className="sidebar-budget"><div><span>Estimated total</span><b>{displayMoney(total, trip.currency)}</b></div><div className="budget-meter"><i style={{ width: `${Math.min(100, total / Math.max(trip.budget * trip.travelers, 1) * 100)}%` }} /></div><small>{Math.min(100, Math.round(total / Math.max(trip.budget * trip.travelers, 1) * 100))}% of your {money(trip.budget * trip.travelers, trip.currency)} total budget</small></div><div className="sidebar-note"><Check size={15} /><span>Your itinerary stays editable. Save when you're ready to keep it in Your trips.</span></div><button className="secondary sidebar-save" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button></div>
+          <div className="itinerary-summary-card"><small className="eyebrow">TRIP SNAPSHOT</small><h3>Looking good.</h3><div className="sidebar-stats"><div><span>Cities</span><b>{trip.places.length}</b></div><div><span>Days</span><b>{trip.days}</b></div><div><span>Travellers</span><b>{trip.travelers}</b></div></div><div className="sidebar-budget"><div><span>Estimated total</span><b>{displayMoney(total, trip.currency)}</b></div><div className="budget-meter"><i style={{ width: `${Math.min(100, total / Math.max(trip.budget * trip.travelers * (USD_PER_UNIT[trip.currency] || 1), 1) * 100)}%` }} /></div><small>{Math.min(100, Math.round(total / Math.max(trip.budget * trip.travelers, 1) * 100))}% of your {money(trip.budget * trip.travelers, trip.currency)} total budget</small></div><div className="sidebar-note"><Check size={15} /><span>Your itinerary stays editable. Save when you're ready to keep it in Your trips.</span></div><button className="secondary sidebar-save" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button></div>
         </aside>
       </div>
       <div className="save-banner"><div><small className="eyebrow">YOUR TRIP, READY WHEN YOU ARE</small><h2>Keep the plan. Keep the <em>possibility.</em></h2><p>{currentTripId ? "This trip is saved in Your trips. Update it whenever plans change." : "This is a draft until you choose to save it."}</p></div><div className="save-actions"><button className="secondary" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button><button className="primary" onClick={saveCurrentTrip}>{currentTripId ? "Update saved trip" : "Save this trip"} <Check size={15} /></button></div></div>
