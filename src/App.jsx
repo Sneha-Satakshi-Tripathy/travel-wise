@@ -10,8 +10,8 @@ const starterPlaces = {
   "Sri Lanka": { countries: [], places: ["kandy", "nuwara-eliya", "galle"], activities: ["temple", "lake", "market", "tea", "train", "fort", "sunset"] },
   India: { countries: [], places: ["jaipur", "agra", "delhi"], activities: ["jaipur-fort", "jaipur-food", "agra-taj", "agra-fort", "delhi-humayun", "delhi-qutub"] },
   Thailand: { countries: [], places: ["bangkok", "chiang-mai", "krabi"], activities: ["bangkok-temples", "bangkok-food", "chiang-temples", "chiang-market", "krabi-beach", "krabi-food"] },
-  Japan: { countries: [], places: ["tokyo","kyoto","osaka","nara","hakone","hiroshima","kanazawa","sapporo"], activities: ["tokyo-neighbourhood","tokyo-food","kyoto-temples","kyoto-tea","osaka-market","osaka-food","nara-park","nara-machiya","hakone-lake","hakone-onsen","hiroshima-peace","hiroshima-miyajima","kanazawa-garden","kanazawa-market","sapporo-park","sapporo-food"] },
-  Vietnam: { countries: [], places: ["hanoi", "ninh-binh", "ha-long-bay", "da-nang", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "ninh-binh-boat", "ninh-binh-cycling", "halong-cruise", "halong-kayak", "danang-beach", "danang-marble", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
+  Japan: { countries: [], places: ["tokyo", "kyoto", "osaka"], activities: ["tokyo-neighbourhood","tokyo-food","kyoto-temples","kyoto-tea","osaka-market","osaka-food"] },
+  Vietnam: { countries: [], places: ["hanoi", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
 const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
@@ -35,6 +35,26 @@ const money = (n, c = "USD") => {
 const USD_PER_UNIT = { USD: 1, INR: 1 / 83, EUR: 1.08, GBP: 1.27, LKR: 1 / 300, THB: 1 / 35, JPY: 1 / 150, VND: 1 / 24500 };
 const displayMoney = (usd, currency = "USD") => money(usd / (USD_PER_UNIT[currency] || 1), currency);
 const convertBudget = (amount, from, to) => amount * (USD_PER_UNIT[from] || 1) / (USD_PER_UNIT[to] || 1);
+
+// Add cities only when the selected trip length exceeds the recommended stay of the current route.
+// Existing selections are preserved; new cities are chosen from the active country/region.
+const ensureCitiesForDuration = (trip, days) => {
+  const candidates = destinations.filter(d => trip.destination === "Europe"
+    ? d.scope === "Europe" && (!trip.countries?.length || trip.countries.includes(d.country))
+    : d.scope === trip.destination);
+  const places = [...trip.places];
+  const stayLength = () => places.reduce((sum, id) => sum + Math.max(1, destinations.find(d => d.id === id)?.days || 1), 0);
+  for (const place of candidates) {
+    if (stayLength() >= days) break;
+    if (!places.includes(place.id)) places.push(place.id);
+  }
+  const validActivityIds = activities.filter(a => places.includes(a.place)).map(a => a.id);
+  const selectedActivities = trip.activities.filter(id => validActivityIds.includes(id));
+  for (const id of places.filter(id => !trip.places.includes(id))) {
+    selectedActivities.push(...activities.filter(a => a.place === id).slice(0, 2).map(a => a.id));
+  }
+  return { ...trip, days, places, activities: [...new Set(selectedActivities)] };
+};
 
 function DateRangePicker({ startDate, endDate, onChange, flexible, onFlexibleChange, legacyLabel }) {
   const [open, setOpen] = useState(false);
@@ -127,14 +147,22 @@ export default function App() {
   const changeScope = scope => {
     const starter = starterPlaces[scope] || starterPlaces["Sri Lanka"];
     const names = { "Sri Lanka": "A little Sri Lankan magic", India: "An India escape", Thailand: "A Thailand adventure", Japan: "A little Japan adventure", Vietnam: "A Vietnam escape", Europe: "A little European grand tour" };
-    setTrip(t => ({ ...t, destination: scope, countries: [...starter.countries], places: [...starter.places], activities: [...starter.activities], title: names[scope] }));
+    const recommendedDays = starter.places.reduce((sum, id) => sum + Math.max(1, destinations.find(d => d.id === id)?.days || 1), 0);
+    setTrip(t => ({ ...t, destination: scope, days: recommendedDays, countries: [...starter.countries], places: [...starter.places], activities: [...starter.activities], title: names[scope], startDate: "", endDate: "", flexibleDates: true, month: "Flexible dates" }));
   };
   const toggleCountry = country => setTrip(t => {
-    const countries = t.countries.includes(country) ? t.countries.filter(c => c !== country) : [...t.countries, country];
-    const removedPlaces = destinations.filter(d => d.scope === "Europe" && d.country === country).map(d => d.id);
-    const places = t.countries.includes(country) ? t.places.filter(id => !removedPlaces.includes(id)) : t.places;
+    const removing = t.countries.includes(country);
+    const countries = removing ? t.countries.filter(c => c !== country) : [...t.countries, country];
+    const countryPlaces = destinations.filter(d => d.scope === "Europe" && d.country === country);
+    const removedPlaces = countryPlaces.map(d => d.id);
+    let places = removing ? t.places.filter(id => !removedPlaces.includes(id)) : [...t.places];
+    if (!removing && !places.some(id => countryPlaces.some(d => d.id === id))) {
+      const first = countryPlaces[0];
+      if (first) places.push(first.id);
+    }
     const validActivityIds = activities.filter(a => places.includes(a.place)).map(a => a.id);
-    return { ...t, countries, places, activities: t.activities.filter(id => validActivityIds.includes(id)) };
+    const next = { ...t, countries, places, activities: t.activities.filter(id => validActivityIds.includes(id)) };
+    return ensureCitiesForDuration(next, t.days);
   });
   const togglePlace = id => setTrip(t => {
     const adding = !t.places.includes(id);
@@ -217,7 +245,7 @@ export default function App() {
       <section className="steps">{["Tell us your vibe", "Pick your places", "Make it yours"].map((s, i) => <div key={s}><b>0{i + 1}</b><strong>{s}</strong><small>{["Not just where. How you like to travel.", "Pick cities in one country or across Europe.", "A flexible itinerary that feels right."][i]}</small></div>)}</section>
     </main>}
 
-    {page === "profile" && <main className="form-page"><button className="link" onClick={() => setPage("home")}>← Back to explore</button><div className="form-card"><small className="eyebrow">YOUR TRAVEL DNA · STEP {step + 1} OF 2</small>{step === 0 ? <><h1>What makes a trip<br /><em>feel like you?</em></h1><p>Choose up to three things you love. There are no wrong answers.</p><div className="styles">{styles.map(s => <button key={s} className={profile.styles.includes(s) ? "style selected" : "style"} onClick={() => setProfile(p => ({ ...p, styles: p.styles.includes(s) ? p.styles.filter(x => x !== s) : p.styles.length < 3 ? [...p.styles, s] : p.styles }))}><Check size={15} />{s}</button>)}</div><label>Your name (optional)<input value={profile.name} onChange={e => setProfile(p => ({ ...p, name: e.target.value }))} placeholder="What should we call you?" /></label><button className="primary full" onClick={() => setStep(1)}>Next: trip details →</button></> : <><h1>Let's shape your<br /><em>little escape.</em></h1><div className="fields"><label>Trip destination<select value={trip.destination} onChange={e => changeScope(e.target.value)}>{scopeOptions.map(x => <option key={x}>{x}</option>)}</select></label><label>Trip length<select value={trip.days} onChange={e => setTrip(t => ({ ...t, days: +e.target.value }))}>{[2, 3, 4, 5, 6, 7, 8, 10, 14, 21].map(n => <option key={n}>{n}</option>)}</select></label><label>Travellers<input type="number" min="1" max="12" value={trip.travelers} onChange={e => setTrip(t => ({ ...t, travelers: Math.max(1, +e.target.value || 1) }))} /></label><div className="date-field"><span>When?</span><DateRangePicker startDate={trip.startDate || ""} endDate={trip.endDate || ""} flexible={!!trip.flexibleDates} legacyLabel={trip.month} onFlexibleChange={value => setTrip(t => ({ ...t, flexibleDates: value, month: value ? "Flexible dates" : (t.month === "Flexible dates" ? "" : t.month) }))} onChange={(startDate, endDate) => setTrip(t => { const days = startDate && endDate ? Math.max(1, Math.round((new Date(endDate + "T12:00:00") - new Date(startDate + "T12:00:00")) / 86400000) + 1) : t.days; return { ...t, startDate, endDate, flexibleDates: false, days, month: startDate && endDate ? dateLabel(startDate) + " – " + dateLabel(endDate) : "Choose dates" }; })} /></div><label>Budget per person (approximate)<input type="number" value={trip.budget} onChange={e => setTrip(t => ({ ...t, budget: Math.max(100, +e.target.value || 100) }))} /></label><label>Currency<select value={trip.currency} onChange={e => setTrip(t => ({ ...t, budget: Math.round(convertBudget(t.budget, t.currency, e.target.value)), currency: e.target.value }))}>{["USD", "INR", "EUR", "GBP", "LKR", "THB", "JPY", "VND"].map(x => <option key={x}>{x}</option>)}</select></label></div><div className="form-actions"><button className="link" onClick={() => setStep(0)}>← Back</button><button className="primary" onClick={() => setPage("discover")}>Find my places →</button></div></>}</div></main>}
+    {page === "profile" && <main className="form-page"><button className="link" onClick={() => setPage("home")}>← Back to explore</button><div className="form-card"><small className="eyebrow">YOUR TRAVEL DNA · STEP {step + 1} OF 2</small>{step === 0 ? <><h1>What makes a trip<br /><em>feel like you?</em></h1><p>Choose up to three things you love. There are no wrong answers.</p><div className="styles">{styles.map(s => <button key={s} className={profile.styles.includes(s) ? "style selected" : "style"} onClick={() => setProfile(p => ({ ...p, styles: p.styles.includes(s) ? p.styles.filter(x => x !== s) : p.styles.length < 3 ? [...p.styles, s] : p.styles }))}><Check size={15} />{s}</button>)}</div><label>Your name (optional)<input value={profile.name} onChange={e => setProfile(p => ({ ...p, name: e.target.value }))} placeholder="What should we call you?" /></label><button className="primary full" onClick={() => setStep(1)}>Next: trip details →</button></> : <><h1>Let's shape your<br /><em>little escape.</em></h1><div className="fields"><label>Trip destination<select value={trip.destination} onChange={e => changeScope(e.target.value)}>{scopeOptions.map(x => <option key={x}>{x}</option>)}</select></label><label>Trip length<select value={trip.days} onChange={e => setTrip(t => ensureCitiesForDuration(t, +e.target.value))}>{[2, 3, 4, 5, 6, 7, 8, 10, 14, 21].map(n => <option key={n}>{n}</option>)}</select><small className="field-hint">Suggested: {Math.max(1, chosen.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0))} days for {trip.places.length} {trip.places.length === 1 ? "city" : "cities"} · change it anytime.</small></label><label>Travellers<input type="number" min="1" max="12" value={trip.travelers} onChange={e => setTrip(t => ({ ...t, travelers: Math.max(1, +e.target.value || 1) }))} /></label><div className="date-field"><span>When?</span><DateRangePicker startDate={trip.startDate || ""} endDate={trip.endDate || ""} flexible={!!trip.flexibleDates} legacyLabel={trip.month} onFlexibleChange={value => setTrip(t => ({ ...t, flexibleDates: value, month: value ? "Flexible dates" : (t.month === "Flexible dates" ? "" : t.month) }))} onChange={(startDate, endDate) => setTrip(t => { const days = startDate && endDate ? Math.max(1, Math.round((new Date(endDate + "T12:00:00") - new Date(startDate + "T12:00:00")) / 86400000) + 1) : t.days; return { ...ensureCitiesForDuration(t, days), startDate, endDate, flexibleDates: false, month: startDate && endDate ? dateLabel(startDate) + " – " + dateLabel(endDate) : "Choose dates" }; })} /></div><label>Budget per person (approximate)<input type="number" value={trip.budget} onChange={e => setTrip(t => ({ ...t, budget: Math.max(100, +e.target.value || 100) }))} /></label><label>Currency<select value={trip.currency} onChange={e => setTrip(t => ({ ...t, budget: Math.round(convertBudget(t.budget, t.currency, e.target.value)), currency: e.target.value }))}>{["USD", "INR", "EUR", "GBP", "LKR", "THB", "JPY", "VND"].map(x => <option key={x}>{x}</option>)}</select></label></div><div className="form-actions"><button className="link" onClick={() => setStep(0)}>← Back</button><button className="primary" onClick={() => setPage("discover")}>Find my places →</button></div></>}</div></main>}
 
     {page === "discover" && <main className="discover"><div className="section-head"><div><small className="eyebrow">A SHORTLIST WITH SOUL</small><h1>Places that fit <em>your kind of trip.</em></h1><p>Pick a trip destination first, then add the cities you want to explore. Prices are rough USD-based planning estimates, not live quotes. Currency conversion uses approximate reference rates, not live FX. Attraction fees, meals, transport and season can change the actual total.</p></div><b className="count">{trip.places.length} cities picked</b></div>
       <div className="scope-switch" aria-label="Trip destination">{scopeOptions.map(scope => <button key={scope} className={trip.destination === scope ? "scope-chip active" : "scope-chip"} onClick={() => changeScope(scope)}>{scope}</button>)}</div>
