@@ -238,7 +238,7 @@ export default function App() {
     catch { return "light"; }
   });
 
-  useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
+  useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); } catch { /* Keep the current session usable when browser storage is unavailable. */ } }, [trip, profile, currentTripId]);
   useEffect(() => { try { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); } catch { /* Current session remains usable if storage is unavailable. */ } }, [savedTrips]);
   useEffect(() => {
     if ("serviceWorker" in navigator && import.meta.env.PROD) navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
@@ -311,9 +311,10 @@ export default function App() {
     const next = currentTripId ? savedTrips.map(item => item.id === id ? saved : item) : [saved, ...savedTrips];
     if (currentTripId && !savedTrips.some(item => item.id === currentTripId)) next.unshift(saved);
     setSavedTrips(next);
-    localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(next));
+    let persisted = true;
+    try { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(next)); } catch { persisted = false; }
     setCurrentTripId(id);
-    notify(currentTripId ? "Saved trip updated." : "Trip added to Your trips.");
+    notify(persisted ? (currentTripId ? "Saved trip updated." : "Trip added to Your trips.") : "Saved for this session only; browser storage is unavailable.");
   };
   const openSavedTrip = saved => {
     setTrip({ ...defaults, ...saved.trip });
@@ -334,7 +335,7 @@ export default function App() {
   const deleteSavedTrip = id => {
     const next = savedTrips.filter(item => item.id !== id);
     setSavedTrips(next);
-    localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(next));
+    try { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(next)); } catch { /* Removal still applies for this session. */ }
     if (currentTripId === id) setCurrentTripId(null);
     notify("Trip removed from your saved trips.");
   };
