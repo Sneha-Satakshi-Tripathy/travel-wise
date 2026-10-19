@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, Compass, Heart, MapPin, Plus, Share2, Sparkles, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, Compass, Heart, MapPin, Moon, Plus, Share2, Sparkles, Sun, Users } from "lucide-react";
 import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 
@@ -163,9 +163,16 @@ export default function App() {
   const [swappingActivityId, setSwappingActivityId] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const [toast, setToast] = useState("");
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("roamwise-theme") === "dark" ? "dark" : "light"; }
+    catch { return "light"; }
+  });
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
   useEffect(() => { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); }, [savedTrips]);
+  useEffect(() => {
+    try { localStorage.setItem("roamwise-theme", theme); } catch {}
+  }, [theme]);
   // Every page transition starts at the top; don’t preserve a previous page’s scroll offset.
   useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); }, [page]);
 
@@ -325,10 +332,11 @@ export default function App() {
     return plan;
   }, [trip.days, trip.places, selected, profile.pace, profile.walking, profile.ageGroup, profile.travellingWith]);
 
-  return <div className="app">
+  return <div className="app" data-theme={theme}>
     <header>
       <button className="brand" onClick={() => setPage("home")}><span><Compass size={21} /></span>Roamwise<span className="dot">.</span></button>
       <nav aria-label="Main navigation"><button className={page === "home" ? "nav-active" : ""} aria-current={page === "home" ? "page" : undefined} onClick={() => setPage("home")}>Explore</button><button className={page === "discover" ? "nav-active" : ""} aria-current={page === "discover" ? "page" : undefined} onClick={() => setPage("discover")}>Destinations</button><button className={page === "trips" ? "nav-active" : ""} aria-current={page === "trips" ? "page" : undefined} onClick={() => setPage("trips")}>Your trips <span className="nav-count">{savedTrips.length}</span></button></nav>
+      <button className="theme-toggle" type="button" onClick={() => setTheme(current => current === "dark" ? "light" : "dark")} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"} aria-pressed={theme === "dark"} title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}<span>{theme === "dark" ? "Light mode" : "Dark mode"}</span></button>
     </header>
 
     {page === "home" && <main>
