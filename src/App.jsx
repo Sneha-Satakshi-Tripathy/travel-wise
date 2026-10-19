@@ -35,6 +35,61 @@ const money = (n, c = "USD") => {
 const USD_PER_UNIT = { USD: 1, INR: 1 / 83, EUR: 1.08, GBP: 1.27, LKR: 1 / 300, THB: 1 / 35, JPY: 1 / 150, VND: 1 / 24500 };
 const displayMoney = (usd, currency = "USD") => money(usd / (USD_PER_UNIT[currency] || 1), currency);
 const convertBudget = (amount, from, to) => amount * (USD_PER_UNIT[from] || 1) / (USD_PER_UNIT[to] || 1);
+// Offline planning heuristics; never presented as live routing or verified accessibility data.
+const activityMinutes = activity => {
+  const match = String(activity?.duration || "").match(/([0-9]+(?:\.[0-9]+)?)\s*(hr|hour|min)/i);
+  if (!match) return 60;
+  return Math.round(Number(match[1]) * (/min/i.test(match[2]) ? 1 : 60));
+};
+const effortLevel = activity => {
+  const effort = String(activity?.effort || "Medium").toLowerCase();
+  return effort === "low" ? 1 : effort === "high" ? 3 : 2;
+};
+const activityFitReason = (activity, profile, place) => {
+  const text = String(activity?.name || "") + " " + String(activity?.note || "");
+  const styles = profile?.styles || [];
+  const effort = activity?.effort || "Medium";
+  let fit = "";
+  if (styles.includes("Food-led explorer") && /food|market|cafe|café|tea|tasting|dinner|lunch|bite|culinary/i.test(text)) fit = "Matches your food-led travel style.";
+  else if (styles.includes("Culture & history") && /temple|heritage|historic|fort|museum|architecture|palace|history|old.city/i.test(text)) fit = "Matches your interest in culture and history.";
+  else if (styles.includes("Nature lover") && /nature|garden|lake|beach|mountain|scenic|tea estate|sunset|countryside/i.test(text)) fit = "Matches your interest in nature and scenery.";
+  else if (styles.includes("Slow living") && /cafe|café|lake|sunset|slow|tasting|tea|beach|coffee|garden/i.test(text)) fit = "Leaves space for a slower, more unhurried experience.";
+  else if (styles.includes("Adventure seeker") && /climb|hike|ride|adventure|fortress|trail|kayak|cycle/i.test(text)) fit = "Adds an active experience to your trip.";
+  else if (styles.includes("Sun & sea") && /beach|sea|coast|swim|boat|sunset/i.test(text)) fit = "Fits your sun-and-sea preference.";
+  if (!fit) fit = \`A \${effort.toLowerCase()}-effort option in \${place?.name || "this destination"}.\`;
+  if (profile?.pace === "Relaxed" && effortLevel(activity) === 3) fit += " This is a higher-effort exception to your relaxed pace.";
+  else if (profile?.pace === "Packed") fit += " Suits your preference for a fuller day.";
+  else if (profile?.pace === "Relaxed") fit += " The plan leaves room to slow down.";
+  if (profile?.walking === "Minimal walking" && effortLevel(activity) >= 3) fit += " Check stairs, terrain and access before committing; those details aren't verified here.";
+  else if (profile?.walking === "Minimal walking") fit += " Lower-effort picks are prioritised, but walking distance isn't verified.";
+  if ((profile?.travellingWith || []).some(x => /parents|older adults|mixed-age|children/i.test(x))) fit += " Kept as an editable option for your group; age alone doesn't guarantee accessibility.";
+  return fit;
+};
+const adjustDayActivities = (items, mode) => {
+  if (!mode || !items?.length) return items || [];
+  const ranked = [...items].sort((a, b) => effortLevel(a) - effortLevel(b));
+  if (mode === "gentler") return ranked.slice(0, Math.min(2, ranked.length)).sort((a, b) => items.indexOf(a) - items.indexOf(b));
+  if (mode === "less-walking") {
+    const low = items.filter(a => effortLevel(a) === 1);
+    return (low.length ? low : ranked.slice(0, 1)).slice(0, 3);
+  }
+  if (mode === "food-culture") {
+    const relevant = items.filter(a => /food|market|cafe|café|tea|tasting|dinner|lunch|bite|culinary|temple|heritage|historic|museum|palace/i.test(String(a.name) + " " + String(a.note || "")));
+    return (relevant.length ? relevant : items).slice(0, 3);
+  }
+  if (mode === "running-late") return items.slice(0, 2).map((a, i) => ({ ...a, slot: i === 0 ? "Priority 1" : "Priority 2" }));
+  return items;
+};
+const getDayWorkload = (day, profile) => {
+  const items = day?.activities || [];
+  const activityMins = items.reduce((sum, activity) => sum + activityMinutes(activity), 0);
+  // This allowance is not a route API result.
+  const transitMins = Math.max(0, items.length - 1) * 20;
+  const breakMins = items.length >= 2 ? 60 : items.length === 1 ? 30 : 0;
+  const totalMins = activityMins + transitMins + breakMins;
+  return { activityMins, transitMins, breakMins, totalMins, hours: Math.round(totalMins / 6) / 10, overloaded: totalMins > 480 || (profile?.pace === "Relaxed" && totalMins > 360) };
+};
+
 
 // Add cities only when the selected trip length exceeds the recommended stay of the current route.
 // Existing selections are preserved; new cities are chosen from the active country/region.
@@ -344,8 +399,11 @@ export default function App() {
         plan.push({ n: plan.length + 1, place, activities: dayActivities });
       }
     });
-    return plan;
-  }, [trip.days, trip.places, selected, profile.pace, profile.walking, profile.ageGroup, profile.travellingWith]);
+    return plan.map(day => {
+      const mode = trip.dayAdjustments?.[day.n - 1];
+      return { ...day, adjustment: mode || "", activities: adjustDayActivities(day.activities, mode) };
+    });
+  }, [trip.days, trip.places, selected, profile.pace, profile.walking, profile.ageGroup, profile.travellingWith, trip.dayAdjustments]);
 
   return <div className="app" data-theme={theme}>
     <header>
@@ -405,6 +463,7 @@ export default function App() {
       <div className="itinerary-layout">
         <section className="itinerary-main">
           <div className="section-head itinerary-title"><div><h2>The days, your way</h2><p>Swap, add or skip anything. This is a flexible starting point.</p></div><button className="link" onClick={() => setPage("discover")}>Change cities ↗</button></div>
+          <p className="planning-disclaimer">Personalised planning suggestions and offline estimates. Transit allowances are not live routes; opening hours, accessibility and conditions need checking.</p>
           <div className="journey-strip" aria-label="Visual day-by-day route">
             <div className="journey-strip-head"><span className="eyebrow">YOUR JOURNEY</span><span>{days.length} days · {chosen.length} {chosen.length === 1 ? "stop" : "stops"}</span></div>
             <div className="journey-scroll">
@@ -424,7 +483,25 @@ export default function App() {
           </div>
           {days[activeDay] && (() => { const d = days[activeDay]; const candidates = d.place ? activities.filter(a => a.place === d.place.id && !trip.activities.includes(a.id)) : activities.filter(a => trip.places.includes(a.place) && !trip.activities.includes(a.id)); return <article className="active-day-panel" key={d.n}>
             <div className="active-day-heading"><div><small className="eyebrow">DAY {d.n} · {(d.place?.name || "OPEN DAY").toUpperCase()}</small><h3>{!d.place ? "Leave room for a new discovery" : d.n === 1 ? "Arrive & find your rhythm" : d.n === trip.days ? "Leave room for one last memory" : d.place.tagline}</h3><p>{d.place ? `${d.place.country} · ${d.activities.length} activities planned` : "Choose a city to start your itinerary"}</p></div><span className="day-count">{d.activities.length} planned</span></div>
-            {d.activities.length ? <div className="activity-list">{d.activities.map(a => <div className="activity activity-row" key={a.id}><div className="activity-time"><small>{a.slot}</small><span>{a.duration}</span></div><div className="activity-copy"><b>{a.name}</b><p>{a.note}</p><small>{displayMoney(a.cost, trip.currency)} per person · {a.effort} effort</small></div><div className="activity-actions"><button className="inline-action" onClick={() => setSwappingActivityId(swappingActivityId === a.id ? null : a.id)} aria-expanded={swappingActivityId === a.id} title="Choose a replacement activity">Swap</button><button className="inline-action skip-action" onClick={() => { toggleActivity(a.id); setSwappingActivityId(null); notify("Activity skipped."); }} title="Skip this activity">Skip</button></div>{swappingActivityId === a.id && <div className="swap-options"><b>Choose an alternative</b>{activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).length ? activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).map(option => <button key={option.id} className="swap-option" onClick={() => { setTrip(t => ({ ...t, activities: [...t.activities.filter(id => id !== a.id), option.id] })); setSwappingActivityId(null); notify("Swapped in " + option.name + "."); }}><span><strong>{option.name}</strong><small>{option.slot} · {option.duration} · {option.effort} effort · {displayMoney(option.cost, trip.currency)}</small></span><ArrowRight size={15} /></button>) : <p className="empty">No unused alternatives yet for this city. Add an activity or skip this one.</p>}</div>}</div>)}</div> : <p className="empty-day">A little room to breathe. Add an activity below or choose another city.</p>}
+            <section className="day-adjustments" aria-label="Offline itinerary adjustments">
+              <div className="day-adjustments-head"><b>Adjust this day</b><small>Offline planning rules · not live intelligence</small></div>
+              <div className="adjustment-actions">
+                {[["gentler","Gentler day"],["food-culture","More food & culture"],["less-walking","Less walking"],["running-late","Running late"]].map(([mode,label]) => <button type="button" key={mode} className={d.adjustment === mode ? "adjustment-chip active" : "adjustment-chip"} aria-pressed={d.adjustment === mode} onClick={() => { setTrip(t => { const next = { ...(t.dayAdjustments || {}) }; if (next[d.n - 1] === mode) delete next[d.n - 1]; else next[d.n - 1] = mode; return { ...t, dayAdjustments: next }; }); notify(d.adjustment === mode ? "Day adjustment cleared." : label + " applied."); }}>{label}</button>)}
+                {d.adjustment && <button type="button" className="adjustment-reset" onClick={() => setTrip(t => { const next = { ...(t.dayAdjustments || {}) }; delete next[d.n - 1]; return { ...t, dayAdjustments: next }; })}>Reset</button>}
+              </div>
+            </section>
+            <section className="day-fit-card">
+              <small className="eyebrow">WHY THIS DAY WORKS FOR US</small>
+              <p>{d.activities.length ? `Built around your ${(profile.styles || []).slice(0, 2).join(" and ").toLowerCase() || "travel"} preferences, a ${(profile.pace || "Balanced").toLowerCase()} pace and ${(profile.walking || "some walking is fine").toLowerCase()}.` : "Keep this day open or add an activity that suits your group."}</p>
+              <div className="day-workload">
+                <span><b>{getDayWorkload(d, profile).hours}h</b><small>estimated day block</small></span>
+                <span><b>{Math.round(getDayWorkload(d, profile).activityMins / 60 * 10) / 10}h</b><small>activity time</small></span>
+                <span><b>{Math.round(getDayWorkload(d, profile).transitMins)}m</b><small>transit allowance</small></span>
+                <span><b>{getDayWorkload(d, profile).breakMins}m</b><small>meal/rest break</small></span>
+              </div>
+              <p className="workload-note">{getDayWorkload(d, profile).overloaded ? "This may be too packed for your selected pace. Remove a stop or choose a gentler adjustment." : "A rough workload estimate with room for breaks. Transit is a 20-minute-per-transfer planning allowance, not a route calculation."}</p>
+            </section>
+            {d.activities.length ? <div className="activity-list">{d.activities.map(a => <div className="activity activity-row" key={a.id}><div className="activity-time"><small>{a.slot}</small><span>{a.duration}</span></div><div className="activity-copy"><b>{a.name}</b><p>{a.note}</p><p className="activity-fit-reason"><strong>Why it fits:</strong> {activityFitReason(a, profile, d.place)}</p><small>{displayMoney(a.cost, trip.currency)} per person · {a.effort} effort · {activityMinutes(a)} min activity time</small></div><div className="activity-actions"><button className="inline-action" onClick={() => setSwappingActivityId(swappingActivityId === a.id ? null : a.id)} aria-expanded={swappingActivityId === a.id} title="Choose a replacement activity">Swap</button><button className="inline-action skip-action" onClick={() => { toggleActivity(a.id); setSwappingActivityId(null); notify("Activity skipped."); }} title="Skip this activity">Skip</button></div>{swappingActivityId === a.id && <div className="swap-options"><b>Choose an alternative</b>{activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).length ? activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).map(option => <button key={option.id} className="swap-option" onClick={() => { setTrip(t => ({ ...t, activities: [...t.activities.filter(id => id !== a.id), option.id] })); setSwappingActivityId(null); notify("Swapped in " + option.name + "."); }}><span><strong>{option.name}</strong><small>{option.slot} · {option.duration} · {option.effort} effort · {displayMoney(option.cost, trip.currency)}</small></span><ArrowRight size={15} /></button>) : <p className="empty">No unused alternatives yet for this city. Add an activity or skip this one.</p>}</div>}</div>)}</div> : <p className="empty-day">A little room to breathe. Add an activity below or choose another city.</p>}
             <div className="add-activity-area"><button className="add-activity-button" onClick={() => setAddingForDay(addingForDay === d.n ? -1 : d.n)}><Plus size={15} /> Add an activity <ChevronDown size={14} /></button>
               {addingForDay === d.n && <div className="activity-picker">{candidates.length ? candidates.slice(0, 8).map(a => <button key={a.id} className="activity-option" onClick={() => { toggleActivity(a.id); setAddingForDay(-1); notify(`${a.name} added to your plan.`); }}><span><b>{a.name}</b><small>{a.slot} · {a.duration} · {displayMoney(a.cost, trip.currency)}</small></span><Plus size={15} /></button>) : <p className="empty">No more suggested activities for this day. You can change cities to explore more options.</p>}</div>}
             </div>
