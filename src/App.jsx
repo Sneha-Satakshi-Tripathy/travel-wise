@@ -14,7 +14,7 @@ const starterPlaces = {
   Vietnam: { countries: [], places: ["hanoi", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
-const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
+const defaults = { destination: "Japan", days: 7, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces.Japan.countries, places: starterPlaces.Japan.places, activities: starterPlaces.Japan.activities, title: "A little Japan adventure" };
 // Broad historical seasonal guidance only; never a live forecast or guarantee.
 const climateTips = {
   "Sri Lanka": { season: "December–April for the west and south coasts; January–April for the central highlands", temperature: "24–32°C on the coasts; around 12–22°C in the highlands", note: "Monsoons vary by coast and elevation, so choose the season for your selected region." },
@@ -90,7 +90,7 @@ const getInitialTrip = () => {
     const query = getQueryParams();
     const destination = query.get("destination");
     if (!scopeOptions.includes(destination)) return { ...defaults, ...stored, flexibleDates: stored.flexibleDates ?? stored.month === "Flexible dates", startDate: stored.startDate || "", endDate: stored.endDate || "" };
-    const starter = starterPlaces[destination] || starterPlaces["Sri Lanka"];
+    const starter = starterPlaces[destination] || starterPlaces.Japan;
     const names = { "Sri Lanka": "A little Sri Lankan magic", India: "An India escape", Thailand: "A Thailand adventure", Japan: "A little Japan adventure", Vietnam: "A Vietnam escape", Europe: "A little European grand tour" };
     const requestedDays = Number(query.get("days"));
     const days = Number.isFinite(requestedDays) && requestedDays >= 2 && requestedDays <= 21 ? requestedDays : 7;
@@ -239,7 +239,7 @@ export default function App() {
   };
 
   const changeScope = scope => {
-    const starter = starterPlaces[scope] || starterPlaces["Sri Lanka"];
+    const starter = starterPlaces[scope] || starterPlaces.Japan;
     const names = { "Sri Lanka": "A little Sri Lankan magic", India: "An India escape", Thailand: "A Thailand adventure", Japan: "A little Japan adventure", Vietnam: "A Vietnam escape", Europe: "A little European grand tour" };
     const recommendedDays = starter.places.reduce((sum, id) => sum + Math.max(1, destinations.find(d => d.id === id)?.days || 1), 0);
     setTrip(t => ({ ...t, destination: scope, days: recommendedDays, countries: [...starter.countries], places: [...starter.places], activities: [...starter.activities], title: names[scope], startDate: "", endDate: "", flexibleDates: true, month: "Flexible dates" }));
