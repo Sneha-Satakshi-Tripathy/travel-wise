@@ -663,3 +663,42 @@ footer{background:#f3f2eb}
 .app[data-theme="dark"] .scope-chip:hover {
   border-color: #91ad85;
 }
+
+
+/* Header/navigation contrast correction for dark mode */
+.app[data-theme="dark"] header {
+  background: rgba(21, 27, 24, 0.97);
+  border-bottom-color: #303a33;
+}
+.app[data-theme="dark"] header .brand {
+  color: #e8eee7;
+}
+.app[data-theme="dark"] header .brand > span:first-child {
+  background: #304734;
+  color: #e8eee7;
+}
+.app[data-theme="dark"] header .brand .dot {
+  color: #a8c69b;
+}
+.app[data-theme="dark"] header nav button {
+  color: #cbd5ca;
+  background: transparent;
+}
+.app[data-theme="dark"] header nav button:hover {
+  color: #f0f7ed;
+  background: #26352a;
+}
+.app[data-theme="dark"] header nav button.nav-active {
+  color: #f0f7ed;
+  background: #304734;
+  border-color: #91ad85;
+}
+.app[data-theme="dark"] header .nav-count {
+  background: #39483b;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] header .theme-toggle {
+  background: #253229;
+  border-color: #53654f;
+  color: #e2ebdf;
+}
