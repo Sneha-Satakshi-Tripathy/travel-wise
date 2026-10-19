@@ -544,3 +544,122 @@ footer{background:#f3f2eb}
 .theme-toggle:hover{border-color:#809876}
 .app header{flex-wrap:wrap}
 @media(max-width:600px){.app header{gap:10px}.app header nav{order:3;width:100%;justify-content:space-between}.theme-toggle{margin-left:auto}.theme-toggle span{display:inline}}
+
+
+/* Dark theme contrast pass: keep every form prompt and date-picker surface readable. */
+.app[data-theme="dark"] .form-card,
+.app[data-theme="dark"] .form-page,
+.app[data-theme="dark"] .country-picker,
+.app[data-theme="dark"] .date-calendar,
+.app[data-theme="dark"] .climate-card,
+.app[data-theme="dark"] .swap-options,
+.app[data-theme="dark"] .activity-picker,
+.app[data-theme="dark"] .active-day-panel,
+.app[data-theme="dark"] .itinerary-summary-card,
+.app[data-theme="dark"] .saved-trip-card,
+.app[data-theme="dark"] .empty-trips,
+.app[data-theme="dark"] .map-disclosure,
+.app[data-theme="dark"] .map-frame-wrap,
+.app[data-theme="dark"] .journey-strip,
+.app[data-theme="dark"] .day-tabs,
+.app[data-theme="dark"] .active-day-heading {
+  background-color: #1e2721;
+  border-color: #37453a;
+  color: #e4ebe2;
+}
+.app[data-theme="dark"] .form-card > p,
+.app[data-theme="dark"] .form-card label,
+.app[data-theme="dark"] .fields label,
+.app[data-theme="dark"] .traveller-fields label,
+.app[data-theme="dark"] .date-field > span,
+.app[data-theme="dark"] .profile-section-head b,
+.app[data-theme="dark"] .swap-options > b,
+.app[data-theme="dark"] .climate-card p,
+.app[data-theme="dark"] .climate-card p b,
+.app[data-theme="dark"] .field-hint,
+.app[data-theme="dark"] .calendar-hint,
+.app[data-theme="dark"] .calendar-weekday,
+.app[data-theme="dark"] .flexible-date-toggle,
+.app[data-theme="dark"] .journey-stop-copy,
+.app[data-theme="dark"] .journey-stop-copy b,
+.app[data-theme="dark"] .day-tabs button,
+.app[data-theme="dark"] .activity-option,
+.app[data-theme="dark"] .saved-trip-content,
+.app[data-theme="dark"] .map-location {
+  color: #dce6da;
+}
+.app[data-theme="dark"] .form-card input,
+.app[data-theme="dark"] .form-card select,
+.app[data-theme="dark"] .fields input,
+.app[data-theme="dark"] .fields select,
+.app[data-theme="dark"] .traveller-fields select,
+.app[data-theme="dark"] .date-range-trigger,
+.app[data-theme="dark"] .date-calendar,
+.app[data-theme="dark"] .calendar-day,
+.app[data-theme="dark"] .calendar-clear,
+.app[data-theme="dark"] .calendar-head button,
+.app[data-theme="dark"] .activity-option,
+.app[data-theme="dark"] .day-tabs button,
+.app[data-theme="dark"] .map-disclosure-toggle,
+.app[data-theme="dark"] .map-open-link,
+.app[data-theme="dark"] .country-chip,
+.app[data-theme="dark"] .scope-chip {
+  background-color: #222e26;
+  border-color: #405043;
+  color: #e1e9df;
+}
+.app[data-theme="dark"] .calendar-day:hover,
+.app[data-theme="dark"] .calendar-head button:hover,
+.app[data-theme="dark"] .calendar-clear:hover,
+.app[data-theme="dark"] .activity-option:hover,
+.app[data-theme="dark"] .day-tabs button:hover {
+  background-color: #304734;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] .calendar-day.range-start,
+.app[data-theme="dark"] .calendar-day.range-end {
+  background: #a8c69b;
+  color: #17231a;
+}
+.app[data-theme="dark"] .calendar-day.range-middle,
+.app[data-theme="dark"] .scope-chip.active,
+.app[data-theme="dark"] .day-tabs button[aria-selected="true"],
+.app[data-theme="dark"] .activity-option.selected {
+  background: #304734;
+  border-color: #91ad85;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] .calendar-weekday,
+.app[data-theme="dark"] .profile-section-head small,
+.app[data-theme="dark"] .profile-explainer,
+.app[data-theme="dark"] .field-hint,
+.app[data-theme="dark"] .calendar-hint,
+.app[data-theme="dark"] .climate-card p,
+.app[data-theme="dark"] .climate-temperature,
+.app[data-theme="dark"] .journey-stop-copy small,
+.app[data-theme="dark"] .estimate-disclaimer,
+.app[data-theme="dark"] .saved-trip-meta,
+.app[data-theme="dark"] .map-location small {
+  color: #aebdad;
+}
+.app[data-theme="dark"] .date-range-trigger:hover,
+.app[data-theme="dark"] .date-range-trigger:focus-visible,
+.app[data-theme="dark"] input:focus-visible,
+.app[data-theme="dark"] select:focus-visible,
+.app[data-theme="dark"] textarea:focus-visible {
+  outline-color: #a8c69b;
+  border-color: #a8c69b;
+}
+.app[data-theme="dark"] option {
+  background: #222e26;
+  color: #e1e9df;
+}
+.app[data-theme="dark"] .journey-strip { color: #e1e9df; }
+.app[data-theme="dark"] .journey-road { opacity: .45; }
+.app[data-theme="dark"] .journey-pin { box-shadow: 0 0 0 4px #1e2721; }
+.app[data-theme="dark"] .day-count { color: #c7d5c2 !important; }
+.app[data-theme="dark"] .map-disclosure-toggle:hover,
+.app[data-theme="dark"] .country-chip:hover,
+.app[data-theme="dark"] .scope-chip:hover {
+  border-color: #91ad85;
+}
