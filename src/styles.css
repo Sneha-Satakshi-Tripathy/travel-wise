@@ -702,3 +702,18 @@ footer{background:#f3f2eb}
   border-color: #53654f;
   color: #e2ebdf;
 }
+
+
+/* Ensure the floating hero caption remains readable in dark mode */
+.app[data-theme="dark"] .hero-image .float {
+  background: #222e26;
+  color: #f0f5ed;
+  border: 1px solid #405043;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+}
+.app[data-theme="dark"] .hero-image .float b {
+  color: #f0f5ed;
+}
+.app[data-theme="dark"] .hero-image .float small {
+  color: #c1cdbd;
+}
