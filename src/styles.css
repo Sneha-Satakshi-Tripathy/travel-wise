@@ -478,3 +478,242 @@ footer{background:#f3f2eb}
 .journey-photo-fallback{position:relative;background:linear-gradient(145deg,#dfe8d9,#f0e9dc)!important}
 .journey-photo-fallback::after{content:"Photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:5px;color:#53674e;font-size:9px;font-weight:600;text-align:center}
 @media(max-width:720px){.journey-road{top:25px}.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin{top:100px}.journey-stop-copy b{font-size:11px;line-height:1.35}}
+
+
+/* Traveller-aware planning and organic discovery */
+.traveller-profile{margin:28px 0;padding:22px;border:1px solid #e5e8de;border-radius:12px;background:#f8f8f2}
+.profile-section-head{display:grid;gap:6px;margin-bottom:14px}
+.profile-section-head b{font:22px "Playfair Display",serif;color:#2d4935}
+.profile-section-head small,.profile-explainer{font-size:11px;line-height:1.7;color:#7a8276}
+.traveller-chips{display:flex;flex-wrap:wrap;gap:8px}
+.traveller-chip{border:1px solid #dfe3d8;background:#fffdf8;color:#596657;border-radius:999px;padding:10px 13px;font-size:11px}
+.traveller-chip.selected{border-color:#809876;background:#eaf0e5;color:#294b37;box-shadow:inset 0 0 0 1px #809876}
+.traveller-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.traveller-fields label{display:grid;gap:8px;font-size:11px;color:#5e695d}
+.traveller-fields select{width:100%;min-width:0;padding:11px 9px;border:1px solid #e3e4da;border-radius:8px;background:#fffdf8;color:#28352b;outline-color:#82977b;font-size:11px}
+.profile-explainer{margin:15px 0 0}
+.guide-discovery{padding:28px 0 48px;border-top:1px solid #e5e2d9}
+.guide-discovery .section-head{margin-bottom:16px}
+.guide-discovery .section-head h2{font:500 34px "Playfair Display",serif;margin:9px 0}
+.guide-discovery .section-head p{font-size:12px;line-height:1.7;color:#7a8276;margin:0}
+.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.guide-card{display:flex;flex-direction:column;gap:10px;min-height:170px;padding:20px;text-decoration:none;background:#fffdf8;border:1px solid #e5e5dc;border-radius:12px;color:#2d4935;transition:transform .2s,border-color .2s}
+.guide-card:hover{transform:translateY(-2px);border-color:#9cac91}
+.guide-card span{font-size:9px;letter-spacing:1.2px;font-weight:700;color:#8a927e}
+.guide-card b{font:22px/1.2 "Playfair Display",serif}
+.guide-card small{font-size:11px;line-height:1.6;color:#798176}
+.guide-card i{margin-top:auto;font-size:11px;font-style:normal;font-weight:700}
+.traveller-summary{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11px!important;color:#71806d!important}
+.trip-top-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.trip-top-actions .primary,.trip-top-actions .secondary{padding:11px 13px}
+@media(max-width:760px){
+  .traveller-fields{grid-template-columns:1fr}
+  .guide-grid{grid-template-columns:1fr}
+  .guide-card{min-height:135px}
+  .trip-top-actions{justify-content:flex-start}
+  .traveller-profile{padding:16px}
+}
+
+
+/* User-selectable dark theme */
+.app[data-theme="dark"]{background:#151b18;color:#e8eee7;color-scheme:dark}
+.app[data-theme="dark"] header{border-color:#303a33}
+.app[data-theme="dark"] .brand,.app[data-theme="dark"] h1,.app[data-theme="dark"] h2,.app[data-theme="dark"] h3,.app[data-theme="dark"] h4{color:#e8eee7}
+.app[data-theme="dark"] .brand .dot,.app[data-theme="dark"] h1 em,.app[data-theme="dark"] h2 em{color:#a8c69b}
+.app[data-theme="dark"] nav button{color:#c0c9bf}
+.app[data-theme="dark"] nav button.nav-active{color:#d5e9cb;border-color:#a8c69b}
+.app[data-theme="dark"] .eyebrow,.app[data-theme="dark"] .proof,.app[data-theme="dark"] .section-head p,.app[data-theme="dark"] .profile-section-head small,.app[data-theme="dark"] .profile-explainer,.app[data-theme="dark"] .guide-card small,.app[data-theme="dark"] .fine{color:#a2afa1}
+.app[data-theme="dark"] p,.app[data-theme="dark"] li,.app[data-theme="dark"] label,.app[data-theme="dark"] small{color:inherit}
+.app[data-theme="dark"] .hero-image:after{background:linear-gradient(0deg,rgba(21,27,24,.65),transparent 65%)}
+.app[data-theme="dark"] .inspiration-card,.app[data-theme="dark"] .guide-card,.app[data-theme="dark"] .traveller-profile,.app[data-theme="dark"] .destination-card,.app[data-theme="dark"] .trip-card,.app[data-theme="dark"] .itinerary-summary-card,.app[data-theme="dark"] .save-banner,.app[data-theme="dark"] .day-card,.app[data-theme="dark"] .activity,.app[data-theme="dark"] .activity-picker,.app[data-theme="dark"] .sidebar-note,.app[data-theme="dark"] .sidebar-budget,.app[data-theme="dark"] .trip-form,.app[data-theme="dark"] .profile-card,.app[data-theme="dark"] .country-option,.app[data-theme="dark"] .place-card,.app[data-theme="dark"] .map-panel,.app[data-theme="dark"] .empty-state,.app[data-theme="dark"] .guide-card{background:#1e2721;border-color:#37453a;color:#e4ebe2}
+.app[data-theme="dark"] .traveller-profile,.app[data-theme="dark"] .profile-card{background:#1b241e}
+.app[data-theme="dark"] .traveller-chip,.app[data-theme="dark"] input,.app[data-theme="dark"] select,.app[data-theme="dark"] textarea,.app[data-theme="dark"] .secondary,.app[data-theme="dark"] .link,.app[data-theme="dark"] .swap-option,.app[data-theme="dark"] .inline-action{background:#222e26;border-color:#405043;color:#e1e9df}
+.app[data-theme="dark"] .traveller-chip.selected{background:#304734;border-color:#9ab98b;color:#eff8eb}
+.app[data-theme="dark"] .primary{background:#a8c69b;border-color:#a8c69b;color:#1b2b1e}
+.app[data-theme="dark"] .primary:hover{background:#bad6ae}
+.app[data-theme="dark"] .secondary:hover,.app[data-theme="dark"] .link:hover,.app[data-theme="dark"] .traveller-chip:hover{border-color:#91ad85}
+.app[data-theme="dark"] .section-head,.app[data-theme="dark"] .guide-discovery,.app[data-theme="dark"] .steps,.app[data-theme="dark"] .inspiration{border-color:#303a33}
+.app[data-theme="dark"] .activity-copy p,.app[data-theme="dark"] .activity-copy small,.app[data-theme="dark"] .activity-time,.app[data-theme="dark"] .sidebar-budget small,.app[data-theme="dark"] .day-count,.app[data-theme="dark"] .personal-note,.app[data-theme="dark"] .traveller-summary{color:#b1beb0!important}
+.app[data-theme="dark"] .budget-meter{background:#354238}
+.app[data-theme="dark"] .budget-meter i{background:#a8c69b}
+.app[data-theme="dark"] .map-panel svg,.app[data-theme="dark"] .map-panel img{filter:brightness(.84) saturate(.8)}
+.app[data-theme="dark"] footer{border-color:#303a33;color:#a2afa1}
+.app[data-theme="dark"] .toast{background:#e0ebdc;color:#203624}
+.app[data-theme="dark"] .theme-toggle{background:#253229;border-color:#53654f;color:#e2ebdf}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;border:1px solid #dfe3d8;border-radius:999px;background:#fffdf8;color:#405541;padding:9px 12px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.theme-toggle:hover{border-color:#809876}
+.app header{flex-wrap:wrap}
+@media(max-width:600px){.app header{gap:10px}.app header nav{order:3;width:100%;justify-content:space-between}.theme-toggle{margin-left:auto}.theme-toggle span{display:inline}}
+
+
+/* Dark theme contrast pass: keep every form prompt and date-picker surface readable. */
+.app[data-theme="dark"] .form-card,
+.app[data-theme="dark"] .form-page,
+.app[data-theme="dark"] .country-picker,
+.app[data-theme="dark"] .date-calendar,
+.app[data-theme="dark"] .climate-card,
+.app[data-theme="dark"] .swap-options,
+.app[data-theme="dark"] .activity-picker,
+.app[data-theme="dark"] .active-day-panel,
+.app[data-theme="dark"] .itinerary-summary-card,
+.app[data-theme="dark"] .saved-trip-card,
+.app[data-theme="dark"] .empty-trips,
+.app[data-theme="dark"] .map-disclosure,
+.app[data-theme="dark"] .map-frame-wrap,
+.app[data-theme="dark"] .journey-strip,
+.app[data-theme="dark"] .day-tabs,
+.app[data-theme="dark"] .active-day-heading {
+  background-color: #1e2721;
+  border-color: #37453a;
+  color: #e4ebe2;
+}
+.app[data-theme="dark"] .form-card > p,
+.app[data-theme="dark"] .form-card label,
+.app[data-theme="dark"] .fields label,
+.app[data-theme="dark"] .traveller-fields label,
+.app[data-theme="dark"] .date-field > span,
+.app[data-theme="dark"] .profile-section-head b,
+.app[data-theme="dark"] .swap-options > b,
+.app[data-theme="dark"] .climate-card p,
+.app[data-theme="dark"] .climate-card p b,
+.app[data-theme="dark"] .field-hint,
+.app[data-theme="dark"] .calendar-hint,
+.app[data-theme="dark"] .calendar-weekday,
+.app[data-theme="dark"] .flexible-date-toggle,
+.app[data-theme="dark"] .journey-stop-copy,
+.app[data-theme="dark"] .journey-stop-copy b,
+.app[data-theme="dark"] .day-tabs button,
+.app[data-theme="dark"] .activity-option,
+.app[data-theme="dark"] .saved-trip-content,
+.app[data-theme="dark"] .map-location {
+  color: #dce6da;
+}
+.app[data-theme="dark"] .form-card input,
+.app[data-theme="dark"] .form-card select,
+.app[data-theme="dark"] .fields input,
+.app[data-theme="dark"] .fields select,
+.app[data-theme="dark"] .traveller-fields select,
+.app[data-theme="dark"] .date-range-trigger,
+.app[data-theme="dark"] .date-calendar,
+.app[data-theme="dark"] .calendar-day,
+.app[data-theme="dark"] .calendar-clear,
+.app[data-theme="dark"] .calendar-head button,
+.app[data-theme="dark"] .activity-option,
+.app[data-theme="dark"] .day-tabs button,
+.app[data-theme="dark"] .map-disclosure-toggle,
+.app[data-theme="dark"] .map-open-link,
+.app[data-theme="dark"] .country-chip,
+.app[data-theme="dark"] .scope-chip {
+  background-color: #222e26;
+  border-color: #405043;
+  color: #e1e9df;
+}
+.app[data-theme="dark"] .calendar-day:hover,
+.app[data-theme="dark"] .calendar-head button:hover,
+.app[data-theme="dark"] .calendar-clear:hover,
+.app[data-theme="dark"] .activity-option:hover,
+.app[data-theme="dark"] .day-tabs button:hover {
+  background-color: #304734;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] .calendar-day.range-start,
+.app[data-theme="dark"] .calendar-day.range-end {
+  background: #a8c69b;
+  color: #17231a;
+}
+.app[data-theme="dark"] .calendar-day.range-middle,
+.app[data-theme="dark"] .scope-chip.active,
+.app[data-theme="dark"] .day-tabs button[aria-selected="true"],
+.app[data-theme="dark"] .activity-option.selected {
+  background: #304734;
+  border-color: #91ad85;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] .calendar-weekday,
+.app[data-theme="dark"] .profile-section-head small,
+.app[data-theme="dark"] .profile-explainer,
+.app[data-theme="dark"] .field-hint,
+.app[data-theme="dark"] .calendar-hint,
+.app[data-theme="dark"] .climate-card p,
+.app[data-theme="dark"] .climate-temperature,
+.app[data-theme="dark"] .journey-stop-copy small,
+.app[data-theme="dark"] .estimate-disclaimer,
+.app[data-theme="dark"] .saved-trip-meta,
+.app[data-theme="dark"] .map-location small {
+  color: #aebdad;
+}
+.app[data-theme="dark"] .date-range-trigger:hover,
+.app[data-theme="dark"] .date-range-trigger:focus-visible,
+.app[data-theme="dark"] input:focus-visible,
+.app[data-theme="dark"] select:focus-visible,
+.app[data-theme="dark"] textarea:focus-visible {
+  outline-color: #a8c69b;
+  border-color: #a8c69b;
+}
+.app[data-theme="dark"] option {
+  background: #222e26;
+  color: #e1e9df;
+}
+.app[data-theme="dark"] .journey-strip { color: #e1e9df; }
+.app[data-theme="dark"] .journey-road { opacity: .45; }
+.app[data-theme="dark"] .journey-pin { box-shadow: 0 0 0 4px #1e2721; }
+.app[data-theme="dark"] .day-count { color: #c7d5c2 !important; }
+.app[data-theme="dark"] .map-disclosure-toggle:hover,
+.app[data-theme="dark"] .country-chip:hover,
+.app[data-theme="dark"] .scope-chip:hover {
+  border-color: #91ad85;
+}
+
+
+/* Header/navigation contrast correction for dark mode */
+.app[data-theme="dark"] header {
+  background: rgba(21, 27, 24, 0.97);
+  border-bottom-color: #303a33;
+}
+.app[data-theme="dark"] header .brand {
+  color: #e8eee7;
+}
+.app[data-theme="dark"] header .brand > span:first-child {
+  background: #304734;
+  color: #e8eee7;
+}
+.app[data-theme="dark"] header .brand .dot {
+  color: #a8c69b;
+}
+.app[data-theme="dark"] header nav button {
+  color: #cbd5ca;
+  background: transparent;
+}
+.app[data-theme="dark"] header nav button:hover {
+  color: #f0f7ed;
+  background: #26352a;
+}
+.app[data-theme="dark"] header nav button.nav-active {
+  color: #f0f7ed;
+  background: #304734;
+  border-color: #91ad85;
+}
+.app[data-theme="dark"] header .nav-count {
+  background: #39483b;
+  color: #f0f7ed;
+}
+.app[data-theme="dark"] header .theme-toggle {
+  background: #253229;
+  border-color: #53654f;
+  color: #e2ebdf;
+}
+
+
+/* Ensure the floating hero caption remains readable in dark mode */
+.app[data-theme="dark"] .hero-image .float {
+  background: #222e26;
+  color: #f0f5ed;
+  border: 1px solid #405043;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+}
+.app[data-theme="dark"] .hero-image .float b {
+  color: #f0f5ed;
+}
+.app[data-theme="dark"] .hero-image .float small {
+  color: #c1cdbd;
+}

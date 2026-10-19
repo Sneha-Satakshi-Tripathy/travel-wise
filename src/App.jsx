@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, Compass, Heart, MapPin, Plus, Sparkles, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, Compass, Heart, MapPin, Moon, Plus, Share2, Sparkles, Sun, Users } from "lucide-react";
 import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 
@@ -14,7 +14,7 @@ const starterPlaces = {
   Vietnam: { countries: [], places: ["hanoi", "hoi-an", "ho-chi-minh-city"], activities: ["hanoi-old-quarter", "hanoi-food", "hoi-an-old-town", "hoi-an-cooking", "hcmc-history", "hcmc-food"] },
   Europe: { countries: ["France", "Italy"], places: ["paris", "rome", "florence"], activities: ["paris-landmarks", "paris-cafe", "rome-ancient", "rome-food", "florence-art", "florence-food"] }
 };
-const defaults = { destination: "Sri Lanka", days: 5, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces["Sri Lanka"].countries, places: starterPlaces["Sri Lanka"].places, activities: starterPlaces["Sri Lanka"].activities, title: "A little Sri Lankan magic" };
+const defaults = { destination: "Japan", days: 7, travelers: 2, month: "Flexible dates", flexibleDates: true, startDate: "", endDate: "", budget: 200, currency: "USD", countries: starterPlaces.Japan.countries, places: starterPlaces.Japan.places, activities: starterPlaces.Japan.activities, title: "A little Japan adventure" };
 // Broad historical seasonal guidance only; never a live forecast or guarantee.
 const climateTips = {
   "Sri Lanka": { season: "December–April for the west and south coasts; January–April for the central highlands", temperature: "24–32°C on the coasts; around 12–22°C in the highlands", note: "Monsoons vary by coast and elevation, so choose the season for your selected region." },
@@ -56,6 +56,75 @@ const ensureCitiesForDuration = (trip, days) => {
   return { ...trip, days, places, activities: [...new Set(selectedActivities)] };
 };
 
+const defaultProfile = () => ({
+  name: "",
+  styles: ["Culture & history", "Slow living"],
+  travellingWith: ["Couple / partner"],
+  ageGroup: "30–44",
+  pace: "Balanced",
+  walking: "Some walking is fine"
+});
+const getQueryParams = () => typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
+const readSharedPayload = () => {
+  try {
+    const encoded = getQueryParams().get("share");
+    if (!encoded || typeof window === "undefined") return null;
+    const payload = JSON.parse(decodeURIComponent(escape(window.atob(encoded))));
+    if (!payload?.trip || !scopeOptions.includes(payload.trip.destination)) return null;
+    return payload;
+  } catch { return null; }
+};
+const getInitialTrip = () => {
+  const shared = readSharedPayload();
+  if (shared?.trip) {
+    return {
+      ...defaults,
+      ...shared.trip,
+      countries: Array.isArray(shared.trip.countries) ? shared.trip.countries : [],
+      places: Array.isArray(shared.trip.places) ? shared.trip.places.filter(id => destinations.some(d => d.id === id)) : [...defaults.places],
+      activities: Array.isArray(shared.trip.activities) ? shared.trip.activities.filter(id => activities.some(a => a.id === id)) : [...defaults.activities]
+    };
+  }
+  try {
+    const stored = JSON.parse(localStorage.getItem(KEY))?.trip || {};
+    const query = getQueryParams();
+    const destination = query.get("destination");
+    if (!scopeOptions.includes(destination)) return { ...defaults, ...stored, flexibleDates: stored.flexibleDates ?? stored.month === "Flexible dates", startDate: stored.startDate || "", endDate: stored.endDate || "" };
+    const starter = starterPlaces[destination] || starterPlaces.Japan;
+    const names = { "Sri Lanka": "A little Sri Lankan magic", India: "An India escape", Thailand: "A Thailand adventure", Japan: "A little Japan adventure", Vietnam: "A Vietnam escape", Europe: "A little European grand tour" };
+    const requestedDays = Number(query.get("days"));
+    const days = Number.isFinite(requestedDays) && requestedDays >= 2 && requestedDays <= 21 ? requestedDays : 7;
+    return ensureCitiesForDuration({
+      ...defaults,
+      destination,
+      days,
+      countries: [...starter.countries],
+      places: [...starter.places],
+      activities: [...starter.activities],
+      title: names[destination],
+      flexibleDates: true,
+      month: "Flexible dates",
+      startDate: "",
+      endDate: ""
+    }, days);
+  } catch { return defaults; }
+};
+const getInitialProfile = () => {
+  const base = defaultProfile();
+  const shared = readSharedPayload();
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem(KEY))?.profile || {}; } catch {}
+  const profile = { ...base, ...(shared?.profile || stored) };
+  const query = getQueryParams();
+  if (query.get("travellingWith")) profile.travellingWith = [query.get("travellingWith")];
+  if (query.get("ageGroup")) profile.ageGroup = query.get("ageGroup");
+  if (query.get("pace")) profile.pace = query.get("pace");
+  if (query.get("walking")) profile.walking = query.get("walking");
+  if (!Array.isArray(profile.travellingWith)) profile.travellingWith = [profile.travellingWith || "Couple / partner"];
+  if (!Array.isArray(profile.styles)) profile.styles = base.styles;
+  return profile;
+};
+
 function DateRangePicker({ startDate, endDate, onChange, flexible, onFlexibleChange, legacyLabel }) {
   const [open, setOpen] = useState(false);
   const [viewMonth, setViewMonth] = useState(() => { const value = startDate || new Date().toISOString().slice(0, 10); const parsed = new Date(value + "T12:00:00"); return new Date(parsed.getFullYear(), parsed.getMonth(), 1); });
@@ -76,33 +145,34 @@ function DateRangePicker({ startDate, endDate, onChange, flexible, onFlexibleCha
   </div>;
 }
 export default function App() {
-  const [trip, setTrip] = useState(() => {
-    try { const stored = JSON.parse(localStorage.getItem(KEY))?.trip || {}; return { ...defaults, ...stored, flexibleDates: stored.flexibleDates ?? stored.month === "Flexible dates", startDate: stored.startDate || "", endDate: stored.endDate || "" }; }
-    catch { return defaults; }
-  });
-  const [profile, setProfile] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(KEY))?.profile || { name: "", styles: ["Culture & history", "Slow living"] }; }
-    catch { return { name: "", styles: ["Culture & history", "Slow living"] }; }
-  });
+  const [trip, setTrip] = useState(getInitialTrip);
+  const [profile, setProfile] = useState(getInitialProfile);
   const [savedTrips, setSavedTrips] = useState(() => {
     try { return JSON.parse(localStorage.getItem(SAVED_TRIPS_KEY)) || []; }
     catch { return []; }
   });
-  const [currentTripId, setCurrentTripId] = useState(() => {
+  const [currentTripId, setCurrentTripId] = useState(() => (readSharedPayload() || getQueryParams().has("destination")) ? null : (() => {
     try { return JSON.parse(localStorage.getItem(KEY))?.currentTripId || null; }
     catch { return null; }
-  });
-  const [page, setPage] = useState("home");
-  const [step, setStep] = useState(0);
+  })());
+  const [page, setPage] = useState(() => readSharedPayload() ? "trip" : getQueryParams().has("destination") ? "profile" : "home");
+  const [step, setStep] = useState(() => getQueryParams().has("destination") ? 1 : 0);
   const [expanded, setExpanded] = useState(0);
   const [activeDay, setActiveDay] = useState(0);
   const [addingForDay, setAddingForDay] = useState(-1);
   const [swappingActivityId, setSwappingActivityId] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const [toast, setToast] = useState("");
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("roamwise-theme") === "dark" ? "dark" : "light"; }
+    catch { return "light"; }
+  });
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify({ trip, profile, currentTripId })); }, [trip, profile, currentTripId]);
   useEffect(() => { localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips)); }, [savedTrips]);
+  useEffect(() => {
+    try { localStorage.setItem("roamwise-theme", theme); } catch {}
+  }, [theme]);
   // Every page transition starts at the top; don’t preserve a previous page’s scroll offset.
   useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); }, [page]);
 
@@ -110,6 +180,30 @@ export default function App() {
   const selected = activities.filter(a => trip.activities.includes(a.id) && trip.places.includes(a.place));
   const total = (selected.reduce((s, a) => s + a.cost, 0) + chosen.reduce((s, d) => s + d.cost, 0) + trip.days * 45) * trip.travelers;
   const notify = message => { setToast(message); window.setTimeout(() => setToast(""), 2300); };
+  const shareCurrentTrip = async () => {
+    const payload = { trip, profile: { ...profile, name: "" } };
+    const encoded = window.btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.hash = "";
+    url.searchParams.set("share", encoded);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: trip.title || `My ${trip.destination} trip`, text: "Take a look at this Roamwise itinerary.", url: url.toString() });
+        notify("Share sheet opened.");
+      } else {
+        await navigator.clipboard.writeText(url.toString());
+        notify("Share link copied.");
+      }
+    } catch {
+      try {
+        await navigator.clipboard.writeText(url.toString());
+        notify("Share link copied.");
+      } catch {
+        window.prompt("Copy your Roamwise trip link", url.toString());
+      }
+    }
+  };
   const saveCurrentTrip = () => {
     const id = currentTripId || `trip-${Date.now()}`;
     const saved = { id, title: trip.title || `Your ${trip.destination} escape`, trip: JSON.parse(JSON.stringify(trip)), profile: JSON.parse(JSON.stringify(profile)), savedAt: new Date().toISOString() };
@@ -122,7 +216,7 @@ export default function App() {
   };
   const openSavedTrip = saved => {
     setTrip({ ...defaults, ...saved.trip });
-    setProfile(saved.profile || { name: "", styles: ["Culture & history", "Slow living"] });
+    setProfile({ ...defaultProfile(), ...(saved.profile || {}) });
     setCurrentTripId(saved.id);
     setPage("trip");
     setExpanded(0);
@@ -131,7 +225,7 @@ export default function App() {
   };
   const startNewTrip = () => {
     setTrip({ ...defaults, countries: [...defaults.countries], places: [...defaults.places], activities: [...defaults.activities] });
-    setProfile({ name: "", styles: ["Culture & history", "Slow living"] });
+    setProfile(defaultProfile());
     setCurrentTripId(null);
     setPage("profile");
     setStep(0);
@@ -145,7 +239,7 @@ export default function App() {
   };
 
   const changeScope = scope => {
-    const starter = starterPlaces[scope] || starterPlaces["Sri Lanka"];
+    const starter = starterPlaces[scope] || starterPlaces.Japan;
     const names = { "Sri Lanka": "A little Sri Lankan magic", India: "An India escape", Thailand: "A Thailand adventure", Japan: "A little Japan adventure", Vietnam: "A Vietnam escape", Europe: "A little European grand tour" };
     const recommendedDays = starter.places.reduce((sum, id) => sum + Math.max(1, destinations.find(d => d.id === id)?.days || 1), 0);
     setTrip(t => ({ ...t, destination: scope, days: recommendedDays, countries: [...starter.countries], places: [...starter.places], activities: [...starter.activities], title: names[scope], startDate: "", endDate: "", flexibleDates: true, month: "Flexible dates" }));
@@ -211,9 +305,16 @@ export default function App() {
       // Start with the user’s chosen activities, then use the destination catalogue to fill
       // longer stays. This prevents selected starter activities from leaving later days empty.
       const selectedIds = new Set(trip.activities);
+      const effortRank = activity => {
+        const effort = String(activity.effort || "Medium").toLowerCase();
+        const rank = effort === "low" ? 0 : effort === "high" ? 2 : 1;
+        const paceRank = profile.pace === "Packed" ? 2 - rank : profile.pace === "Balanced" ? Math.abs(rank - 1) : rank;
+        const mobilityPenalty = profile.walking === "Minimal walking" && rank === 2 ? 4 : 0;
+        return paceRank + mobilityPenalty - (selectedIds.has(activity.id) ? 1 : 0);
+      };
       const placeActivities = activities
         .filter(activity => activity.place === place.id)
-        .sort((a, b) => Number(selectedIds.has(b.id)) - Number(selectedIds.has(a.id)));
+        .sort((a, b) => effortRank(a) - effortRank(b));
       for (let day = 0; day < counts[index]; day += 1) {
         // Proportional boundaries distribute remainder activities across days instead of
         // creating a blank final day due to ceil-based chunk sizes.
@@ -229,12 +330,13 @@ export default function App() {
       }
     });
     return plan;
-  }, [trip.days, trip.places, selected]);
+  }, [trip.days, trip.places, selected, profile.pace, profile.walking, profile.ageGroup, profile.travellingWith]);
 
-  return <div className="app">
+  return <div className="app" data-theme={theme}>
     <header>
-      <button className="brand" onClick={() => setPage("home")}><span><Compass size={21} /></span>Travel wise<span className="dot">.</span></button>
+      <button className="brand" onClick={() => setPage("home")}><span><Compass size={21} /></span>Roamwise<span className="dot">.</span></button>
       <nav aria-label="Main navigation"><button className={page === "home" ? "nav-active" : ""} aria-current={page === "home" ? "page" : undefined} onClick={() => setPage("home")}>Explore</button><button className={page === "discover" ? "nav-active" : ""} aria-current={page === "discover" ? "page" : undefined} onClick={() => setPage("discover")}>Destinations</button><button className={page === "trips" ? "nav-active" : ""} aria-current={page === "trips" ? "page" : undefined} onClick={() => setPage("trips")}>Your trips <span className="nav-count">{savedTrips.length}</span></button></nav>
+      <button className="theme-toggle" type="button" onClick={() => setTheme(current => current === "dark" ? "light" : "dark")} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"} aria-pressed={theme === "dark"} title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}<span>{theme === "dark" ? "Light mode" : "Dark mode"}</span></button>
     </header>
 
     {page === "home" && <main>
@@ -242,10 +344,15 @@ export default function App() {
       <section className="inspiration"><div className="section-head"><div><small className="eyebrow">A LITTLE INSPIRATION</small><h2>Where could you <em>wander?</em></h2></div><button className="link" onClick={() => setPage("discover")}>Find my kind of place →</button></div><div className="inspiration-grid">
         {[{ name: "India", meta: "Heritage · food · coast", img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=85" }, { name: "Thailand", meta: "Street food · temples · beaches", img: "https://images.unsplash.com/photo-1613672803979-a6edfc5a179b?auto=format&fit=crop&w=900&q=85" }, { name: "Europe", meta: "Multiple countries · iconic cities", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=900&q=85" }].map(x => <button className="inspiration-card" key={x.name} onClick={() => { changeScope(x.name); setPage("discover"); }}><img src={x.img} alt={x.name} /><span><b>{x.name}</b><small>{x.meta}</small></span></button>)}
       </div></section>
+      <section className="guide-discovery"><div className="section-head"><div><small className="eyebrow">TRIP IDEAS THAT FIT REAL PEOPLE</small><h2>Start with a little <em>inspiration.</em></h2><p>Practical guides for choosing a pace, a route and the right kind of trip.</p></div></div><div className="guide-grid">
+        <a className="guide-card" href="guides/8-day-japan-itinerary-for-couples.html"><span>JAPAN · 8 DAYS</span><b>Japan at your own pace</b><small>City highlights with room to breathe.</small><i>Explore the guide →</i></a>
+        <a className="guide-card" href="guides/thailand-itinerary-for-parents.html"><span>THAILAND · FAMILY</span><b>Thailand with parents</b><small>Comfortable transfers and less rushed days.</small><i>Explore the guide →</i></a>
+        <a className="guide-card" href="guides/international-trips-with-older-parents.html"><span>TRAVEL SMARTER</span><b>International trips with older parents</b><small>Plan around the people, not assumptions about age.</small><i>Explore the guide →</i></a>
+      </div></section>
       <section className="steps">{["Tell us your vibe", "Pick your places", "Make it yours"].map((s, i) => <div key={s}><b>0{i + 1}</b><strong>{s}</strong><small>{["Not just where. How you like to travel.", "Pick cities in one country or across Europe.", "A flexible itinerary that feels right."][i]}</small></div>)}</section>
     </main>}
 
-    {page === "profile" && <main className="form-page"><button className="link" onClick={() => setPage("home")}>← Back to explore</button><div className="form-card"><small className="eyebrow">YOUR TRAVEL DNA · STEP {step + 1} OF 2</small>{step === 0 ? <><h1>What makes a trip<br /><em>feel like you?</em></h1><p>Choose up to three things you love. There are no wrong answers.</p><div className="styles">{styles.map(s => <button key={s} className={profile.styles.includes(s) ? "style selected" : "style"} onClick={() => setProfile(p => ({ ...p, styles: p.styles.includes(s) ? p.styles.filter(x => x !== s) : p.styles.length < 3 ? [...p.styles, s] : p.styles }))}><Check size={15} />{s}</button>)}</div><label>Your name (optional)<input value={profile.name} onChange={e => setProfile(p => ({ ...p, name: e.target.value }))} placeholder="What should we call you?" /></label><button className="primary full" onClick={() => setStep(1)}>Next: trip details →</button></> : <><h1>Let's shape your<br /><em>little escape.</em></h1><div className="fields"><label>Trip destination<select value={trip.destination} onChange={e => changeScope(e.target.value)}>{scopeOptions.map(x => <option key={x}>{x}</option>)}</select></label><label>Trip length<select value={trip.days} onChange={e => setTrip(t => ensureCitiesForDuration(t, +e.target.value))}>{[2, 3, 4, 5, 6, 7, 8, 10, 14, 21].map(n => <option key={n}>{n}</option>)}</select><small className="field-hint">Suggested: {Math.max(1, chosen.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0))} days for {trip.places.length} {trip.places.length === 1 ? "city" : "cities"} · change it anytime.</small></label><label>Travellers<input type="number" min="1" max="12" value={trip.travelers} onChange={e => setTrip(t => ({ ...t, travelers: Math.max(1, +e.target.value || 1) }))} /></label><div className="date-field"><span>When?</span><DateRangePicker startDate={trip.startDate || ""} endDate={trip.endDate || ""} flexible={!!trip.flexibleDates} legacyLabel={trip.month} onFlexibleChange={value => setTrip(t => ({ ...t, flexibleDates: value, month: value ? "Flexible dates" : (t.month === "Flexible dates" ? "" : t.month) }))} onChange={(startDate, endDate) => setTrip(t => { const days = startDate && endDate ? Math.max(1, Math.round((new Date(endDate + "T12:00:00") - new Date(startDate + "T12:00:00")) / 86400000) + 1) : t.days; return { ...ensureCitiesForDuration(t, days), startDate, endDate, flexibleDates: false, month: startDate && endDate ? dateLabel(startDate) + " – " + dateLabel(endDate) : "Choose dates" }; })} /></div><label>Budget per person (approximate)<input type="number" value={trip.budget} onChange={e => setTrip(t => ({ ...t, budget: Math.max(100, +e.target.value || 100) }))} /></label><label>Currency<select value={trip.currency} onChange={e => setTrip(t => ({ ...t, budget: Math.round(convertBudget(t.budget, t.currency, e.target.value)), currency: e.target.value }))}>{["USD", "INR", "EUR", "GBP", "LKR", "THB", "JPY", "VND"].map(x => <option key={x}>{x}</option>)}</select></label></div><div className="form-actions"><button className="link" onClick={() => setStep(0)}>← Back</button><button className="primary" onClick={() => setPage("discover")}>Find my places →</button></div></>}</div></main>}
+    {page === "profile" && <main className="form-page"><button className="link" onClick={() => setPage("home")}>← Back to explore</button><div className="form-card"><small className="eyebrow">YOUR TRAVEL DNA · STEP {step + 1} OF 2</small>{step === 0 ? <><h1>What makes a trip<br /><em>feel like you?</em></h1><p>Choose up to three things you love. There are no wrong answers.</p><div className="styles">{styles.map(s => <button key={s} className={profile.styles.includes(s) ? "style selected" : "style"} onClick={() => setProfile(p => ({ ...p, styles: p.styles.includes(s) ? p.styles.filter(x => x !== s) : p.styles.length < 3 ? [...p.styles, s] : p.styles }))}><Check size={15} />{s}</button>)}</div><section className="traveller-profile"><div className="profile-section-head"><b>Who’s coming?</b><small>Choose the group, then tune the plan to your real preferences.</small></div><div className="traveller-chips">{["Solo", "Couple / partner", "Friends", "Children", "Parents / older adults", "Mixed-age family"].map(option => <button type="button" key={option} className={(profile.travellingWith || []).includes(option) ? "traveller-chip selected" : "traveller-chip"} aria-pressed={(profile.travellingWith || []).includes(option)} onClick={() => setProfile(p => { const current = p.travellingWith || []; const next = current.includes(option) ? current.filter(item => item !== option) : [...current, option]; return { ...p, travellingWith: next.length ? next : [option] }; })}>{option}</button>)}</div><div className="traveller-fields"><label>Age range of the group<select value={profile.ageGroup || "30–44"} onChange={e => setProfile(p => ({ ...p, ageGroup: e.target.value }))}>{["Under 18", "18–29", "30–44", "45–54", "55–69", "70+", "Mixed ages"].map(option => <option key={option}>{option}</option>)}</select></label><label>Preferred pace<select value={profile.pace || "Balanced"} onChange={e => setProfile(p => ({ ...p, pace: e.target.value }))}>{["Relaxed", "Balanced", "Packed"].map(option => <option key={option}>{option}</option>)}</select></label><label>Walking preference<select value={profile.walking || "Some walking is fine"} onChange={e => setProfile(p => ({ ...p, walking: e.target.value }))}>{["Minimal walking", "Some walking is fine", "Active days are fine"].map(option => <option key={option}>{option}</option>)}</select></label></div><p className="profile-explainer">Age never decides your trip for you. Pace and walking preferences help Roamwise rank activity suggestions while keeping the itinerary editable.</p></section><label>Your name (optional)<input value={profile.name} onChange={e => setProfile(p => ({ ...p, name: e.target.value }))} placeholder="What should we call you?" /></label><button className="primary full" onClick={() => setStep(1)}>Next: trip details →</button></> : <><h1>Let's shape your<br /><em>little escape.</em></h1><div className="fields"><label>Trip destination<select value={trip.destination} onChange={e => changeScope(e.target.value)}>{scopeOptions.map(x => <option key={x}>{x}</option>)}</select></label><label>Trip length<select value={trip.days} onChange={e => setTrip(t => ensureCitiesForDuration(t, +e.target.value))}>{[2, 3, 4, 5, 6, 7, 8, 10, 14, 21].map(n => <option key={n}>{n}</option>)}</select><small className="field-hint">Suggested: {Math.max(1, chosen.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0))} days for {trip.places.length} {trip.places.length === 1 ? "city" : "cities"} · change it anytime.</small></label><label>Travellers<input type="number" min="1" max="12" value={trip.travelers} onChange={e => setTrip(t => ({ ...t, travelers: Math.max(1, +e.target.value || 1) }))} /></label><div className="date-field"><span>When?</span><DateRangePicker startDate={trip.startDate || ""} endDate={trip.endDate || ""} flexible={!!trip.flexibleDates} legacyLabel={trip.month} onFlexibleChange={value => setTrip(t => ({ ...t, flexibleDates: value, month: value ? "Flexible dates" : (t.month === "Flexible dates" ? "" : t.month) }))} onChange={(startDate, endDate) => setTrip(t => { const days = startDate && endDate ? Math.max(1, Math.round((new Date(endDate + "T12:00:00") - new Date(startDate + "T12:00:00")) / 86400000) + 1) : t.days; return { ...ensureCitiesForDuration(t, days), startDate, endDate, flexibleDates: false, month: startDate && endDate ? dateLabel(startDate) + " – " + dateLabel(endDate) : "Choose dates" }; })} /></div><label>Budget per person (approximate)<input type="number" value={trip.budget} onChange={e => setTrip(t => ({ ...t, budget: Math.max(100, +e.target.value || 100) }))} /></label><label>Currency<select value={trip.currency} onChange={e => setTrip(t => ({ ...t, budget: Math.round(convertBudget(t.budget, t.currency, e.target.value)), currency: e.target.value }))}>{["USD", "INR", "EUR", "GBP", "LKR", "THB", "JPY", "VND"].map(x => <option key={x}>{x}</option>)}</select></label></div><div className="form-actions"><button className="link" onClick={() => setStep(0)}>← Back</button><button className="primary" onClick={() => setPage("discover")}>Find my places →</button></div></>}</div></main>}
 
     {page === "discover" && <main className="discover"><div className="section-head"><div><small className="eyebrow">A SHORTLIST WITH SOUL</small><h1>Places that fit <em>your kind of trip.</em></h1><p>Pick a trip destination first, then add the cities you want to explore. Prices are rough USD-based planning estimates, not live quotes. Currency conversion uses approximate reference rates, not live FX. Attraction fees, meals, transport and season can change the actual total.</p></div><b className="count">{trip.places.length} cities picked</b></div>
       <div className="scope-switch" aria-label="Trip destination">{scopeOptions.map(scope => <button key={scope} className={trip.destination === scope ? "scope-chip active" : "scope-chip"} onClick={() => changeScope(scope)}>{scope}</button>)}</div>
@@ -263,9 +370,9 @@ export default function App() {
         <div className="trip-heading">
           <small className="eyebrow">YOUR ITINERARY</small>
           <h1>{trip.title || `Your ${trip.destination} escape`}</h1>
-          <p><MapPin size={13} /> {trip.destination}{trip.destination === "Europe" && trip.countries.length ? ` · ${trip.countries.join(" + ")}` : ""} <span>·</span> <CalendarDays size={13} /> {trip.days} days <span>·</span> <Users size={13} /> {trip.travelers} travellers <span>·</span> {tripWhen(trip)}</p>{profile.name.trim() && <p className="personal-note">Made for {profile.name.trim()}, around your kind of travel.</p>}
+          <p><MapPin size={13} /> {trip.destination}{trip.destination === "Europe" && trip.countries.length ? ` · ${trip.countries.join(" + ")}` : ""} <span>·</span> <CalendarDays size={13} /> {trip.days} days <span>·</span> <Users size={13} /> {trip.travelers} travellers <span>·</span> {tripWhen(trip)}</p><p className="traveller-summary"><Users size={13} /> {(profile.travellingWith || []).join(" + ") || "Travellers"} · {profile.ageGroup || "Age flexible"} · {profile.pace || "Balanced"} pace · {profile.walking || "Some walking is fine"}</p>{profile.name.trim() && <p className="personal-note">Made for {profile.name.trim()}, around your kind of travel.</p>}
         </div>
-        <div className="trip-top-actions"><button className="secondary" onClick={() => { setPage("profile"); setStep(1); }}>Edit trip</button><button className="primary" onClick={saveCurrentTrip}><Check size={15} /> {currentTripId ? "Update saved trip" : "Save trip"}</button></div>
+        <div className="trip-top-actions"><button className="secondary" onClick={() => { setPage("profile"); setStep(0); }}>Edit traveller profile</button><button className="secondary" onClick={() => setProfile(p => ({ ...p, pace: "Relaxed", walking: "Minimal walking" }))}>Prefer gentler days</button><button className="secondary" onClick={shareCurrentTrip}><Share2 size={15} /> Share trip</button><button className="primary" onClick={saveCurrentTrip}><Check size={15} /> {currentTripId ? "Update saved trip" : "Save trip"}</button></div>
       </div>
       {trip.flexibleDates && <section className="climate-card"><div className="climate-icon"><Sparkles size={18} /></div><div><small className="eyebrow">A GOOD TIME TO GO</small><h2>Best time to visit {trip.destination}</h2><p><b>{climateTips[trip.destination]?.season}</b></p><p className="climate-temperature">Typical temperatures: {climateTips[trip.destination]?.temperature}</p><p>{climateTips[trip.destination]?.note} These are broad seasonal guides, not a live forecast. Check official weather and local advisories close to departure.</p></div></section>}
       <section className="map-disclosure">
@@ -314,6 +421,6 @@ export default function App() {
       </div>
       <div className="save-banner"><div><small className="eyebrow">YOUR TRIP, READY WHEN YOU ARE</small><h2>Keep the plan. Keep the <em>possibility.</em></h2><p>{currentTripId ? "This trip is saved in Your trips. Update it whenever plans change." : "This is a draft until you choose to save it."}</p></div><div className="save-actions"><button className="secondary" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button><button className="primary" onClick={saveCurrentTrip}>{currentTripId ? "Update saved trip" : "Save this trip"} <Check size={15} /></button></div></div>
     </main>}
-    <footer><span><Compass size={15} /> Travel wise<span className="dot">.</span></span><small>Made for the way you wander.</small></footer>{toast && <div className="toast">{toast}</div>}
+    <footer><span><Compass size={15} /> Roamwise<span className="dot">.</span></span><small>Made for the way you wander.</small></footer>{toast && <div className="toast">{toast}</div>}
   </div>;
 }
