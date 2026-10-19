@@ -478,3 +478,38 @@ footer{background:#f3f2eb}
 .journey-photo-fallback{position:relative;background:linear-gradient(145deg,#dfe8d9,#f0e9dc)!important}
 .journey-photo-fallback::after{content:"Photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:5px;color:#53674e;font-size:9px;font-weight:600;text-align:center}
 @media(max-width:720px){.journey-road{top:25px}.journey-stop-top .journey-pin,.journey-stop-bottom .journey-pin{top:100px}.journey-stop-copy b{font-size:11px;line-height:1.35}}
+
+
+/* Traveller-aware planning and organic discovery */
+.traveller-profile{margin:28px 0;padding:22px;border:1px solid #e5e8de;border-radius:12px;background:#f8f8f2}
+.profile-section-head{display:grid;gap:6px;margin-bottom:14px}
+.profile-section-head b{font:22px "Playfair Display",serif;color:#2d4935}
+.profile-section-head small,.profile-explainer{font-size:11px;line-height:1.7;color:#7a8276}
+.traveller-chips{display:flex;flex-wrap:wrap;gap:8px}
+.traveller-chip{border:1px solid #dfe3d8;background:#fffdf8;color:#596657;border-radius:999px;padding:10px 13px;font-size:11px}
+.traveller-chip.selected{border-color:#809876;background:#eaf0e5;color:#294b37;box-shadow:inset 0 0 0 1px #809876}
+.traveller-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.traveller-fields label{display:grid;gap:8px;font-size:11px;color:#5e695d}
+.traveller-fields select{width:100%;min-width:0;padding:11px 9px;border:1px solid #e3e4da;border-radius:8px;background:#fffdf8;color:#28352b;outline-color:#82977b;font-size:11px}
+.profile-explainer{margin:15px 0 0}
+.guide-discovery{padding:28px 0 48px;border-top:1px solid #e5e2d9}
+.guide-discovery .section-head{margin-bottom:16px}
+.guide-discovery .section-head h2{font:500 34px "Playfair Display",serif;margin:9px 0}
+.guide-discovery .section-head p{font-size:12px;line-height:1.7;color:#7a8276;margin:0}
+.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.guide-card{display:flex;flex-direction:column;gap:10px;min-height:170px;padding:20px;text-decoration:none;background:#fffdf8;border:1px solid #e5e5dc;border-radius:12px;color:#2d4935;transition:transform .2s,border-color .2s}
+.guide-card:hover{transform:translateY(-2px);border-color:#9cac91}
+.guide-card span{font-size:9px;letter-spacing:1.2px;font-weight:700;color:#8a927e}
+.guide-card b{font:22px/1.2 "Playfair Display",serif}
+.guide-card small{font-size:11px;line-height:1.6;color:#798176}
+.guide-card i{margin-top:auto;font-size:11px;font-style:normal;font-weight:700}
+.traveller-summary{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11px!important;color:#71806d!important}
+.trip-top-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.trip-top-actions .primary,.trip-top-actions .secondary{padding:11px 13px}
+@media(max-width:760px){
+  .traveller-fields{grid-template-columns:1fr}
+  .guide-grid{grid-template-columns:1fr}
+  .guide-card{min-height:135px}
+  .trip-top-actions{justify-content:flex-start}
+  .traveller-profile{padding:16px}
+}
