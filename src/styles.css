@@ -513,3 +513,34 @@ footer{background:#f3f2eb}
   .trip-top-actions{justify-content:flex-start}
   .traveller-profile{padding:16px}
 }
+
+
+/* User-selectable dark theme */
+.app[data-theme="dark"]{background:#151b18;color:#e8eee7;color-scheme:dark}
+.app[data-theme="dark"] header{border-color:#303a33}
+.app[data-theme="dark"] .brand,.app[data-theme="dark"] h1,.app[data-theme="dark"] h2,.app[data-theme="dark"] h3,.app[data-theme="dark"] h4{color:#e8eee7}
+.app[data-theme="dark"] .brand .dot,.app[data-theme="dark"] h1 em,.app[data-theme="dark"] h2 em{color:#a8c69b}
+.app[data-theme="dark"] nav button{color:#c0c9bf}
+.app[data-theme="dark"] nav button.nav-active{color:#d5e9cb;border-color:#a8c69b}
+.app[data-theme="dark"] .eyebrow,.app[data-theme="dark"] .proof,.app[data-theme="dark"] .section-head p,.app[data-theme="dark"] .profile-section-head small,.app[data-theme="dark"] .profile-explainer,.app[data-theme="dark"] .guide-card small,.app[data-theme="dark"] .fine{color:#a2afa1}
+.app[data-theme="dark"] p,.app[data-theme="dark"] li,.app[data-theme="dark"] label,.app[data-theme="dark"] small{color:inherit}
+.app[data-theme="dark"] .hero-image:after{background:linear-gradient(0deg,rgba(21,27,24,.65),transparent 65%)}
+.app[data-theme="dark"] .inspiration-card,.app[data-theme="dark"] .guide-card,.app[data-theme="dark"] .traveller-profile,.app[data-theme="dark"] .destination-card,.app[data-theme="dark"] .trip-card,.app[data-theme="dark"] .itinerary-summary-card,.app[data-theme="dark"] .save-banner,.app[data-theme="dark"] .day-card,.app[data-theme="dark"] .activity,.app[data-theme="dark"] .activity-picker,.app[data-theme="dark"] .sidebar-note,.app[data-theme="dark"] .sidebar-budget,.app[data-theme="dark"] .trip-form,.app[data-theme="dark"] .profile-card,.app[data-theme="dark"] .country-option,.app[data-theme="dark"] .place-card,.app[data-theme="dark"] .map-panel,.app[data-theme="dark"] .empty-state,.app[data-theme="dark"] .guide-card{background:#1e2721;border-color:#37453a;color:#e4ebe2}
+.app[data-theme="dark"] .traveller-profile,.app[data-theme="dark"] .profile-card{background:#1b241e}
+.app[data-theme="dark"] .traveller-chip,.app[data-theme="dark"] input,.app[data-theme="dark"] select,.app[data-theme="dark"] textarea,.app[data-theme="dark"] .secondary,.app[data-theme="dark"] .link,.app[data-theme="dark"] .swap-option,.app[data-theme="dark"] .inline-action{background:#222e26;border-color:#405043;color:#e1e9df}
+.app[data-theme="dark"] .traveller-chip.selected{background:#304734;border-color:#9ab98b;color:#eff8eb}
+.app[data-theme="dark"] .primary{background:#a8c69b;border-color:#a8c69b;color:#1b2b1e}
+.app[data-theme="dark"] .primary:hover{background:#bad6ae}
+.app[data-theme="dark"] .secondary:hover,.app[data-theme="dark"] .link:hover,.app[data-theme="dark"] .traveller-chip:hover{border-color:#91ad85}
+.app[data-theme="dark"] .section-head,.app[data-theme="dark"] .guide-discovery,.app[data-theme="dark"] .steps,.app[data-theme="dark"] .inspiration{border-color:#303a33}
+.app[data-theme="dark"] .activity-copy p,.app[data-theme="dark"] .activity-copy small,.app[data-theme="dark"] .activity-time,.app[data-theme="dark"] .sidebar-budget small,.app[data-theme="dark"] .day-count,.app[data-theme="dark"] .personal-note,.app[data-theme="dark"] .traveller-summary{color:#b1beb0!important}
+.app[data-theme="dark"] .budget-meter{background:#354238}
+.app[data-theme="dark"] .budget-meter i{background:#a8c69b}
+.app[data-theme="dark"] .map-panel svg,.app[data-theme="dark"] .map-panel img{filter:brightness(.84) saturate(.8)}
+.app[data-theme="dark"] footer{border-color:#303a33;color:#a2afa1}
+.app[data-theme="dark"] .toast{background:#e0ebdc;color:#203624}
+.app[data-theme="dark"] .theme-toggle{background:#253229;border-color:#53654f;color:#e2ebdf}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;border:1px solid #dfe3d8;border-radius:999px;background:#fffdf8;color:#405541;padding:9px 12px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.theme-toggle:hover{border-color:#809876}
+.app header{flex-wrap:wrap}
+@media(max-width:600px){.app header{gap:10px}.app header nav{order:3;width:100%;justify-content:space-between}.theme-toggle{margin-left:auto}.theme-toggle span{display:inline}}
