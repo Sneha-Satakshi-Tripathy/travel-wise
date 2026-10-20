@@ -4,6 +4,7 @@ import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 import { USD_PER_UNIT, money, displayMoney, convertBudget } from "./lib/estimates.js";
 import { activityDurationMinutes as activityMinutes, activityEffortLevel as effortLevel, isSuitableActivitySuggestion } from "./lib/profileRules.js";
+import { allocateDaysAcrossRoute } from "./lib/itineraryRules.js";
 const feedbackFormUrl = import.meta.env.VITE_FEEDBACK_FORM_URL?.trim();
 
 const KEY = "roamwise-v1";
@@ -443,18 +444,7 @@ export default function App() {
     const route = trip.places.map(id => destinations.find(d => d.id === id)).filter(Boolean);
     if (!route.length) return Array.from({ length: trip.days }, (_, i) => ({ n: i + 1, place: null, activities: [] }));
     // Keep each selected city contiguous. Allocate days across the route, weighted by suggested stay length.
-    const assigned = route.slice(0, Math.min(route.length, trip.days));
-    const counts = assigned.map(() => 1);
-    const remaining = trip.days - counts.length;
-    const totalWeight = assigned.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0);
-    const extras = assigned.map((place, index) => {
-      const exact = remaining * Math.max(1, place.days || 1) / totalWeight;
-      const whole = Math.floor(exact);
-      counts[index] += whole;
-      return { index, remainder: exact - whole };
-    });
-    const allocated = counts.reduce((sum, count) => sum + count, 0);
-    extras.sort((a, b) => b.remainder - a.remainder).slice(0, trip.days - allocated).forEach(item => { counts[item.index] += 1; });
+    const { assigned, counts } = allocateDaysAcrossRoute(route, trip.days);
     const plan = [];
     assigned.forEach((place, index) => {
       // Start with the user’s chosen activities, then use the destination catalogue to fill
