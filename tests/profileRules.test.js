@@ -6,6 +6,7 @@ test("parses minutes and hours into consistent durations", () => {
   assert.equal(activityDurationMinutes({ duration: "45 min" }), 45);
   assert.equal(activityDurationMinutes({ duration: "1.5 hr" }), 90);
   assert.equal(activityDurationMinutes({ duration: "2 hours" }), 120);
+  assert.equal(activityDurationMinutes({ duration: "4–6 hr" }), 300);
 });
 
 test("unknown duration safely uses a conservative one-hour estimate", () => {
