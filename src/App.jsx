@@ -44,6 +44,7 @@ function InteractiveRouteMap({ points }) {
       mapInstance = L.map(hostRef.current, { scrollWheelZoom: false }).setView(points[0].coords, 5);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
+        referrerPolicy: "strict-origin-when-cross-origin",
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
       }).addTo(mapInstance);
       const linePoints = points.map(point => point.coords);
