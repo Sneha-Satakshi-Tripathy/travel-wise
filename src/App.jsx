@@ -65,12 +65,26 @@ const defaultProfile = () => ({
   walking: "Some walking is fine"
 });
 const getQueryParams = () => typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
+const getShareToken = () => {
+  if (typeof window === "undefined") return null;
+  // Support older query-string links and newer fragment links (which static hosts won't route away).
+  return getQueryParams().get("share") || new URLSearchParams(window.location.hash.replace(/^#/, "")).get("share");
+};
+const decodeSharePayload = encoded => {
+  // Accept URL-safe and standard Base64, decoding UTF-8 correctly for non-ASCII text.
+  const normalized = encoded.replace(/-/g, "+").replace(/_/g, "/");
+  const binary = window.atob(normalized);
+  const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+};
 const readSharedPayload = () => {
   try {
-    const encoded = getQueryParams().get("share");
-    if (!encoded || typeof window === "undefined") return null;
-    const payload = JSON.parse(decodeURIComponent(escape(window.atob(encoded))));
+    if (typeof window === "undefined") return null;
+    const encoded = getShareToken();
+    if (!encoded) return null;
+    const payload = decodeSharePayload(encoded);
     if (!payload?.trip || !scopeOptions.includes(payload.trip.destination)) return null;
+    if (!Array.isArray(payload.trip.places) || !Array.isArray(payload.trip.activities)) return null;
     return payload;
   } catch { return null; }
 };
@@ -184,9 +198,10 @@ export default function App() {
     const payload = { trip, profile: { ...profile, name: "" } };
     const encoded = window.btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
     const url = new URL(window.location.href);
+    // Use a fragment for new share links so static hosting and link previews don't
+    // interpret the trip payload as a route. Keep query-string parsing for old links.
     url.search = "";
-    url.hash = "";
-    url.searchParams.set("share", encoded);
+    url.hash = new URLSearchParams({ share: encoded }).toString();
     try {
       if (navigator.share) {
         await navigator.share({ title: trip.title || `My ${trip.destination} trip`, text: "Take a look at this Roamwise itinerary.", url: url.toString() });
