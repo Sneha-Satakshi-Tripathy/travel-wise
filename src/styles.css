@@ -802,3 +802,29 @@ footer{background:#f3f2eb}
 .app[data-theme="dark"] .day-tabs button[aria-selected="true"] span {
   color: #f0f7ed;
 }
+
+
+/* Interactive city map with a clear external route action */
+.map-frame-wrap{min-height:0;background:#f0f3ed;display:flex;flex-direction:column}
+.map-route-actions{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:#fffdf8;border-bottom:1px solid #e2e7dd}
+.map-route-actions .map-open-link{position:static;display:inline-flex;align-items:center;justify-content:center;gap:7px;box-shadow:none;background:#294c38;color:#fff;padding:10px 13px;font-size:11px;white-space:normal}
+.map-route-actions>small{font-size:10px;color:#6f7d6b;line-height:1.4;text-align:right}
+.interactive-map-shell{position:relative;min-height:340px;background:#e8eee5}
+.interactive-route-map{height:340px;width:100%;min-height:340px;z-index:1}
+.interactive-map-message,.interactive-map-fallback{padding:20px;text-align:center;color:#52634e;font-size:12px}
+.interactive-map-message{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:500;background:#fffdf8ed;border-radius:8px;padding:9px 12px;box-shadow:0 2px 8px #18291b20;max-width:90%}
+.interactive-map-message.map-error{top:auto;bottom:42px;color:#783d32}
+.map-route-note{margin:0;padding:8px 12px;background:#f8faf6;color:#677562;font-size:10px;line-height:1.45;border-top:1px solid #e0e6dc}
+.roamwise-map-marker-shell{background:transparent;border:0}
+.roamwise-map-marker{display:flex;align-items:center;justify-content:center;width:29px;height:29px;border:2px solid #fff;border-radius:50%;background:#294c38;color:#fff;font-size:12px;font-weight:800;box-shadow:0 2px 8px #14271955}
+.app[data-theme="dark"] .map-route-actions{background:#202b24;border-color:#3b4b3d}
+.app[data-theme="dark"] .map-route-actions>small,.app[data-theme="dark"] .map-route-note{color:#c0ceb9}
+.app[data-theme="dark"] .map-route-note{background:#202b24;border-color:#3b4b3d}
+.app[data-theme="dark"] .interactive-map-shell,.app[data-theme="dark"] .map-frame-wrap{background:#263329}
+.app[data-theme="dark"] .interactive-map-message,.app[data-theme="dark"] .interactive-map-fallback{background:#202b24;color:#dce6da}
+@media(max-width:640px){
+ .interactive-map-shell,.interactive-route-map{min-height:270px;height:270px}
+ .map-route-actions{align-items:stretch;flex-direction:column}
+ .map-route-actions>small{text-align:left}
+}
+@media print{.map-route-actions,.interactive-map-shell{display:none!important}}
