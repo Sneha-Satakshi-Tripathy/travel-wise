@@ -441,15 +441,7 @@ export default function App() {
   const visibleDestinations = destinations.filter(d => trip.destination === "Europe"
     ? d.scope === "Europe" && (!trip.countries.length || trip.countries.includes(d.country))
     : d.scope === trip.destination);
-  const placeCoordinates = {
-    kandy: [7.2906, 80.6337], "nuwara-eliya": [6.9497, 80.7891], galle: [6.0535, 80.221], sigiriya: [7.957, 80.7603], mirissa: [5.9483, 80.4716],
-    jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739], agra: [27.1767, 78.0081], delhi: [28.6139, 77.2090], hampi: [15.3350, 76.4600], mysuru: [12.2958, 76.6394], rishikesh: [30.0869, 78.2676], amritsar: [31.6340, 74.8723],
-    bangkok: [13.7563, 100.5018], "chiang-mai": [18.7883, 98.9853], krabi: [8.0863, 98.9063], phuket: [7.8804, 98.3923], ayutthaya: [14.3532, 100.5689],
-    tokyo: [35.6762, 139.6503], kyoto: [35.0116, 135.7681], osaka: [34.6937, 135.5023], nara: [34.6851, 135.8048], hakone: [35.2324, 139.1069], hiroshima: [34.3853, 132.4553], kanazawa: [36.5613, 136.6562], sapporo: [43.0618, 141.3545],
-    hanoi: [21.0278, 105.8342], "ninh-binh": [20.2506, 105.9745], "ha-long-bay": [20.9101, 107.1839], "da-nang": [16.0544, 108.2022], "hoi-an": [15.8801, 108.338], hue: [16.4637, 107.5909], "da-lat": [11.9404, 108.4583], "phong-nha": [17.5916, 106.283], "ho-chi-minh-city": [10.8231, 106.6297],
-    paris: [48.8566, 2.3522], nice: [43.7102, 7.262], lyon: [45.764, 4.8357], rome: [41.9028, 12.4964], florence: [43.7696, 11.2558], venice: [45.4408, 12.3155],
-    zurich: [47.3769, 8.5417], lucerne: [47.0502, 8.3093], barcelona: [41.3874, 2.1686], madrid: [40.4168, -3.7038], amsterdam: [52.3676, 4.9041]
-  };
+  const placeCoordinates = Object.fromEntries(destinations.filter(d => d.coordinates).map(d => [d.id, [d.coordinates.lat, d.coordinates.lon]]));
   const mapBounds = {
     "Sri Lanka": "79.65,5.75,81.95,9.95", India: "68.0,6.0,97.5,35.5", Thailand: "97.0,5.0,106.0,21.0",
     Japan: "129.0,30.0,146.0,46.0", Vietnam: "102.0,8.0,110.0,24.0", Europe: "-1.0,35.0,19.0,56.0"
