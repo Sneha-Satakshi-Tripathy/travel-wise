@@ -17,6 +17,8 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
+      - name: Run unit tests
+        run: npm test
       - name: Validate destination and activity fixtures
         run: npm run validate:data
       - name: Build production app
