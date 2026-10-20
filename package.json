@@ -10,7 +10,7 @@
     "validate:data": "node scripts/validate-data.mjs",
     "test": "node --test",
     "test:data": "node scripts/validate-data.mjs",
-    "test:all": "npm run test && npm run test:data && npm run build"
+    "test:all": "npm run test && npm run validate:data && npm run build"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
