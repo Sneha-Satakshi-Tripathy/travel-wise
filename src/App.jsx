@@ -1,9 +1,84 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, Compass, Download, Heart, MapPin, Moon, Plus, Printer, Share2, Sparkles, Sun, Users } from "lucide-react";
 import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 
 const KEY = "roamwise-v1";
+
+// Interactive, client-only map. Leaflet is loaded on demand so the planner still
+// renders if the map CDN is unavailable. The connecting line is a visual itinerary
+// guide between cities, not a road route or travel-time estimate.
+function InteractiveRouteMap({ points }) {
+  const hostRef = useRef(null);
+  const mapRef = useRef(null);
+  const [status, setStatus] = useState("loading");
+  useEffect(() => {
+    let cancelled = false;
+    let mapInstance;
+    const loadLeaflet = () => {
+      if (window.L) return Promise.resolve(window.L);
+      if (!window.__roamwiseLeafletPromise) {
+        window.__roamwiseLeafletPromise = new Promise((resolve, reject) => {
+          if (!document.querySelector('link[data-roamwise-leaflet]')) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+            link.dataset.roamwiseLeaflet = "true";
+            document.head.appendChild(link);
+          }
+          const script = document.createElement("script");
+          script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+          script.async = true;
+          script.onload = () => window.L ? resolve(window.L) : reject(new Error("Map library did not load"));
+          script.onerror = () => reject(new Error("Map library could not be reached"));
+          document.head.appendChild(script);
+        });
+      }
+      return window.__roamwiseLeafletPromise;
+    };
+    if (!points.length) { setStatus("empty"); return undefined; }
+    loadLeaflet().then(L => {
+      if (cancelled || !hostRef.current) return;
+      if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
+      mapInstance = L.map(hostRef.current, { scrollWheelZoom: false }).setView(points[0].coords, 5);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
+      }).addTo(mapInstance);
+      const linePoints = points.map(point => point.coords);
+      if (linePoints.length > 1) {
+        L.polyline(linePoints, { color: "#477b52", weight: 3, opacity: 0.85, dashArray: "7 7" }).addTo(mapInstance);
+      }
+      points.forEach((point, index) => {
+        const icon = L.divIcon({
+          className: "roamwise-map-marker-shell",
+          html: '<span class="roamwise-map-marker">' + (index + 1) + '</span>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15]
+        });
+        L.marker(point.coords, { icon }).addTo(mapInstance)
+          .bindPopup('<strong>' + point.name.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char])) + '</strong><br/>' + point.country);
+      });
+      if (linePoints.length > 1) mapInstance.fitBounds(L.latLngBounds(linePoints).pad(0.18), { maxZoom: 7 });
+      else mapInstance.setView(linePoints[0], 11);
+      mapRef.current = mapInstance;
+      setStatus("ready");
+      window.setTimeout(() => mapInstance.invalidateSize(), 80);
+    }).catch(() => { if (!cancelled) setStatus("unavailable"); });
+    return () => {
+      cancelled = true;
+      if (mapInstance) mapInstance.remove();
+      if (mapRef.current === mapInstance) mapRef.current = null;
+    };
+  }, [points.map(point => point.id + ":" + point.coords.join(",")).join("|")]);
+  if (status === "empty") return <div className="interactive-map-fallback">Choose cities to see them on the map.</div>;
+  return <div className="interactive-map-shell">
+    <div ref={hostRef} className="interactive-route-map" role="region" aria-label="Interactive map of selected trip cities" />
+    {status === "loading" && <div className="interactive-map-message">Loading interactive map…</div>}
+    {status === "unavailable" && <div className="interactive-map-message map-error">Map tiles could not load. Check your connection or use the route planner below.</div>}
+    <p className="map-route-note">Dashed line connects your selected cities as a visual guide; it is not a road route or travel-time estimate.</p>
+  </div>;
+}
 const SAVED_TRIPS_KEY = "roamwise-saved-trips-v1";
 const scopeOptions = ["India", "Thailand", "Japan", "Vietnam", "Europe", "Sri Lanka"];
 const starterPlaces = {
@@ -487,8 +562,11 @@ export default function App() {
         </button>
         {showMap && <div className="map-disclosure-content">
           <div className="map-frame-wrap">
-            {(() => { const first = chosen[0]; const coords = placeCoordinates[first?.id] || (trip.destination === "Sri Lanka" ? [7.8,80.7] : trip.destination === "India" ? [20.6,78.9] : trip.destination === "Thailand" ? [15.8,101] : trip.destination === "Japan" ? [36.2,138.2] : trip.destination === "Vietnam" ? [16.0,107.5] : [46.0,10.0]); return <iframe title={"Map of " + trip.destination + " trip locations"} loading="lazy" src={"https://www.openstreetmap.org/export/embed.html?bbox=" + (mapBounds[trip.destination] || mapBounds["Sri Lanka"]) + "&layer=mapnik&marker=" + coords[0] + "," + coords[1]} />; })()}
-            <a className="map-open-link" href={"https://www.google.com/maps/dir/?api=1" + (chosen.length ? "&origin=" + encodeURIComponent(chosen[0].name + ", " + chosen[0].country) : "") + (chosen.length > 1 ? "&destination=" + encodeURIComponent(chosen[chosen.length - 1].name + ", " + chosen[chosen.length - 1].country) : "") + (chosen.length > 2 ? "&waypoints=" + chosen.slice(1, -1).map(p => encodeURIComponent(p.name + ", " + p.country)).join("%7C") : "") + "&travelmode=driving"} target="_blank" rel="noreferrer">Plan this route in Google Maps ↗</a>
+            <div className="map-route-actions">
+              <a className="map-open-link" href={"https://www.google.com/maps/dir/?api=1" + (chosen.length ? "&origin=" + encodeURIComponent(chosen[0].name + ", " + chosen[0].country) : "") + (chosen.length > 1 ? "&destination=" + encodeURIComponent(chosen[chosen.length - 1].name + ", " + chosen[chosen.length - 1].country) : chosen.length === 1 ? "&destination=" + encodeURIComponent(chosen[0].name + ", " + chosen[0].country) : "") + (chosen.length > 2 ? "&waypoints=" + chosen.slice(1, -1).map(p => encodeURIComponent(p.name + ", " + p.country)).join("%7C") : "") + "&travelmode=driving"} target="_blank" rel="noreferrer">Plan this route in Google Maps <ArrowRight size={14} /></a>
+              <small>Opens turn-by-turn directions in Google Maps</small>
+            </div>
+            <InteractiveRouteMap points={chosen.filter(place => placeCoordinates[place.id]).map(place => ({ id: place.id, name: place.name, country: place.country, coords: placeCoordinates[place.id] }))} />
           </div>
           <div className="map-location-list"><small className="eyebrow">YOUR PLACES</small>{chosen.length ? chosen.map((place, index) => { const planned = selected.filter(activity => activity.place === place.id); const nearby = activities.filter(activity => activity.place === place.id); return <div className="map-location" key={place.id}><span className="map-location-number">{String(index+1).padStart(2,"0")}</span><div><b>{place.name}</b><small>{place.country} · {planned.length} planned · {nearby.length} ideas</small><span>{nearby.slice(0,2).map(activity => activity.name).join(" · ") || place.tagline}</span></div></div>; }) : <p className="empty">Add places to your trip to see their locations and activity ideas.</p>}</div>
         </div>}
