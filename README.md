@@ -79,7 +79,7 @@ To add a city, add its destination fixture and at least one activity using the s
 
 Roamwise currently ships with static JSON fixtures in `src/data/`; it does not fetch live travel data.
 
-- Destination and activity costs are rough **USD-based planning estimates**, not quotations, official entrance fees, or guaranteed daily budgets. Currency display uses approximate reference conversion factors in `src/App.jsx`; it is not live foreign-exchange data.
+- Destination and activity costs are rough **USD-based planning estimates**, not quotations, official entrance fees, or guaranteed daily budgets. Currency display uses fixed reference conversion factors in `src/lib/estimates.js`; they are not live or cached foreign-exchange data. No live weather, hotel, food, or transport pricing API is connected.
 - Seasonal guidance is broad climate context, not a forecast. Check official meteorological services, local authorities, attraction operators, and travel advisories near departure.
 - Entry and visa requirements depend on passport nationality, trip purpose, duration, and current rules. Do not infer visa eligibility from a destination card; verify with the destination government's official immigration source.
 - Travel times are indicative and vary by route, transport mode, traffic, timetable, and service disruptions. The UI should not present them as live ETAs.
