@@ -45,5 +45,5 @@ async function worker() {
 }
 
 await Promise.all(Array.from({ length: Math.min(concurrency, uniqueUrls.length) }, worker));
-console.log(`\nChecked ${uniqueUrls.length} unique destination image URLs; ${failures.length} failed.`);
+console.log(`\nChecked ${uniqueUrls.length} unique destination image URLs; ${failures.length} failed, ${inconclusive.length} inconclusive (rate-limited).`);
 if (failures.length) process.exitCode = 1;
