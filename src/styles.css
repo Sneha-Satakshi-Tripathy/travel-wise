@@ -774,3 +774,31 @@ footer{background:#f3f2eb}
   a{color:#111!important;text-decoration:none!important}
   @page{margin:14mm}
 }
+
+
+/* Dark-mode contrast fixes for itinerary city labels and map counts */
+.app[data-theme="dark"] .active-day-heading .eyebrow,
+.app[data-theme="dark"] .active-day-heading h3,
+.app[data-theme="dark"] .day-tabs button span,
+.app[data-theme="dark"] .journey-stop-copy b {
+  color: #e7eee4;
+}
+.app[data-theme="dark"] .map-location,
+.app[data-theme="dark"] .map-location b,
+.app[data-theme="dark"] .map-location small,
+.app[data-theme="dark"] .map-location > div > span {
+  color: #dce6da;
+}
+.app[data-theme="dark"] .map-location small,
+.app[data-theme="dark"] .map-location > div > span {
+  color: #b9c8b6;
+}
+.app[data-theme="dark"] .place-img > span,
+.app[data-theme="dark"] .saved-trip-image > span {
+  color: #24352a;
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+.app[data-theme="dark"] .day-tabs button[aria-selected="true"] span {
+  color: #f0f7ed;
+}
