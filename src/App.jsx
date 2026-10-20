@@ -4,6 +4,7 @@ import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 import { USD_PER_UNIT, money, displayMoney, convertBudget } from "./lib/estimates.js";
 import { activityDurationMinutes as activityMinutes, activityEffortLevel as effortLevel, isSuitableActivitySuggestion } from "./lib/profileRules.js";
+const feedbackFormUrl = import.meta.env.VITE_FEEDBACK_FORM_URL?.trim();
 
 const KEY = "roamwise-v1";
 
@@ -601,6 +602,6 @@ export default function App() {
       </div>
       <div className="save-banner"><div><small className="eyebrow">YOUR TRIP, READY WHEN YOU ARE</small><h2>Keep the plan. Keep the <em>possibility.</em></h2><p>{currentTripId ? "This trip is saved in Your trips. Update it whenever plans change." : "This is a draft until you choose to save it."}</p></div><div className="save-actions"><button className="secondary" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button><button className="primary" onClick={saveCurrentTrip}>{currentTripId ? "Update saved trip" : "Save this trip"} <Check size={15} /></button></div></div>
     </main>}
-    <footer><span><Compass size={15} /> Roamwise<span className="dot">.</span></span><small>Made for the way you wander.</small></footer>{toast && <div className="toast">{toast}</div>}
+    <footer><span><Compass size={15} /> Roamwise<span className="dot">.</span></span><small>Made for the way you wander.</small>{feedbackFormUrl && /^https:\/\//i.test(feedbackFormUrl) && <a className="feedback-link" href={feedbackFormUrl} target="_blank" rel="noreferrer">Share pilot feedback ↗</a>}</footer>{toast && <div className="toast">{toast}</div>}
   </div>;
 }
