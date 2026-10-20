@@ -828,3 +828,9 @@ footer{background:#f3f2eb}
  .map-route-actions>small{text-align:left}
 }
 @media print{.map-route-actions,.interactive-map-shell{display:none!important}}
+
+/* Explicit, accessible placeholder when a third-party destination photo fails. */
+.place-img.image-fallback{background:linear-gradient(145deg,#dfe8d9,#f0e9dc)}
+.place-img.image-fallback::after{content:"Destination photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:12px;color:#53674e;font-size:12px;font-weight:600;text-align:center}
+.app[data-theme="dark"] .place-img.image-fallback{background:linear-gradient(145deg,#283a30,#403a30)}
+.app[data-theme="dark"] .place-img.image-fallback::after{color:#e1e9dc}
