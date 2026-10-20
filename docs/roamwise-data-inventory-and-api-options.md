@@ -63,3 +63,11 @@ Pricing/quotas below are provider-published figures checked 20 Oct 2026. They ma
 - Show last-updated timestamps and honest “not available” states.
 - Transit is a planning estimate, not a guarantee. Activity effort is not step-free access or medical suitability.
 - Keep personal names and sensitive traveller details out of third-party requests unless necessary and consented to.
+
+
+## Interactive map implementation
+
+- The itinerary map now loads Leaflet on demand from its public CDN and uses OpenStreetMap tiles with visible attribution.
+- Selected cities with coordinates are numbered markers; selecting several cities draws a dashed connecting line and frames the route in view. This line is a geographic guide, not road routing or a travel-time estimate.
+- The primary route action opens Google Maps directions for the selected cities. Map-library or tile failures show a fallback message rather than breaking itinerary planning.
+- The map requires connectivity to load the library and map tiles. For higher production traffic, review OpenStreetMap tile usage policy and consider a hosted tile provider; use a routing API if turn-by-turn road geometry is required.
