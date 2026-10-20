@@ -57,7 +57,7 @@ const activityFitReason = (activity, profile, place) => {
   else if (styles.includes("Slow living") && /cafe|café|lake|sunset|slow|tasting|tea|beach|coffee|garden/i.test(text)) fit = "Leaves space for a slower, more unhurried experience.";
   else if (styles.includes("Adventure seeker") && /climb|hike|ride|adventure|fortress|trail|kayak|cycle/i.test(text)) fit = "Adds an active experience to your trip.";
   else if (styles.includes("Sun & sea") && /beach|sea|coast|swim|boat|sunset/i.test(text)) fit = "Fits your sun-and-sea preference.";
-  if (!fit) fit = \`A \${effort.toLowerCase()}-effort option in \${place?.name || "this destination"}.\`;
+  if (!fit) fit = `A ${effort.toLowerCase()}-effort option in ${place?.name || "this destination"}.`;
   if (profile?.pace === "Relaxed" && effortLevel(activity) === 3) fit += " This is a higher-effort exception to your relaxed pace.";
   else if (profile?.pace === "Packed") fit += " Suits your preference for a fuller day.";
   else if (profile?.pace === "Relaxed") fit += " The plan leaves room to slow down.";
