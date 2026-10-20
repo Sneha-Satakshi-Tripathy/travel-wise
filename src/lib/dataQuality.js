@@ -1,7 +1,7 @@
 const requiredDestinationFields = ["id", "name", "region", "country", "scope", "tagline", "days", "cost", "effort", "image", "why", "travel", "coordinates"];
 const requiredActivityFields = ["id", "place", "name", "slot", "duration", "cost", "effort", "note"];
 const validEfforts = new Set(["Low", "Medium", "High"]);
-const durationPattern = /^\s*\d+(?:\.\d+)?\s*(?:min|mins|minutes?|hr|hrs|hours?)\s*$/i;
+const durationPattern = /^\s*\d+(?:\.\d+)?(?:\s*[-–]\s*\d+(?:\.\d+)?)?\s*(?:min|mins|minutes?|hr|hrs|hours?)\s*$/i;
 
 export function validateDestinationData(destinations, activities) {
   const errors = [];
