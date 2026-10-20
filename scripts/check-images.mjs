@@ -5,6 +5,7 @@ const uniqueUrls = [...new Set(destinations.map(d => d.image))];
 const concurrency = 5;
 const timeoutMs = 10000;
 const failures = [];
+const inconclusive = [];
 let next = 0;
 
 async function checkImage(url) {
@@ -18,7 +19,10 @@ async function checkImage(url) {
       signal: controller.signal,
     });
     const type = response.headers.get("content-type") || "";
-    if (!response.ok || !type.toLowerCase().startsWith("image/")) {
+    if (response.status === 429) {
+      inconclusive.push({ url, reason: "rate limited by host" });
+      console.warn(`WARN rate-limited; unable to verify ${url}`);
+    } else if (!response.ok || !type.toLowerCase().startsWith("image/")) {
       failures.push({ url, status: response.status, contentType: type || "missing" });
       console.error(`FAIL ${response.status} ${type || "no content-type"} ${url}`);
     } else {
