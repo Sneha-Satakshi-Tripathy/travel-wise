@@ -1,7 +1,8 @@
 export function activityDurationMinutes(activity) {
-  const match = String(activity?.duration || "").match(/([0-9]+(?:\.[0-9]+)?)\s*(hr|hour|min)/i);
+  const match = String(activity?.duration || "").match(/([0-9]+(?:\.[0-9]+)?)(?:\s*[-–]\s*([0-9]+(?:\.[0-9]+)?))?\s*(hr|hour|min)/i);
   if (!match) return 60;
-  return Math.round(Number(match[1]) * (/min/i.test(match[2]) ? 1 : 60));
+  const amount = match[2] ? (Number(match[1]) + Number(match[2])) / 2 : Number(match[1]);
+  return Math.round(amount * (/min/i.test(match[3]) ? 1 : 60));
 }
 
 export function activityEffortLevel(activity) {
