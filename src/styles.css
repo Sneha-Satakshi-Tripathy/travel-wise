@@ -834,3 +834,5 @@ footer{background:#f3f2eb}
 .place-img.image-fallback::after{content:"Destination photo unavailable";position:absolute;inset:0;display:grid;place-items:center;padding:12px;color:#53674e;font-size:12px;font-weight:600;text-align:center}
 .app[data-theme="dark"] .place-img.image-fallback{background:linear-gradient(145deg,#283a30,#403a30)}
 .app[data-theme="dark"] .place-img.image-fallback::after{color:#e1e9dc}
+
+.feedback-link{color:#587250;font-size:11px;text-decoration:underline;text-underline-offset:3px}.app[data-theme="dark"] .feedback-link{color:#c4d6bb}
