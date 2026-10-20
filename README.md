@@ -48,7 +48,8 @@ Each entry in `src/data/destinations.json` represents a selectable city/place an
 - `name`, `region`, `country`, `scope`: place name and hierarchy
 - `tagline`, `why`: display copy
 - `days`, `cost`, `effort`, `travel`: planning hints
-- `image`: image URL
+- `image`: image URL; broken remote images show an explicit placeholder
+- `coordinates`: approximate destination-centre latitude/longitude used for map markers, not route geometry
 
 Each activity in `src/data/activities.json` has a stable `id` and a `place` value matching a destination ID, plus time slot, duration, cost, effort, and a note.
 
@@ -83,7 +84,7 @@ Roamwise currently ships with static JSON fixtures in `src/data/`; it does not f
 - Seasonal guidance is broad climate context, not a forecast. Check official meteorological services, local authorities, attraction operators, and travel advisories near departure.
 - Entry and visa requirements depend on passport nationality, trip purpose, duration, and current rules. Do not infer visa eligibility from a destination card; verify with the destination government's official immigration source.
 - Travel times are indicative and vary by route, transport mode, traffic, timetable, and service disruptions. The UI should not present them as live ETAs.
-- Attraction access, opening hours, tickets, and image URLs have not been independently verified in real time. Verify before booking or departure.
+- Attraction access, opening hours, tickets, and photo subject accuracy need human review. Run `npm run audit:images` to check whether destination image URLs currently return image content; that does not prove the photo depicts the correct place. Verify before booking or departure.
 
 ### Validate the fixture data
 

@@ -3,6 +3,9 @@ import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight
 import destinations from "./data/destinations.json";
 import activities from "./data/activities.json";
 import { USD_PER_UNIT, money, displayMoney, convertBudget } from "./lib/estimates.js";
+import { activityDurationMinutes as activityMinutes, activityEffortLevel as effortLevel, isSuitableActivitySuggestion } from "./lib/profileRules.js";
+import { allocateDaysAcrossRoute } from "./lib/itineraryRules.js";
+const feedbackFormUrl = import.meta.env.VITE_FEEDBACK_FORM_URL?.trim();
 
 const KEY = "roamwise-v1";
 
@@ -105,15 +108,6 @@ const dateLabel = value => value ? new Date(value + "T12:00:00").toLocaleDateStr
 const tripWhen = t => t.startDate && t.endDate ? dateLabel(t.startDate) + " – " + dateLabel(t.endDate) : t.startDate ? "From " + dateLabel(t.startDate) : (t.month || "Flexible dates");
 const styles = ["Culture & history", "Slow living", "Adventure seeker", "Food-led explorer", "Sun & sea", "Nature lover"];
 // Offline planning heuristics; never presented as live routing or verified accessibility data.
-const activityMinutes = activity => {
-  const match = String(activity?.duration || "").match(/([0-9]+(?:\.[0-9]+)?)\s*(hr|hour|min)/i);
-  if (!match) return 60;
-  return Math.round(Number(match[1]) * (/min/i.test(match[2]) ? 1 : 60));
-};
-const effortLevel = activity => {
-  const effort = String(activity?.effort || "Medium").toLowerCase();
-  return effort === "low" ? 1 : effort === "high" ? 3 : 2;
-};
 const activityFitReason = (activity, profile, place) => {
   const text = String(activity?.name || "") + " " + String(activity?.note || "");
   const styles = profile?.styles || [];
@@ -441,15 +435,7 @@ export default function App() {
   const visibleDestinations = destinations.filter(d => trip.destination === "Europe"
     ? d.scope === "Europe" && (!trip.countries.length || trip.countries.includes(d.country))
     : d.scope === trip.destination);
-  const placeCoordinates = {
-    kandy: [7.2906, 80.6337], "nuwara-eliya": [6.9497, 80.7891], galle: [6.0535, 80.221], sigiriya: [7.957, 80.7603], mirissa: [5.9483, 80.4716],
-    jaipur: [26.9124, 75.7873], goa: [15.2993, 74.124], kochi: [9.9312, 76.2673], udaipur: [24.5854, 73.7125], varanasi: [25.3176, 82.9739], agra: [27.1767, 78.0081], delhi: [28.6139, 77.2090], hampi: [15.3350, 76.4600], mysuru: [12.2958, 76.6394], rishikesh: [30.0869, 78.2676], amritsar: [31.6340, 74.8723],
-    bangkok: [13.7563, 100.5018], "chiang-mai": [18.7883, 98.9853], krabi: [8.0863, 98.9063], phuket: [7.8804, 98.3923], ayutthaya: [14.3532, 100.5689],
-    tokyo: [35.6762, 139.6503], kyoto: [35.0116, 135.7681], osaka: [34.6937, 135.5023], nara: [34.6851, 135.8048], hakone: [35.2324, 139.1069], hiroshima: [34.3853, 132.4553], kanazawa: [36.5613, 136.6562], sapporo: [43.0618, 141.3545],
-    hanoi: [21.0278, 105.8342], "ninh-binh": [20.2506, 105.9745], "ha-long-bay": [20.9101, 107.1839], "da-nang": [16.0544, 108.2022], "hoi-an": [15.8801, 108.338], hue: [16.4637, 107.5909], "da-lat": [11.9404, 108.4583], "phong-nha": [17.5916, 106.283], "ho-chi-minh-city": [10.8231, 106.6297],
-    paris: [48.8566, 2.3522], nice: [43.7102, 7.262], lyon: [45.764, 4.8357], rome: [41.9028, 12.4964], florence: [43.7696, 11.2558], venice: [45.4408, 12.3155],
-    zurich: [47.3769, 8.5417], lucerne: [47.0502, 8.3093], barcelona: [41.3874, 2.1686], madrid: [40.4168, -3.7038], amsterdam: [52.3676, 4.9041]
-  };
+  const placeCoordinates = Object.fromEntries(destinations.filter(d => d.coordinates).map(d => [d.id, [d.coordinates.lat, d.coordinates.lon]]));
   const mapBounds = {
     "Sri Lanka": "79.65,5.75,81.95,9.95", India: "68.0,6.0,97.5,35.5", Thailand: "97.0,5.0,106.0,21.0",
     Japan: "129.0,30.0,146.0,46.0", Vietnam: "102.0,8.0,110.0,24.0", Europe: "-1.0,35.0,19.0,56.0"
@@ -458,18 +444,7 @@ export default function App() {
     const route = trip.places.map(id => destinations.find(d => d.id === id)).filter(Boolean);
     if (!route.length) return Array.from({ length: trip.days }, (_, i) => ({ n: i + 1, place: null, activities: [] }));
     // Keep each selected city contiguous. Allocate days across the route, weighted by suggested stay length.
-    const assigned = route.slice(0, Math.min(route.length, trip.days));
-    const counts = assigned.map(() => 1);
-    const remaining = trip.days - counts.length;
-    const totalWeight = assigned.reduce((sum, place) => sum + Math.max(1, place.days || 1), 0);
-    const extras = assigned.map((place, index) => {
-      const exact = remaining * Math.max(1, place.days || 1) / totalWeight;
-      const whole = Math.floor(exact);
-      counts[index] += whole;
-      return { index, remainder: exact - whole };
-    });
-    const allocated = counts.reduce((sum, count) => sum + count, 0);
-    extras.sort((a, b) => b.remainder - a.remainder).slice(0, trip.days - allocated).forEach(item => { counts[item.index] += 1; });
+    const { assigned, counts } = allocateDaysAcrossRoute(route, trip.days);
     const plan = [];
     assigned.forEach((place, index) => {
       // Start with the user’s chosen activities, then use the destination catalogue to fill
@@ -585,7 +560,7 @@ export default function App() {
           </div><div className="day-tabs" role="tablist" aria-label="Itinerary days">
             {days.map((d, i) => <button key={d.n} role="tab" aria-selected={activeDay === i} className={activeDay === i ? "day-tab active" : "day-tab"} onClick={() => { setActiveDay(i); setAddingForDay(-1); }}><small>DAY</small><b>{String(d.n).padStart(2, "0")}</b><span>{d.place?.name || "Open day"}</span></button>)}
           </div>
-          {days[activeDay] && (() => { const d = days[activeDay]; const candidates = d.place ? activities.filter(a => a.place === d.place.id && !trip.activities.includes(a.id)) : activities.filter(a => trip.places.includes(a.place) && !trip.activities.includes(a.id)); return <article className="active-day-panel" key={d.n}>
+          {days[activeDay] && (() => { const d = days[activeDay]; const candidates = (d.place ? activities.filter(a => a.place === d.place.id) : activities.filter(a => trip.places.includes(a.place))).filter(a => !trip.activities.includes(a.id) && isSuitableActivitySuggestion(a, profile)); return <article className="active-day-panel" key={d.n}>
             <div className="active-day-heading"><div><small className="eyebrow">DAY {d.n} · {(d.place?.name || "OPEN DAY").toUpperCase()}</small><h3>{!d.place ? "Leave room for a new discovery" : d.n === 1 ? "Arrive & find your rhythm" : d.n === trip.days ? "Leave room for one last memory" : d.place.tagline}</h3><p>{d.place ? `${d.place.country} · ${d.activities.length} activities planned` : "Choose a city to start your itinerary"}</p></div><span className="day-count">{d.activities.length} planned</span></div>
             <section className="day-adjustments" aria-label="Offline itinerary adjustments">
               <div className="day-adjustments-head"><b>Adjust this day</b><small>Offline planning rules · not live intelligence</small></div>
@@ -605,7 +580,7 @@ export default function App() {
               </div>
               <p className="workload-note">{getDayWorkload(d, profile).overloaded ? "This may be too packed for your selected pace. Remove a stop or choose a gentler adjustment." : "A rough workload estimate with room for breaks. Transit is a 20-minute-per-transfer planning allowance, not a route calculation."}</p>
             </section>
-            {d.activities.length ? <div className="activity-list">{d.activities.map(a => <div className="activity activity-row" key={a.id}><div className="activity-time"><small>{a.slot}</small><span>{a.duration}</span></div><div className="activity-copy"><b>{a.name}</b><p>{a.note}</p><p className="activity-fit-reason"><strong>Why it fits:</strong> {activityFitReason(a, profile, d.place)}</p><small>{displayMoney(a.cost, trip.currency)} per person · {a.effort} effort · {activityMinutes(a)} min activity time</small></div><div className="activity-actions"><button className="inline-action" onClick={() => setSwappingActivityId(swappingActivityId === a.id ? null : a.id)} aria-expanded={swappingActivityId === a.id} title="Choose a replacement activity">Swap</button><button className="inline-action skip-action" onClick={() => { toggleActivity(a.id); setSwappingActivityId(null); notify("Activity skipped."); }} title="Skip this activity">Skip</button></div>{swappingActivityId === a.id && <div className="swap-options"><b>Choose an alternative</b>{activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).length ? activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id)).map(option => <button key={option.id} className="swap-option" onClick={() => { setTrip(t => ({ ...t, activities: [...t.activities.filter(id => id !== a.id), option.id] })); setSwappingActivityId(null); notify("Swapped in " + option.name + "."); }}><span><strong>{option.name}</strong><small>{option.slot} · {option.duration} · {option.effort} effort · {displayMoney(option.cost, trip.currency)}</small></span><ArrowRight size={15} /></button>) : <p className="empty">No unused alternatives yet for this city. Add an activity or skip this one.</p>}</div>}</div>)}</div> : <p className="empty-day">A little room to breathe. Add an activity below or choose another city.</p>}
+            {d.activities.length ? <div className="activity-list">{d.activities.map(a => <div className="activity activity-row" key={a.id}><div className="activity-time"><small>{a.slot}</small><span>{a.duration}</span></div><div className="activity-copy"><b>{a.name}</b><p>{a.note}</p><p className="activity-fit-reason"><strong>Why it fits:</strong> {activityFitReason(a, profile, d.place)}</p><small>{displayMoney(a.cost, trip.currency)} per person · {a.effort} effort · {activityMinutes(a)} min activity time</small></div><div className="activity-actions"><button className="inline-action" onClick={() => setSwappingActivityId(swappingActivityId === a.id ? null : a.id)} aria-expanded={swappingActivityId === a.id} title="Choose a replacement activity">Swap</button><button className="inline-action skip-action" onClick={() => { toggleActivity(a.id); setSwappingActivityId(null); notify("Activity skipped."); }} title="Skip this activity">Skip</button></div>{swappingActivityId === a.id && <div className="swap-options"><b>Choose an alternative</b>{activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id) && isSuitableActivitySuggestion(x, profile)).length ? activities.filter(x => x.place === a.place && x.id !== a.id && !trip.activities.includes(x.id) && isSuitableActivitySuggestion(x, profile)).map(option => <button key={option.id} className="swap-option" onClick={() => { setTrip(t => ({ ...t, activities: [...t.activities.filter(id => id !== a.id), option.id] })); setSwappingActivityId(null); notify("Swapped in " + option.name + "."); }}><span><strong>{option.name}</strong><small>{option.slot} · {option.duration} · {option.effort} effort · {displayMoney(option.cost, trip.currency)}</small></span><ArrowRight size={15} /></button>) : <p className="empty">No unused alternatives yet for this city. Add an activity or skip this one.</p>}</div>}</div>)}</div> : <p className="empty-day">A little room to breathe. Add an activity below or choose another city.</p>}
             <div className="add-activity-area"><button className="add-activity-button" onClick={() => setAddingForDay(addingForDay === d.n ? -1 : d.n)}><Plus size={15} /> Add an activity <ChevronDown size={14} /></button>
               {addingForDay === d.n && <div className="activity-picker">{candidates.length ? candidates.slice(0, 8).map(a => <button key={a.id} className="activity-option" onClick={() => { toggleActivity(a.id); setAddingForDay(-1); notify(`${a.name} added to your plan.`); }}><span><b>{a.name}</b><small>{a.slot} · {a.duration} · {displayMoney(a.cost, trip.currency)}</small></span><Plus size={15} /></button>) : <p className="empty">No more suggested activities for this day. You can change cities to explore more options.</p>}</div>}
             </div>
@@ -617,6 +592,6 @@ export default function App() {
       </div>
       <div className="save-banner"><div><small className="eyebrow">YOUR TRIP, READY WHEN YOU ARE</small><h2>Keep the plan. Keep the <em>possibility.</em></h2><p>{currentTripId ? "This trip is saved in Your trips. Update it whenever plans change." : "This is a draft until you choose to save it."}</p></div><div className="save-actions"><button className="secondary" onClick={() => setPage("trips")}>Your trips ({savedTrips.length})</button><button className="primary" onClick={saveCurrentTrip}>{currentTripId ? "Update saved trip" : "Save this trip"} <Check size={15} /></button></div></div>
     </main>}
-    <footer><span><Compass size={15} /> Roamwise<span className="dot">.</span></span><small>Made for the way you wander.</small></footer>{toast && <div className="toast">{toast}</div>}
+    <footer><span><Compass size={15} /> Roamwise<span className="dot">.</span></span><small>Made for the way you wander.</small>{feedbackFormUrl && /^https:\/\//i.test(feedbackFormUrl) && <a className="feedback-link" href={feedbackFormUrl} target="_blank" rel="noreferrer">Share pilot feedback ↗</a>}</footer>{toast && <div className="toast">{toast}</div>}
   </div>;
 }

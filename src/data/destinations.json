@@ -11,7 +11,11 @@
     "effort": "High",
     "image": "https://images.unsplash.com/photo-1537551080512-fb7dd14fbf90?auto=format&fit=crop&w=1200&q=85",
     "why": "A spectacular ancient rock fortress for one unforgettable, active day.",
-    "travel": "3–4 hr from Kandy"
+    "travel": "3–4 hr from Kandy",
+    "coordinates": {
+      "lat": 7.957,
+      "lon": 80.76
+    }
   },
   {
     "id": "kandy",
@@ -25,7 +29,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1665849050430-5e8c16bacf7e?auto=format&fit=crop&w=1100&q=85",
     "why": "A gentle cultural base with a sacred temple, a lake loop and relaxed cafés.",
-    "travel": "2.5–3 hr from Colombo"
+    "travel": "2.5–3 hr from Colombo",
+    "coordinates": {
+      "lat": 7.2906,
+      "lon": 80.6337
+    }
   },
   {
     "id": "nuwara-eliya",
@@ -39,7 +47,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1585171328560-947fbd92d6f0?auto=format&fit=crop&w=1100&q=85",
     "why": "Cool air, scenic train journeys and tea estates make a lovely slower-paced stop.",
-    "travel": "3–4 hr from Kandy"
+    "travel": "3–4 hr from Kandy",
+    "coordinates": {
+      "lat": 6.9497,
+      "lon": 80.7891
+    }
   },
   {
     "id": "galle",
@@ -53,7 +65,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1704797390682-76479a29dc9a?auto=format&fit=crop&w=1100&q=85",
     "why": "Easy to explore on foot, with boutiques, rampart sunsets and places to eat.",
-    "travel": "2–2.5 hr from Colombo"
+    "travel": "2–2.5 hr from Colombo",
+    "coordinates": {
+      "lat": 6.0535,
+      "lon": 80.221
+    }
   },
   {
     "id": "mirissa",
@@ -67,7 +83,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1776359355863-ced034480487?auto=format&fit=crop&w=1100&q=85",
     "why": "A flexible coastal base for beach time, cafés and optional ocean activities.",
-    "travel": "45–60 min from Galle"
+    "travel": "45–60 min from Galle",
+    "coordinates": {
+      "lat": 5.9483,
+      "lon": 80.4716
+    }
   },
   {
     "id": "jaipur",
@@ -82,7 +102,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hawa_Mahal_in_Jaipur%2C_Rajasthan.jpg",
     "why": "A colourful heritage city with forts, courtyards, craft markets and Rajasthani food.",
     "travel": "City transfers vary",
-    "imageSource": "https://commons.wikimedia.org/wiki/File:Hawa_Mahal_in_Jaipur,_Rajasthan.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Hawa_Mahal_in_Jaipur,_Rajasthan.jpg",
+    "coordinates": {
+      "lat": 26.9124,
+      "lon": 75.7873
+    }
   },
   {
     "id": "goa",
@@ -97,7 +121,11 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Palolem_beach%2C_Goa_-_panoramio.jpg",
     "why": "A relaxed mix of beaches, old neighbourhoods, seafood and sunset cafés.",
     "travel": "Local transfers vary",
-    "imageSource": "https://commons.wikimedia.org/wiki/File:Palolem_beach,_Goa_-_panoramio.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Palolem_beach,_Goa_-_panoramio.jpg",
+    "coordinates": {
+      "lat": 15.2993,
+      "lon": 74.124
+    }
   },
   {
     "id": "kochi",
@@ -112,7 +140,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_Fishing_Net_in_Cochin.jpg",
     "why": "Explore Fort Kochi lanes, waterfront views, local art and Kerala flavours.",
     "travel": "City transfers vary",
-    "imageSource": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_Fishing_Net_in_Cochin.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_Fishing_Net_in_Cochin.jpg",
+    "coordinates": {
+      "lat": 9.9312,
+      "lon": 76.2673
+    }
   },
   {
     "id": "udaipur",
@@ -127,7 +159,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Pichola_Udaipur_India.jpg",
     "why": "A scenic lake city for palace visits, rooftop dinners and unhurried evenings.",
     "travel": "City transfers vary",
-    "imageSource": "https://commons.wikimedia.org/wiki/File:Lake_Pichola_Udaipur_India.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/File:Lake_Pichola_Udaipur_India.jpg",
+    "coordinates": {
+      "lat": 24.5854,
+      "lon": 73.7125
+    }
   },
   {
     "id": "varanasi",
@@ -142,7 +178,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/DASHASHWAMEDH_GHAT%2C_VARANASI.jpg",
     "why": "A deeply atmospheric city best explored respectfully with time to absorb its rituals.",
     "travel": "City transfers vary",
-    "imageSource": "https://commons.wikimedia.org/wiki/File:DASHASHWAMEDH_GHAT,_VARANASI.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/File:DASHASHWAMEDH_GHAT,_VARANASI.jpg",
+    "coordinates": {
+      "lat": 25.3176,
+      "lon": 82.9739
+    }
   },
   {
     "id": "bangkok",
@@ -156,7 +196,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1613672803979-a6edfc5a179b?auto=format&fit=crop&w=1100&q=85",
     "why": "A lively city combining ornate temples, river rides, markets and memorable street food.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "coordinates": {
+      "lat": 13.7563,
+      "lon": 100.5018
+    }
   },
   {
     "id": "chiang-mai",
@@ -168,9 +212,13 @@
     "days": 3,
     "cost": 35,
     "effort": "Low",
-    "image": "https://images.unsplash.com/photo-1598935898639-815ee2eae3cc?auto=format&fit=crop&w=1100&q=85",
+    "image": "https://media.routard.com/image/24/6/thailande-chiang-mai-2.1526246.jpg",
     "why": "A slower northern base for temple visits, cafés, cooking and day trips.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "coordinates": {
+      "lat": 18.7883,
+      "lon": 98.9853
+    }
   },
   {
     "id": "krabi",
@@ -184,7 +232,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1580981072760-b72ef15a545e?auto=format&fit=crop&w=1100&q=85",
     "why": "A coastal base for beaches, viewpoints and relaxed evenings; check seasonal sea conditions.",
-    "travel": "Local transfers vary"
+    "travel": "Local transfers vary",
+    "coordinates": {
+      "lat": 8.0863,
+      "lon": 98.9063
+    }
   },
   {
     "id": "phuket",
@@ -198,7 +250,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1100&q=85",
     "why": "Choose between old-town colour, beach time and food stops at your own pace.",
-    "travel": "Local transfers vary"
+    "travel": "Local transfers vary",
+    "coordinates": {
+      "lat": 7.8804,
+      "lon": 98.3923
+    }
   },
   {
     "id": "ayutthaya",
@@ -212,7 +268,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1100&q=85",
     "why": "A history-rich day trip among the ruins of Thailand's former royal capital.",
-    "travel": "About 1.5–2 hr from Bangkok"
+    "travel": "About 1.5–2 hr from Bangkok",
+    "coordinates": {
+      "lat": 14.3532,
+      "lon": 100.5689
+    }
   },
   {
     "id": "paris",
@@ -226,7 +286,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1100&q=85",
     "why": "Pair iconic sights with neighbourhood walks, bakeries and unhurried café time.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 48.8566,
+      "lon": 2.3522
+    }
   },
   {
     "id": "nice",
@@ -240,7 +304,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1100&q=85",
     "why": "A coastal base for old-town strolls, markets and Riviera day trips.",
-    "travel": "About 30 min from the airport"
+    "travel": "About 30 min from the airport",
+    "coordinates": {
+      "lat": 43.7102,
+      "lon": 7.262
+    }
   },
   {
     "id": "lyon",
@@ -254,7 +322,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1682249301492-c117bddca579?auto=format&fit=crop&w=1100&q=85",
     "why": "A food-focused city with historic lanes, river walks and lively neighbourhoods.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 45.764,
+      "lon": 4.8357
+    }
   },
   {
     "id": "rome",
@@ -268,7 +340,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1100&q=85",
     "why": "Explore layered history, open-air squares and classic Roman food.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 41.9028,
+      "lon": 12.4964
+    }
   },
   {
     "id": "florence",
@@ -282,7 +358,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1758940886891-4ca718a3b1ff?auto=format&fit=crop&w=1100&q=85",
     "why": "A walkable art city with galleries, architecture, markets and regional cuisine.",
-    "travel": "About 1.5 hr from Rome by fast train"
+    "travel": "About 1.5 hr from Rome by fast train",
+    "coordinates": {
+      "lat": 43.7696,
+      "lon": 11.2558
+    }
   },
   {
     "id": "venice",
@@ -296,7 +376,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1100&q=85",
     "why": "Wander canals and small squares early or late, away from the busiest hours.",
-    "travel": "City walking and water buses"
+    "travel": "City walking and water buses",
+    "coordinates": {
+      "lat": 45.4408,
+      "lon": 12.3155
+    }
   },
   {
     "id": "zurich",
@@ -310,7 +394,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&w=1100&q=85",
     "why": "A polished lakefront city with old-town lanes, museums and easy rail links.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 47.3769,
+      "lon": 8.5417
+    }
   },
   {
     "id": "lucerne",
@@ -324,7 +412,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=1100&q=85",
     "why": "A compact lakeside base for scenic views and optional mountain excursions.",
-    "travel": "About 45–60 min from Zurich by train"
+    "travel": "About 45–60 min from Zurich by train",
+    "coordinates": {
+      "lat": 47.0502,
+      "lon": 8.3093
+    }
   },
   {
     "id": "barcelona",
@@ -338,7 +430,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1100&q=85",
     "why": "Mix Gaudí architecture, market lunches, neighbourhoods and waterfront walks.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 41.3874,
+      "lon": 2.1686
+    }
   },
   {
     "id": "madrid",
@@ -352,7 +448,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1100&q=85",
     "why": "A lively capital for galleries, parks, plazas and long tapas evenings.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 40.4168,
+      "lon": -3.7038
+    }
   },
   {
     "id": "amsterdam",
@@ -366,7 +466,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1100&q=85",
     "why": "Explore canal-side streets, art museums and neighbourhood cafés by foot or bike.",
-    "travel": "City transit varies"
+    "travel": "City transit varies",
+    "coordinates": {
+      "lat": 52.3676,
+      "lon": 4.9041
+    }
   },
   {
     "id": "tokyo",
@@ -381,7 +485,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A_view_of_Tokyo_city_from_Shibuya_Sky,_Tokyo,_Japan.jpg",
     "why": "A big-city mix of neighbourhoods, gardens, design, food and late-night energy.",
     "travel": "City transit varies",
-    "imageSource": "https://commons.wikimedia.org/wiki/File:A_view_of_Tokyo_city_from_Shibuya_Sky,_Tokyo,_Japan.jpg"
+    "imageSource": "https://commons.wikimedia.org/wiki/File:A_view_of_Tokyo_city_from_Shibuya_Sky,_Tokyo,_Japan.jpg",
+    "coordinates": {
+      "lat": 35.6762,
+      "lon": 139.6503
+    }
   },
   {
     "id": "kyoto",
@@ -395,7 +503,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1100&q=85",
     "why": "Historic streets, gardens and shrines reward a slower pace and early starts.",
-    "travel": "About 2–2.5 hr from Tokyo by shinkansen"
+    "travel": "About 2–2.5 hr from Tokyo by shinkansen",
+    "coordinates": {
+      "lat": 35.0116,
+      "lon": 135.7681
+    }
   },
   {
     "id": "osaka",
@@ -410,7 +522,11 @@
     "image": "https://images.squarespace-cdn.com/content/v1/6354f31408faa42115499bca/ef9cdc84-b708-48a9-9b65-1e66bee942d5/Osaka-Dotonbori-Canal-by-Day.jpg?format=2500w",
     "why": "A friendly food city with lively districts, markets and easy day-trip options.",
     "travel": "About 30–45 min from Kyoto by JR rapid train; route and service vary",
-    "imageSource": "https://www.travelynotes.com/blog-japan/my-osaka-bucket-list-best-things-to-do-hidden-gems-and-travel-tips"
+    "imageSource": "https://www.travelynotes.com/blog-japan/my-osaka-bucket-list-best-things-to-do-hidden-gems-and-travel-tips",
+    "coordinates": {
+      "lat": 34.6937,
+      "lon": 135.5023
+    }
   },
   {
     "id": "hanoi",
@@ -424,7 +540,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1509030450996-dd1a26dda07a?auto=format&fit=crop&w=1100&q=85",
     "why": "A layered capital for street food, lakeside strolls and historic neighbourhoods.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "coordinates": {
+      "lat": 21.0278,
+      "lon": 105.8342
+    }
   },
   {
     "id": "hoi-an",
@@ -438,7 +558,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1100&q=85",
     "why": "A walkable old town with riverside cafés, markets and nearby beaches.",
-    "travel": "About 45 min from Da Nang airport"
+    "travel": "About 45 min from Da Nang airport",
+    "coordinates": {
+      "lat": 15.8801,
+      "lon": 108.338
+    }
   },
   {
     "id": "ho-chi-minh-city",
@@ -452,7 +576,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1100&q=85",
     "why": "A busy southern hub with museums, food alleys, markets and contrasting architecture.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "coordinates": {
+      "lat": 10.8231,
+      "lon": 106.6297
+    }
   },
   {
     "id": "ninh-binh",
@@ -466,7 +594,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1100&q=85",
     "why": "A scenic escape for limestone landscapes, boat rides and countryside cycling.",
-    "travel": "About 2 hr from Hanoi"
+    "travel": "About 2 hr from Hanoi",
+    "coordinates": {
+      "lat": 20.2506,
+      "lon": 105.9745
+    }
   },
   {
     "id": "ha-long-bay",
@@ -480,7 +612,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1748102289607-4e1270e4da65?auto=format&fit=crop&w=1100&q=85",
     "why": "A classic bay cruise among dramatic karst islands, with options from day trips to overnight boats.",
-    "travel": "About 2.5–3 hr from Hanoi"
+    "travel": "About 2.5–3 hr from Hanoi",
+    "coordinates": {
+      "lat": 20.9101,
+      "lon": 107.1839
+    }
   },
   {
     "id": "da-nang",
@@ -494,7 +630,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1100&q=85",
     "why": "A relaxed coastal base for sandy beaches, seafood and the Marble Mountains.",
-    "travel": "About 45 min from Hoi An"
+    "travel": "About 45 min from Hoi An",
+    "coordinates": {
+      "lat": 16.0544,
+      "lon": 108.2022
+    }
   },
   {
     "id": "hue",
@@ -508,7 +648,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1100&q=85",
     "why": "Explore the Imperial City, royal tombs and central Vietnamese food traditions.",
-    "travel": "About 2–3 hr from Da Nang"
+    "travel": "About 2–3 hr from Da Nang",
+    "coordinates": {
+      "lat": 16.4637,
+      "lon": 107.5909
+    }
   },
   {
     "id": "da-lat",
@@ -522,7 +666,11 @@
     "effort": "Low",
     "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=85",
     "why": "A cooler highland break with gardens, coffee shops, waterfalls and misty scenery.",
-    "travel": "Short flight or longer road transfer from Ho Chi Minh City"
+    "travel": "Short flight or longer road transfer from Ho Chi Minh City",
+    "coordinates": {
+      "lat": 11.9404,
+      "lon": 108.4583
+    }
   },
   {
     "id": "phong-nha",
@@ -536,7 +684,11 @@
     "effort": "Medium",
     "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1100&q=85",
     "why": "A nature-focused stop known for spectacular caves, river scenery and outdoor adventures.",
-    "travel": "Overnight train or flight plus road transfer"
+    "travel": "Overnight train or flight plus road transfer",
+    "coordinates": {
+      "lat": 17.5916,
+      "lon": 106.283
+    }
   },
   {
     "id": "nara",
@@ -551,7 +703,11 @@
     "image": "https://cdn.kimkim.com/files/a/images/e3eb7d1bb01f01244e95b0225f0289ca845d5512/big-bab7e7b10bc93866f10d48a3ff653018.jpg",
     "why": "A gentle day trip for temple gardens, historic streets and Nara Park.",
     "travel": "About 45–60 min from Kyoto or Osaka",
-    "imageSource": "https://www.kimkim.com/c/highlights-of-japan-15-days"
+    "imageSource": "https://www.kimkim.com/c/highlights-of-japan-15-days",
+    "coordinates": {
+      "lat": 34.6851,
+      "lon": 135.8048
+    }
   },
   {
     "id": "hakone",
@@ -566,7 +722,11 @@
     "image": "https://www.pref.kanagawa.jp/images/16596/lakeashi-fuji.jpg",
     "why": "A scenic mountain escape with onsen stays, lake views and art museums.",
     "travel": "About 1.5 hr from Tokyo",
-    "imageSource": "https://www.pref.kanagawa.jp/docs/b6m/index.html"
+    "imageSource": "https://www.pref.kanagawa.jp/docs/b6m/index.html",
+    "coordinates": {
+      "lat": 35.2324,
+      "lon": 139.1069
+    }
   },
   {
     "id": "hiroshima",
@@ -581,7 +741,11 @@
     "image": "https://www.celebritycruises.com/blog/content/uploads/2025/06/historical-places-in-japan-hiroshima-peace-memorial-park-museum-hiroshima-1536x1024.jpg",
     "why": "A thoughtful history visit paired with a memorable nearby island excursion.",
     "travel": "About 1.5–2 hr from Osaka by shinkansen",
-    "imageSource": "https://www.celebritycruises.com/blog/historical-places-in-japan"
+    "imageSource": "https://www.celebritycruises.com/blog/historical-places-in-japan",
+    "coordinates": {
+      "lat": 34.3853,
+      "lon": 132.4553
+    }
   },
   {
     "id": "kanazawa",
@@ -596,7 +760,11 @@
     "image": "https://ipdi.w3.kanazawa-u.ac.jp/common/img/ijyu-kanko3.jpg",
     "why": "Traditional districts, crafts, seafood and one of Japan's celebrated gardens.",
     "travel": "About 2.5 hr from Tokyo by train",
-    "imageSource": "https://ipdi.w3.kanazawa-u.ac.jp/en/ijyu"
+    "imageSource": "https://ipdi.w3.kanazawa-u.ac.jp/en/ijyu",
+    "coordinates": {
+      "lat": 36.5613,
+      "lon": 136.6562
+    }
   },
   {
     "id": "sapporo",
@@ -611,7 +779,11 @@
     "image": "https://img.city-cost.com/fit-in/800x800/53ea112bf4475757de510bcb2bd55ee8.jpg",
     "why": "A northern city base for food, parks and seasonal snow or flower scenery.",
     "travel": "About 1.5 hr flight from Tokyo",
-    "imageSource": "https://www.city-cost.com/blogs/City-Cost/GO0OW-living_money_sapporo_shi_hokkaido"
+    "imageSource": "https://www.city-cost.com/blogs/City-Cost/GO0OW-living_money_sapporo_shi_hokkaido",
+    "coordinates": {
+      "lat": 43.0618,
+      "lon": 141.3545
+    }
   },
   {
     "id": "agra",
@@ -626,7 +798,11 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Taj_Mahal_islamic_architecture.JPG/1280px-Taj_Mahal_islamic_architecture.JPG",
     "imageSource": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_islamic_architecture.JPG",
     "why": "See the Taj Mahal alongside Agra Fort and the city's Mughal-era heritage.",
-    "travel": "About 2–3 hr from Delhi by fast train"
+    "travel": "About 2–3 hr from Delhi by fast train",
+    "coordinates": {
+      "lat": 27.1767,
+      "lon": 78.0081
+    }
   },
   {
     "id": "delhi",
@@ -641,7 +817,11 @@
     "image": "https://smarthistory.org/wp-content/uploads/2024/09/1_Humayuns_Tomb_9710410947-870x566.jpg",
     "imageSource": "https://smarthistory.org/period-culture-style/timurid/",
     "why": "A capital-city mix of Mughal landmarks, leafy gardens, museums and food streets.",
-    "travel": "City transfers vary; allow extra time for traffic"
+    "travel": "City transfers vary; allow extra time for traffic",
+    "coordinates": {
+      "lat": 28.6139,
+      "lon": 77.209
+    }
   },
   {
     "id": "hampi",
@@ -656,7 +836,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hampi_chariot.jpg",
     "imageSource": "https://commons.wikimedia.org/wiki/File:Hampi_chariot.jpg",
     "why": "Explore the Vijayanagara-era temple complexes and striking granite landscapes.",
-    "travel": "Usually reached via Hospet; last-mile transfers vary"
+    "travel": "Usually reached via Hospet; last-mile transfers vary",
+    "coordinates": {
+      "lat": 15.335,
+      "lon": 76.46
+    }
   },
   {
     "id": "mysuru",
@@ -671,7 +855,11 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mysore_Palace_Morning.jpg",
     "imageSource": "https://commons.wikimedia.org/wiki/File:Mysore_Palace_Morning.jpg",
     "why": "A relaxed heritage city known for its palace, markets and nearby Chamundi Hill.",
-    "travel": "About 3 hr from Bengaluru by road or train"
+    "travel": "About 3 hr from Bengaluru by road or train",
+    "coordinates": {
+      "lat": 12.2958,
+      "lon": 76.6394
+    }
   },
   {
     "id": "rishikesh",
@@ -686,7 +874,11 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Rishikesh%2C_Lakshman_Jhula.jpg",
     "imageSource": "https://commons.wikimedia.org/wiki/File:Rishikesh,_Lakshman_Jhula.jpg",
     "why": "Combine riverside walks, ashrams and optional yoga or outdoor activities.",
-    "travel": "About 45–60 min from Dehradun airport by road"
+    "travel": "About 45–60 min from Dehradun airport by road",
+    "coordinates": {
+      "lat": 30.0869,
+      "lon": 78.2676
+    }
   },
   {
     "id": "amritsar",
@@ -701,6 +893,10 @@
     "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Temple_-_Amritsar_India.jpg",
     "imageSource": "https://commons.wikimedia.org/wiki/File:Golden_Temple_-_Amritsar_India.jpg",
     "why": "A rewarding cultural stop for the Golden Temple, museums and Punjabi cuisine.",
-    "travel": "City transfers vary"
+    "travel": "City transfers vary",
+    "coordinates": {
+      "lat": 31.634,
+      "lon": 74.8723
+    }
   }
 ]
